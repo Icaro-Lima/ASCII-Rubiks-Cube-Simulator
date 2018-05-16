@@ -59,7 +59,7 @@ namespace Transformar592x592ParaTextoPuro
         static void Main(string[] args)
         {
             Console.WriteLine("Digite o caminho: ");
-            string path = @"C:\Users\Lenovo\Documents\Unity\Apenas visualizando o cubo";
+            string path = @"C:\Users\Lenovo\Documents\Unity\Apenas visualizando o cubo\cubo";
             string[] paths = Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
             for (int i = 0; i < paths.Length; i++)
             {
