@@ -1,0 +1,9 @@
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\bin\Release\GerarLadosIdentificadores.exe.config
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\bin\Release\GerarLadosIdentificadores.exe
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\bin\Release\GerarLadosIdentificadores.pdb
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.Properties.Resources.resources
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.csproj.GenerateResource.cache
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.exe
+C:\Users\Lenovo\source\repos\GerarLadosIdentificadores\GerarLadosIdentificadores\obj\Release\GerarLadosIdentificadores.pdb
