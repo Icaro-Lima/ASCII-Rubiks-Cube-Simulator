@@ -1,3 +1,4 @@
+#include <map>
 #include <vector>
 #include <fstream>
 #include <iomanip>
@@ -9,12 +10,13 @@
 using namespace std;
 
 
-const string assets_path = "/home/icarolima/BFP/Assets/";
+const string assets_path = "/home/icarolima/BFP/Assets";
 
+map< string, vector<string> > animations;
 string ** matrix;
 int rows, cols;
 
-string * read_file(string file_path, int &rows) {
+vector<string> read_file(string file_path) {
     vector<string> vector_result;
 
     ifstream myfile;
@@ -27,14 +29,44 @@ string * read_file(string file_path, int &rows) {
 
     myfile.close();
 
-    string * result = new string[vector_result.size()];
-    for (int i = 0; i < vector_result.size(); i++) {
-        result[i] = vector_result[i];
+    return vector_result;
+}
+
+
+void load_animations() {
+    string cube_path = assets_path + "/Cubo";
+
+    animations["Default"] = read_file(cube_path + "/Default.txt");
+
+    vector<string> names;
+    names.push_back("0Left");
+    names.push_back("1Left");
+    names.push_back("2Left");
+    names.push_back("0Right");
+    names.push_back("1Right");
+    names.push_back("2Right");
+
+    names.push_back("AUp");
+    names.push_back("BUp");
+    names.push_back("CUp");
+    names.push_back("ADown");
+    names.push_back("BDown");
+    names.push_back("CDown");
+
+    names.push_back("aClockwise");
+    names.push_back("bClockwise");
+    names.push_back("cClockwise");
+    names.push_back("aCounterclockwise");
+    names.push_back("bCounterclockwise");
+    names.push_back("cCounterclockwise");
+
+    for (int i = 0; i < names.size(); i++) {
+        for (int j = 0; j < 5; j++) {
+            string name = names[i] + "_";
+            name += (char)(j + 48);
+            animations[name] = read_file(cube_path + "/"  + names[i] + "/" + (char)(48 + j) + ".txt");
+        }
     }
-
-    rows = vector_result.size();
-
-    return result;
 }
 
 void fill_matrix() {
@@ -61,9 +93,16 @@ void draw_matrix() {
 
 void write_text(int i, int j, const string &text) {
     for (int jj = 0; jj < text.length(); jj++) {
-        if (text[jj] != ' ') {
+        if (text[jj] != ' ' && i < rows && j + jj < cols) {
             matrix[i][j + jj] = text[jj];
         }
+    }
+}
+
+void write_cube_face(int i, int j, string face_name) {
+    vector<string> lines = animations[face_name];
+    for (int ii = 0; ii < lines.size(); ii++) {
+        write_text(ii + i, j, lines[ii]);
     }
 }
 
@@ -83,6 +122,8 @@ void setup() {
 
     fill_matrix();
 
+    load_animations();
+
     cout << "Configurado! Mantenha o tamanho. (PRESSIONE ENTER)" << endl;
     cin.ignore();
 }
@@ -90,7 +131,20 @@ void setup() {
 int main() {
     setup();
 
-
+    int i = 0;
+    string rootpa = "CUp_";
+    while (true) {
+        string x = rootpa;
+        x += (char)(i % 6 + 48);
+        if (i % 6 == 5) {
+            write_cube_face(0, 0, "Default");
+        } else {
+            write_cube_face(0, 0, x);
+        }
+        draw_matrix();
+        usleep(100000);
+        i++;
+    }
 
     cin.ignore();
 }
