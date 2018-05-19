@@ -3,33 +3,33 @@
                                                                           
                                                                           
                             ###########                                   
-                         ####        #########                            
-                      ########       #####  ########                      
-                   ####     ###########           #########               
-                ####           #############   ####       ######          
-             ####  ######## #####         #########        #####          
-          ####           #########      #####    ###########   #          
-          ########    ####       #########           ####      #          
-          #     #########         ##############  ####  #      #          
-          #         ## #############          #####     #      #          
-          #         ##        #########     #### #      #    ###          
-          #         ##         #     ########    #      # ####            
-          ###       ##         #          #      #     ####               
-           ###########         #          #      #  #######               
-              ### #########    #          #      ###########              
-               ##  ###############        #   ################            
-               ##  # #################### ######           #####          
-            ###### # ##           #    #####  ##           ### #          
-          ########## ##           #           ##           #   #          
-          # ######## ##           #           ##           #   #          
-          #        ####           #           ##  ##########   #          
-          #         ###    ##########################   #      #          
-          #         ########## # ##############  #      #   ####          
-          #         ##         #        ####     #      #####             
-          ######    ##         #          #      #    ####                
-              #########        #          #      # ####                   
-                     ######### #          #     ####                      
-                            #########     #  ####                         
+                         ####AAAAAAAA#########                            
+                      ########AAAAAAA#####MM########                      
+                   ####BBBBB###########MMMMMMMMMMM#########               
+                ####BBBBBBBBBBB#############MMM####aaaaaaa######          
+             ####CC########B#####NNNNNNNNN#########aaaaaaaa#####          
+          ####CCCCCCCCCCC#########NNNNNN#####bbbb###########ooo#          
+          ########CCCC####OOOOOOO#########bbbbbbbbbbb####oooooo#          
+          #DDDDD#########OOOOOOOOO##############bb####nn#oooooo#          
+          #DDDDDDDDD##P#############cccccccccc#####nnnnn#oooooo#          
+          #DDDDDDDDD##PPPPPPPP#########ccccc####m#nnnnnn#oooo###          
+          #DDDDDDDDD##PPPPPPPPP#ddddd########mmmm#nnnnnn#o####            
+          ###DDDDDDD##PPPPPPPPP#dddddddddd#mmmmmm#nnnnn####               
+           ###########PPPPPPPPP#dddddddddd#mmmmmm#nn#######               
+              ###4#########PPPP#dddddddddd#mmmmmm###########              
+               ##44###############dddddddd#mmm################            
+               ##44#5####################d######eeeeeeeeeee#####          
+            ######4#5##EEEEEEEEEEE#QQQQ#####QQ##eeeeeeeeeee###u#          
+          ##########5##EEEEEEEEEEE#QQQQQQQQQQQ##eeeeeeeeeee#uuu#          
+          #F########5##EEEEEEEEEEE#QQQQQQQQQQQ##eeeeeeeeeee#uuu#          
+          #FFFFFFFF####EEEEEEEEEEE#QQQQQQQQQQQ##ee##########uuu#          
+          #FFFFFFFFF###EEEE##########################ttt#uuuuuu#          
+          #FFFFFFFFF##########R#f##############ss#tttttt#uuu####          
+          #FFFFFFFFF##RRRRRRRRR#ffffffff####sssss#tttttt#####             
+          ######FFFF##RRRRRRRRR#ffffffffff#ssssss#tttt####                
+              #########RRRRRRRR#ffffffffff#ssssss#t####                   
+                     #########R#ffffffffff#sssss####                      
+                            #########fffff#ss####                         
                                    ###########                            
                                                                           
                                                                           
