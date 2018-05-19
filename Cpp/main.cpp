@@ -1,3 +1,5 @@
+#include <vector>
+#include <fstream>
 #include <iomanip>
 #include <unistd.h>
 #include <iostream>
@@ -7,8 +9,33 @@
 using namespace std;
 
 
+const string assets_path = "/home/icarolima/BFP/Assets/";
+
 string ** matrix;
 int rows, cols;
+
+string * read_file(string file_path, int &rows) {
+    vector<string> vector_result;
+
+    ifstream myfile;
+    myfile.open(file_path);
+
+    string temp;
+    while (getline(myfile, temp)) {
+        vector_result.push_back(temp);
+    }
+
+    myfile.close();
+
+    string * result = new string[vector_result.size()];
+    for (int i = 0; i < vector_result.size(); i++) {
+        result[i] = vector_result[i];
+    }
+
+    rows = vector_result.size();
+
+    return result;
+}
 
 void fill_matrix() {
     for (int i = 0; i < rows; i++) {
@@ -34,7 +61,9 @@ void draw_matrix() {
 
 void write_text(int i, int j, const string &text) {
     for (int jj = 0; jj < text.length(); jj++) {
-        matrix[i][j + jj] = text[jj];
+        if (text[jj] != ' ') {
+            matrix[i][j + jj] = text[jj];
+        }
     }
 }
 
@@ -60,5 +89,8 @@ void setup() {
 
 int main() {
     setup();
+
+
+
     cin.ignore();
 }
