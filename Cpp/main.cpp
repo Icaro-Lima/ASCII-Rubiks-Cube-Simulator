@@ -10,7 +10,7 @@
 using namespace std;
 
 
-const string assets_path = "/home/icarolima/BFP/Assets";
+const string assets_path = "../../Assets";
 
 map< string, vector<string> > animations;
 string ** matrix;
@@ -132,19 +132,11 @@ int main() {
     setup();
 
     int i = 0;
-    string rootpa = "CUp_";
-    while (true) {
-        string x = rootpa;
-        x += (char)(i % 6 + 48);
-        if (i % 6 == 5) {
-            write_cube_face(0, 0, "Default");
-        } else {
-            write_cube_face(0, 0, x);
-        }
-        draw_matrix();
-        usleep(100000);
-        i++;
-    }
+
+    write_cube_face(0, 0, "Default");
+    draw_matrix();
+    usleep(1000000);
+
 
     cin.ignore();
 }
