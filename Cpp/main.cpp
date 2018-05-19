@@ -10,7 +10,7 @@
 using namespace std;
 
 
-const string assets_path = "../../Assets";
+const string assets_path = "../Assets";
 
 map< string, vector<string> > animations;
 string ** matrix;
@@ -20,7 +20,7 @@ vector<string> read_file(string file_path) {
     vector<string> vector_result;
 
     ifstream myfile;
-    myfile.open(file_path);
+    myfile.open(file_path.c_str());
 
     string temp;
     while (getline(myfile, temp)) {
@@ -130,8 +130,6 @@ void setup() {
 
 int main() {
     setup();
-
-    int i = 0;
 
     write_cube_face(0, 0, "Default");
     draw_matrix();
