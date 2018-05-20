@@ -120,8 +120,8 @@ void write_text(unsigned int i, unsigned int j, const string &text) {
 /**
  * Desenha um frame do cubo em uma determinada posição.
  */
-void write_cube_face(int i, int j, string face_name) {
-    vector<string> lines = animations[face_name];
+void write_sprite(int i, int j, string sprite_name) {
+    vector<string> lines = animations[sprite_name];
     for (unsigned int ii = 0; ii < lines.size(); ii++) {
         write_text(ii + i, j, lines[ii]);
     }
@@ -157,8 +157,8 @@ void setup() {
 
 int main() {
     setup();
-
-	// Frame trivial:
+    
+    // Frame trivial:
 	write_text(0, 0, "Olá mundo!");
     draw_matrix();
     usleep(3000000);
@@ -177,21 +177,21 @@ int main() {
     
     //Frame com um frame estático do cubo:
     write_text(0, 0, "O cubo esta sendo desenhado na posicao 10i10j.");
-    write_cube_face(10, 10, "Default");
+    write_sprite(10, 10, "Default");
     draw_matrix();
     usleep(3000000);
     
     // Desenhando uma animação real do cubo:
     while (true) {
 		for (int i = 0; i < 5; i++) {
-			write_cube_face(0, 0, "BUp_" + to_string(i));
+			write_sprite(0, 0, "BUp_" + to_string(i));
 			draw_matrix();
 			usleep(1000000);
 		}
-		write_cube_face(0, 0, "Default");
+		write_sprite(0, 0, "Default");
 		draw_matrix();
 		usleep(1000000);
 	}
-        
+    
     cin.ignore();
 }
