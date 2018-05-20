@@ -1,4 +1,5 @@
 #include <map>
+#include <string>
 #include <vector>
 #include <fstream>
 #include <iomanip>
@@ -13,14 +14,18 @@ using namespace std;
 const string assets_path = "../Assets";
 
 map< string, vector<string> > animations;
-string ** matrix;
-int rows, cols;
+string ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
+unsigned int rows, cols; // Tamanho do terminal, que também é o tamanho da matrix.
 
+/**
+ * AUXILIAR!
+ * Lê um arquivo e retorna suas linhas em forma de um vetor de strings.
+ */
 vector<string> read_file(string file_path) {
     vector<string> vector_result;
 
     ifstream myfile;
-    myfile.open(file_path.c_str());
+    myfile.open(file_path);
 
     string temp;
     while (getline(myfile, temp)) {
@@ -32,7 +37,10 @@ vector<string> read_file(string file_path) {
     return vector_result;
 }
 
-
+/**
+ * AUXILIAR!
+ * Carrega as animações.
+ */
 void load_animations() {
     string cube_path = assets_path + "/Cubo";
 
@@ -60,7 +68,7 @@ void load_animations() {
     names.push_back("bCounterclockwise");
     names.push_back("cCounterclockwise");
 
-    for (int i = 0; i < names.size(); i++) {
+    for (unsigned int i = 0; i < names.size(); i++) {
         for (int j = 0; j < 5; j++) {
             string name = names[i] + "_";
             name += (char)(j + 48);
@@ -69,17 +77,24 @@ void load_animations() {
     }
 }
 
+/**
+ * AUXILIAR!
+ * Preenche a matriz com espaços.
+ */
 void fill_matrix() {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (unsigned int i = 0; i < rows; i++) {
+        for (unsigned int j = 0; j < cols; j++) {
             matrix[i][j] = ' ';
         }
     }
 }
 
+/**
+ * Desenha um frame e logo em seguida apaga toda a matriz.
+ */
 void draw_matrix() {
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
+    for (unsigned int i = 0; i < rows; i++) {
+        for (unsigned int j = 0; j < cols; j++) {
             cout << matrix[i][j];
         }
 
@@ -91,21 +106,33 @@ void draw_matrix() {
     fill_matrix();
 }
 
-void write_text(int i, int j, const string &text) {
-    for (int jj = 0; jj < text.length(); jj++) {
+/**
+ * Escreve texto em uma determinada posição (os espaços são transparentes).
+ */
+void write_text(unsigned int i, unsigned int j, const string &text) {
+    for (unsigned int jj = 0; jj < text.length(); jj++) {
         if (text[jj] != ' ' && i < rows && j + jj < cols) {
             matrix[i][j + jj] = text[jj];
         }
     }
 }
 
+/**
+ * Desenha um frame do cubo em uma determinada posição.
+ */
 void write_cube_face(int i, int j, string face_name) {
     vector<string> lines = animations[face_name];
-    for (int ii = 0; ii < lines.size(); ii++) {
+    for (unsigned int ii = 0; ii < lines.size(); ii++) {
         write_text(ii + i, j, lines[ii]);
     }
 }
 
+/**
+ * Pega o tamanho do console, 
+ * cria uma matriz de strings, 
+ * preenche essa matriz com espaços e 
+ * carrega as animações."
+ */
 void setup() {
     cout << "Poderia expandir todo o terminal? (PRESSIONE ENTER)" << endl;
     cin.ignore();
@@ -116,7 +143,7 @@ void setup() {
     cols = terminal_size.ws_col;
 
     matrix = new string *[rows];
-    for (int i = 0; i < rows; i++) {
+    for (unsigned int i = 0; i < rows; i++) {
         matrix[i] = new string [cols];
     }
 
@@ -131,10 +158,40 @@ void setup() {
 int main() {
     setup();
 
-    write_cube_face(0, 0, "Default");
+	// Frame trivial:
+	write_text(0, 0, "Olá mundo!");
     draw_matrix();
-    usleep(1000000);
-
-
+    usleep(3000000);
+    
+    //Frame trivial com texto centralizado:
+    string texto = "Olá mundo!";
+    write_text(rows / 2, cols / 2 - texto.length() / 2, texto);
+    draw_matrix();
+    usleep(3000000);
+    
+    //Frame composto:
+    write_text(10, 10, "Nos duas fomos desenhadas");
+    write_text(20, 20, "no mesmo frame ;D");
+    draw_matrix();
+    usleep(3000000);
+    
+    //Frame com um frame estático do cubo:
+    write_text(0, 0, "O cubo esta sendo desenhado na posicao 10i10j.");
+    write_cube_face(10, 10, "Default");
+    draw_matrix();
+    usleep(3000000);
+    
+    // Desenhando uma animação real do cubo:
+    while (true) {
+		for (int i = 0; i < 5; i++) {
+			write_cube_face(0, 0, "BUp_" + to_string(i));
+			draw_matrix();
+			usleep(1000000);
+		}
+		write_cube_face(0, 0, "Default");
+		draw_matrix();
+		usleep(1000000);
+	}
+        
     cin.ignore();
 }
