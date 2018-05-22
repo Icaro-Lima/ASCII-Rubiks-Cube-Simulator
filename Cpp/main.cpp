@@ -177,9 +177,11 @@ void draw_menu() {
  * Escreve as instruções do jogo na tela
  */
 void draw_instructions() {
+	
+
 	char input;
 	while (input != 'J' && input != 'j') {
-		input = getchar();	ok
+		input = cin.get();
 		
 		
 		if (input == 'I') {
@@ -202,8 +204,27 @@ void draw_instructions() {
 	}
 }
 
+// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4);
+char wait_key(char * possible_keys, int count, char stop) {
+	system ("/bin/stty raw");
+	char x;
+	while (char != stop && char != stop + 32) {
+		char x = getchar();
+		cout << '\b' << ' ' << '\b';
+		for (int i = 0; i < count; i++) {
+			if (x == possible_keys[i]) {
+				system ("/bin/stty cooked");
+				return x;
+			}
+		}
+		usleep(10000);
+	}
+}
+
 int main() {
+	system ("/bin/stty raw");
     setup();
+
     
     // Escreve menu do jogo
     draw_menu();
