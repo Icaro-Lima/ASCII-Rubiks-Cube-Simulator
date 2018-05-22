@@ -156,6 +156,9 @@ void setup() {
     cin.ignore();
 }
 
+/**
+ * Escreve o menu na tela
+ */
 void draw_menu() {
 	// Escreve menu do jogo
     string g_name = "SIMULADOR DE CUBO MÁGICO";
@@ -170,16 +173,14 @@ void draw_menu() {
     draw_matrix();
 }
 
-int main() {
-    setup();
-    
-    // Escreve menu do jogo
-    draw_menu();
-	
-	// Recebe entrada
+/**
+ * Escreve as instruções do jogo na tela
+ */
+void draw_instructions() {
 	char input;
 	while (input != 'J' && input != 'j') {
-		input = getchar();
+		input = getchar();	ok
+		
 		
 		if (input == 'I') {
 			write_text(5, cols/2.5, "7 - Rotaciona primeira linha em sentido horário");
@@ -199,6 +200,16 @@ int main() {
 		}
 		cin.ignore(1);
 	}
+}
+
+int main() {
+    setup();
+    
+    // Escreve menu do jogo
+    draw_menu();
+	
+	// Recebe entrada
+	draw_instructions();
     
     /* Frame trivial:
 	write_text(0, 0, "Olá mundo!");
