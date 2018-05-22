@@ -14,6 +14,22 @@ using namespace std;
 
 const string assets_path = "../Assets";
 
+int cube_matrix[12][9]
+ 
+{{000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {102, 102, 102, 103, 103, 103, 044, 044, 044},
+ {102, 102, 102, 103, 103, 103, 044, 044, 044},
+ {102, 102, 102, 103, 103, 103, 044, 044, 044},
+ {000, 000, 000, 045, 045, 045, 000, 000, 000},
+ {000, 000, 000, 045, 045, 045, 000, 000, 000},
+ {000, 000, 000, 045, 045, 045, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000}};
+
+
 map< string, vector<string> > animations;
 string ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
 unsigned int rows, cols; // Tamanho do terminal, que também é o tamanho da matrix.
@@ -204,12 +220,12 @@ void draw_instructions() {
 	}
 }
 
-// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4);
+// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4) PRECISO AJEITAR ISSO AQUI
 char wait_key(char * possible_keys, int count, char stop) {
 	system ("/bin/stty raw");
 	char x;
-	while (char != stop && char != stop + 32) {
-		char x = getchar();
+	while (x != stop && x != stop + 32) {
+		x = getchar();
 		cout << '\b' << ' ' << '\b';
 		for (int i = 0; i < count; i++) {
 			if (x == possible_keys[i]) {
