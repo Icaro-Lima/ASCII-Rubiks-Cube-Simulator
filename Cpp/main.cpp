@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <unistd.h>
 #include <iostream>
+#include <bits/stdc++.h>
 #include <sys/ioctl.h>
 
 
@@ -134,7 +135,7 @@ void write_sprite(int i, int j, string sprite_name) {
  * carrega as animações."
  */
 void setup() {
-    cout << "Poderia expandir todo o terminal? (PRESSIONE ENTER)" << endl;
+    cout << "Poderia expandir todo o terminal? (PRESSIONE ENTER APÓS EXPANDIR)" << endl;
     cin.ignore();
 
     struct winsize terminal_size;
@@ -155,10 +156,51 @@ void setup() {
     cin.ignore();
 }
 
+void draw_menu() {
+	// Escreve menu do jogo
+    string g_name = "SIMULADOR DE CUBO MÁGICO";
+    string opcao_1 = "Pressione I para Instruções";
+    string opcao_2 = "Pressione J para Jogar";
+    string team_name = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte";
+    int g_name_col = cols/2 - g_name.length();
+    write_text(5, g_name_col, "-----------------------  RUBIK CUBE SIMULATOR -----------------------");
+    write_text(8, g_name_col + 20, opcao_1);
+    write_text(9, g_name_col + 20, opcao_2);
+    write_text(11, g_name_col, team_name);
+    draw_matrix();
+}
+
 int main() {
     setup();
     
-    // Frame trivial:
+    // Escreve menu do jogo
+    draw_menu();
+	
+	// Recebe entrada
+	char input;
+	while (input != 'J' && input != 'j') {
+		input = getchar();
+		
+		if (input == 'I') {
+			write_text(5, cols/2.5, "7 - Rotaciona primeira linha em sentido horário");
+			write_text(6, cols/2.5, "9 - Rotaciona primeira linha em sentido anti-horário");
+			write_text(7, cols/2.5, "4 - Rotaciona segunda linha em sentido horário");
+			write_text(8, cols/2.5, "6 - Rotaciona segunda linha em sentido anti-horário");
+			write_text(9, cols/2.5, "1 - Rotaciona terceira linha em sentido horário");
+			write_text(10, cols/2.5, "3 - Rotaciona terceira linha em sentido anti-horário");
+			write_text(11, cols/2.5, "Q - Rotaciona primeira coluna para cima");
+			write_text(12, cols/2.5, "W - Rotciona segunda coluna para cima");
+			write_text(13, cols/2.5, "E - Rotaciona terceira coluna para cima");
+			write_text(14, cols/2.5, "A - Rotaciona primeira coluna para baixo");
+			write_text(15, cols/2.5, "S - Rotaciona segunda coluna para baixo");
+			write_text(16, cols/2.5, "D - Rotaciona terceira coluna para baixo");
+			write_text(18, cols/2.5, "Pressione J para Jogar");
+			draw_matrix();
+		}
+		cin.ignore(1);
+	}
+    
+    /* Frame trivial:
 	write_text(0, 0, "Olá mundo!");
     draw_matrix();
     usleep(3000000);
@@ -167,21 +209,17 @@ int main() {
     string texto = "Olá mundo!";
     write_text(rows / 2, cols / 2 - texto.length() / 2, texto);
     draw_matrix();
-    usleep(3000000);
+    usleep(3000000);*/
     
-    //Frame composto:
-    write_text(10, 10, "Nos duas fomos desenhadas");
-    write_text(20, 20, "no mesmo frame ;D");
-    draw_matrix();
-    usleep(3000000);
     
     //Frame com um frame estático do cubo:
-    write_text(0, 0, "O cubo esta sendo desenhado na posicao 10i10j.");
+    write_text(0, 0, "Bem vindo ao Rubik Cube Simulator!");
     write_sprite(10, 10, "Default");
     draw_matrix();
     usleep(3000000);
     
     // Desenhando uma animação real do cubo:
+    /*
     while (true) {
 		for (int i = 0; i < 5; i++) {
 			write_sprite(0, 0, "BUp_" + to_string(i));
@@ -191,7 +229,7 @@ int main() {
 		write_sprite(0, 0, "Default");
 		draw_matrix();
 		usleep(1000000);
-	}
+	}*/
     
     cin.ignore();
 }
