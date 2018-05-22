@@ -237,10 +237,39 @@ char wait_key(char * possible_keys, int count) {
 	}
 }
 
+void write_cube(int i, int j, string sprite_name){
+	vector<string> lines = animations[sprite_name];
+    for (unsigned int ii = 0; ii < lines.size(); ii++) {
+		string line = lines[ii];
+		
+		bool looked = false;
+		for(unsigned int k = 0; k < line.length(); k++){
+			if (line[k] >= 65 && line[k] <= 76) {
+				int cod = cube_matrix[3][line[k] - 65];
+				
+				if (!looked) {
+					looked = true;
+					line.insert(k, "\033[" + to_string(cod) + "m");
+				}
+			} else {
+				if (looked) {
+					looked = false;
+					line.insert(k + 1, "\033[0m");
+				}
+			}
+		}
+
+        write_text(ii + i, j, line);
+    }
+	
+}
+
 
 int main() {
     setup();
 
+	write_cube(0, 0, "Default");
+	draw_matrix();
     
     // Escreve menu do jogo
     draw_menu();
