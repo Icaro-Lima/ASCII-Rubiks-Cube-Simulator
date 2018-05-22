@@ -239,7 +239,6 @@ char wait_key(char * possible_keys, int count) {
 
 
 int main() {
-	system ("/bin/stty raw");
     setup();
 
     
