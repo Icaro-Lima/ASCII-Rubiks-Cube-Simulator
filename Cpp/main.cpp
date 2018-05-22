@@ -221,11 +221,11 @@ void draw_instructions() {
 }
 
 // Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4) PRECISO AJEITAR ISSO AQUI
-char wait_key(char * possible_keys, int count, char stop) {
+char wait_key(char * possible_keys, int count) {
 	system ("/bin/stty raw");
-	char x;
-	while (x != stop && x != stop + 32) {
-		x = getchar();
+
+	while (true) {
+		char x = getchar();
 		cout << '\b' << ' ' << '\b';
 		for (int i = 0; i < count; i++) {
 			if (x == possible_keys[i]) {
@@ -236,6 +236,7 @@ char wait_key(char * possible_keys, int count, char stop) {
 		usleep(10000);
 	}
 }
+
 
 int main() {
 	system ("/bin/stty raw");
