@@ -290,10 +290,11 @@ void draw_default_cube(int row, int col) {
 
 /**
  * Rotaciona a primeira linha em sentido horário
- */
-void rotate_first_row_left(int row, int col) {
+    **/
+void rotate_row(int row, int col, string rotate) {
+	
 	for (int i = 0; i < 5; i++) {
-		write_sprite(row, col, "0Left_" + to_string(i));
+		write_sprite(row, col, rotate + to_string(i));
 		draw_matrix();
 		usleep(1000000);
 	}
@@ -305,13 +306,74 @@ void rotate_first_row_left(int row, int col) {
 /**
  * Inicia o jogo
  */
+ 
+ /*  
+    names.push_back("AUp");
+    names.push_back("BUp");
+    names.push_back("CUp");
+    names.push_back("ADown");
+    names.push_back("BDown");
+    names.push_back("CDown");
+
+    names.push_back("aClockwise");
+    names.push_back("bClockwise");
+    names.push_back("cClockwise");
+    names.push_back("aCounterclockwise");
+    names.push_back("bCounterclockwise");
+    names.push_back("cCounterclockwise");
+ 
+
+		write_text(i++, cols/2.7, "R - Rotaciona primeira coluna para cima");
+		write_text(i++, cols/2.7, "T - Rotciona segunda coluna para cima");
+		write_text(i++, cols/2.7, "Y - Rotaciona terceira coluna para cima");
+		write_text(i++, cols/2.7, "F - Rotaciona primeira coluna para baixo");
+		write_text(i++, cols/2.7, "G - Rotaciona segunda coluna para baixo");
+		write_text(i++, cols/2.7, "H - Rotaciona terceira coluna para baixo");
+		write_text(i++, cols/2.7, "Pressione J para Jogar");
+		write_text(i++, cols/2.7, "Pressione Q para voltar ao Menu");
+		*/
+		
 void start_game(int row, int col) {
-	char command = wait_key(new char[12] { '7', '9', '4', '6', '1', '3', 'R', 'T', 'Y', 'F', 'G', 'H'}, 12);
+	char command = wait_key(new char[18] { '7', '9', '4', '6', '1', '3', 'R', 'T', 'Y', 'F', 'G', 'H', 'r', 't', 'y', 'f', 'g', 'h'}, 18);
 	
 	if (command == '7') {
-		rotate_first_row_left(row, col);
+		rotate_row(row, col, "0Left_");
 		start_game(row, col);
-	} else {
+	} else if (command == '9'){
+		rotate_row(row, col, "0Right_");
+		start_game(row, col);
+	} else if (command == '4'){
+		rotate_row(row, col, "1Left_");
+		start_game(row, col);
+	} else if (command == '6'){
+		rotate_row(row, col, "1Right_");
+		start_game(row, col);
+	} else if (command == '1'){
+		rotate_row(row, col, "2Left_");
+		start_game(row, col);
+	} else if (command == '3'){
+		rotate_row(row, col, "2Right_");
+		start_game(row, col);
+	} else if (command == 'R' || command == 'r'){
+		rotate_row(row, col, "AUp_");
+		start_game(row, col);
+	} else if (command == 'T' || command == 't'){
+		rotate_row(row, col, "BUp_");
+		start_game(row, col);
+	} else if (command == 'Y' || command == 'y'){
+		rotate_row(row, col, "CUp_");
+		start_game(row, col);
+	} else if (command == 'F' || command == 'f'){
+		rotate_row(row, col, "ADown_");
+		start_game(row, col);
+	} else if (command == 'G' || command == 'g'){
+		rotate_row(row, col, "BDown_");
+		start_game(row, col);
+	} else if (command == 'H' || command == 'h'){
+		rotate_row(row, col, "CDown_");
+		start_game(row, col);
+	}		
+	else {
 		cin.ignore();
 	}
 	
