@@ -201,12 +201,12 @@ void draw_instructions() {
 		write_text(i++, cols/2.7, "6 - Rotaciona segunda linha em sentido anti-horário");
 		write_text(i++, cols/2.7, "1 - Rotaciona terceira linha em sentido horário");
 		write_text(i++, cols/2.7, "3 - Rotaciona terceira linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "Q - Rotaciona primeira coluna para cima");
-		write_text(i++, cols/2.7, "W - Rotciona segunda coluna para cima");
-		write_text(i++, cols/2.7, "E - Rotaciona terceira coluna para cima");
-		write_text(i++, cols/2.7, "A - Rotaciona primeira coluna para baixo");
-		write_text(i++, cols/2.7, "S - Rotaciona segunda coluna para baixo");
-		write_text(i++, cols/2.7, "D - Rotaciona terceira coluna para baixo");
+		write_text(i++, cols/2.7, "R - Rotaciona primeira coluna para cima");
+		write_text(i++, cols/2.7, "T - Rotciona segunda coluna para cima");
+		write_text(i++, cols/2.7, "Y - Rotaciona terceira coluna para cima");
+		write_text(i++, cols/2.7, "F - Rotaciona primeira coluna para baixo");
+		write_text(i++, cols/2.7, "G - Rotaciona segunda coluna para baixo");
+		write_text(i++, cols/2.7, "H - Rotaciona terceira coluna para baixo");
 		write_text(i++, cols/2.7, "Pressione J para Jogar");
 		write_text(i++, cols/2.7, "Pressione Q para voltar ao Menu");
 		draw_matrix();
@@ -228,14 +228,49 @@ char wait_key(char * possible_keys, int count) {
 		usleep(10000);
 	}
 	
-	return -1;
 }
 
+
+/**
+ * Desenha o cubo em formato padrão	
+ */
 void draw_default_cube(int row, int col) {
     write_sprite(row, col, "Default");
     draw_matrix();
 }
 
+/**
+ * Rotaciona a primeira linha em sentido horário
+ */
+void rotate_first_row_left(int row, int col) {
+	for (int i = 0; i < 5; i++) {
+		write_sprite(row, col, "0Left_" + to_string(i));
+		draw_matrix();
+		usleep(1000000);
+	}
+	write_sprite(row, col, "Default");
+	draw_matrix();
+	usleep(1000000);
+}
+
+/**
+ * Inicia o jogo
+ */
+void start_game(int row, int col) {
+	char command = wait_key(new char[12] { '7', '9', '4', '6', '1', '3', 'R', 'T', 'Y', 'F', 'G', 'H'}, 12);
+	
+	if (command == '7') {
+		rotate_first_row_left(row, col);
+		start_game(row, col);
+	} else {
+		cin.ignore();
+	}
+	
+	
+}
+
+
+// Exibe menu de opções
 void menu_options() {
 	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'q', 'Q' }, 6);
 	
@@ -247,6 +282,7 @@ void menu_options() {
 	int mid_screen = rows/2;
 	write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
     draw_default_cube(2, mid_screen);
+    start_game(2, mid_screen);
 	usleep(3000000);
 	}
 	
@@ -254,11 +290,6 @@ void menu_options() {
 	cin.ignore();
 }
 
-
-
-void rotate_first_row_clockwise() {
-	
-}
 
 
 int main() {
@@ -283,14 +314,15 @@ int main() {
     
     
     //Frame com um frame estático do cubo:
+    /*
     write_text(0, 0, "Bem vindo ao Rubik Cube Simulator!");
     write_sprite(10, 10, "Default");
     draw_matrix();
-    usleep(3000000);
+    usleep(3000000);*/
     
     // Desenhando uma animação real do cubo:
     
-    while (true) {
+    /* while (true) {
 		for (int i = 0; i < 5; i++) {
 			write_sprite(0, 0, "BUp_" + to_string(i));
 			draw_matrix();
@@ -301,5 +333,5 @@ int main() {
 		usleep(1000000);
 	}
     
-    cin.ignore();
+    cin.ignore();*/
 }
