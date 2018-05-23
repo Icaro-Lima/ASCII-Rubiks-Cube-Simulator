@@ -290,6 +290,7 @@ void draw_default_cube(int row, int col) {
 
 /**
  * Rotaciona a linha ou coluna desejada conforme passado por parâmetro.
+ * (rotate)
     **/
 void rotate_cube(int row, int col, string rotate) {
 	
@@ -307,7 +308,9 @@ void rotate_cube(int row, int col, string rotate) {
  * Inicia o jogo
  */	
 void start_game(int row, int col) {
-	char command = wait_key(new char[18] { '7', '9', '4', '6', '1', '3', 'R', 'T', 'Y', 'F', 'G', 'H', 'r', 't', 'y', 'f', 'g', 'h'}, 18);
+	char command = wait_key(new char[18] { '7', '9', '4', '6', '1', '3',
+											'R', 'T', 'Y', 'F', 'G', 'H',
+											'r', 't', 'y', 'f', 'g', 'h'}, 18);
 	
 	if (command == '7') {
 		rotate_cube(row, col, "0Left_");
