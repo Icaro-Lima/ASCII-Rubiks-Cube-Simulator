@@ -177,12 +177,12 @@ void setup() {
  */
 void draw_menu() {
 	// Escreve menu do jogo
-    string g_name = "SIMULADOR DE CUBO MÁGICO";
+    string g_name = "-----------------------  RUBIK CUBE SIMULATOR -----------------------";
     string opcao_1 = "Pressione I para Instruções";
     string opcao_2 = "Pressione J para Jogar";
     string team_name = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte";
-    int g_name_col = cols/2 - g_name.length();
-    write_text(5, g_name_col, "-----------------------  RUBIK CUBE SIMULATOR -----------------------");
+    int g_name_col = cols/2 - g_name.length() + 30;
+    write_text(5, g_name_col, g_name);
     write_text(8, g_name_col + 20, opcao_1);
     write_text(9, g_name_col + 20, opcao_2);
     write_text(11, g_name_col, team_name);
@@ -193,34 +193,26 @@ void draw_menu() {
  * Escreve as instruções do jogo na tela
  */
 void draw_instructions() {
-	
-
-	char input;
-	while (input != 'J' && input != 'j') {
-		input = cin.get();
+		int i = 5;
 		
-		
-		if (input == 'I') {
-			write_text(5, cols/2.5, "7 - Rotaciona primeira linha em sentido horário");
-			write_text(6, cols/2.5, "9 - Rotaciona primeira linha em sentido anti-horário");
-			write_text(7, cols/2.5, "4 - Rotaciona segunda linha em sentido horário");
-			write_text(8, cols/2.5, "6 - Rotaciona segunda linha em sentido anti-horário");
-			write_text(9, cols/2.5, "1 - Rotaciona terceira linha em sentido horário");
-			write_text(10, cols/2.5, "3 - Rotaciona terceira linha em sentido anti-horário");
-			write_text(11, cols/2.5, "Q - Rotaciona primeira coluna para cima");
-			write_text(12, cols/2.5, "W - Rotciona segunda coluna para cima");
-			write_text(13, cols/2.5, "E - Rotaciona terceira coluna para cima");
-			write_text(14, cols/2.5, "A - Rotaciona primeira coluna para baixo");
-			write_text(15, cols/2.5, "S - Rotaciona segunda coluna para baixo");
-			write_text(16, cols/2.5, "D - Rotaciona terceira coluna para baixo");
-			write_text(18, cols/2.5, "Pressione J para Jogar");
-			draw_matrix();
-		}
-		cin.ignore(1);
-	}
+		write_text(i++, cols/2.7, "7 - Rotaciona primeira linha em sentido horário");
+		write_text(i++, cols/2.7, "9 - Rotaciona primeira linha em sentido anti-horário");
+		write_text(i++, cols/2.7, "4 - Rotaciona segunda linha em sentido horário");
+		write_text(i++, cols/2.7, "6 - Rotaciona segunda linha em sentido anti-horário");
+		write_text(i++, cols/2.7, "1 - Rotaciona terceira linha em sentido horário");
+		write_text(i++, cols/2.7, "3 - Rotaciona terceira linha em sentido anti-horário");
+		write_text(i++, cols/2.7, "Q - Rotaciona primeira coluna para cima");
+		write_text(i++, cols/2.7, "W - Rotciona segunda coluna para cima");
+		write_text(i++, cols/2.7, "E - Rotaciona terceira coluna para cima");
+		write_text(i++, cols/2.7, "A - Rotaciona primeira coluna para baixo");
+		write_text(i++, cols/2.7, "S - Rotaciona segunda coluna para baixo");
+		write_text(i++, cols/2.7, "D - Rotaciona terceira coluna para baixo");
+		write_text(i++, cols/2.7, "Pressione J para Jogar");
+		write_text(i++, cols/2.7, "Pressione Q para voltar ao Menu");
+		draw_matrix();
 }
 
-// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4) PRECISO AJEITAR ISSO AQUI
+// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4)
 char wait_key(char * possible_keys, int count) {
 	system ("/bin/stty raw");
 
@@ -235,18 +227,38 @@ char wait_key(char * possible_keys, int count) {
 		}
 		usleep(10000);
 	}
+	
+	return -1;
+}
+
+void menu_options() {
+	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'q', 'Q' }, 6);
+	
+	if (input == 'i' || input == 'I') {
+		draw_instructions();
+	} else if (input == 'q' || input == 'Q') {
+		draw_menu();
+	} else {
+	string header = "Bem vindo ao Rubik Cube Simulator!";
+	int mid_screen = rows/2;
+	write_text(5, mid_screen + 20, header);
+    write_sprite(8, mid_screen, "Default");
+    draw_matrix();
+    usleep(3000000);
+	}
+	menu_options();
+	cin.ignore();
 }
 
 
 int main() {
     setup();
-
     
     // Escreve menu do jogo
     draw_menu();
+    
+	menu_options();
 	
-	// Recebe entrada
-	draw_instructions();
     
     /* Frame trivial:
 	write_text(0, 0, "Olá mundo!");
