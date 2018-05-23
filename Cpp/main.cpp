@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <unistd.h>
 #include <iostream>
+#include <bits/stdc++.h>
 #include <sys/ioctl.h>
 
 
@@ -12,6 +13,22 @@ using namespace std;
 
 
 const string assets_path = "../Assets";
+
+int cube_matrix[12][9]
+ 
+{{000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {000, 000, 000, 101, 101, 101, 000, 000, 000},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000},
+ {000, 000, 000, 100, 100, 100, 000, 000, 000}};
+
 
 map< string, vector<string> > animations;
 string ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
@@ -134,7 +151,7 @@ void write_sprite(int i, int j, string sprite_name) {
  * carrega as animações."
  */
 void setup() {
-    cout << "Poderia expandir todo o terminal? (PRESSIONE ENTER)" << endl;
+    cout << "Poderia expandir todo o terminal? (PRESSIONE ENTER APÓS EXPANDIR)" << endl;
     cin.ignore();
 
     struct winsize terminal_size;
@@ -155,10 +172,144 @@ void setup() {
     cin.ignore();
 }
 
+/**
+ * Escreve o menu na tela
+ */
+void draw_menu() {
+	// Escreve menu do jogo
+    string g_name = "SIMULADOR DE CUBO MÁGICO";
+    string opcao_1 = "Pressione I para Instruções";
+    string opcao_2 = "Pressione J para Jogar";
+    string team_name = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte";
+    int g_name_col = cols/2 - g_name.length();
+    write_text(5, g_name_col, "-----------------------  RUBIK CUBE SIMULATOR -----------------------");
+    write_text(8, g_name_col + 20, opcao_1);
+    write_text(9, g_name_col + 20, opcao_2);
+    write_text(11, g_name_col, team_name);
+    draw_matrix();
+}
+
+/**
+ * Escreve as instruções do jogo na tela
+ */
+void draw_instructions() {
+	
+
+	char input;
+	while (input != 'J' && input != 'j') {
+		input = cin.get();
+		
+		
+		if (input == 'I') {
+			write_text(5, cols/2.5, "7 - Rotaciona primeira linha em sentido horário");
+			write_text(6, cols/2.5, "9 - Rotaciona primeira linha em sentido anti-horário");
+			write_text(7, cols/2.5, "4 - Rotaciona segunda linha em sentido horário");
+			write_text(8, cols/2.5, "6 - Rotaciona segunda linha em sentido anti-horário");
+			write_text(9, cols/2.5, "1 - Rotaciona terceira linha em sentido horário");
+			write_text(10, cols/2.5, "3 - Rotaciona terceira linha em sentido anti-horário");
+			write_text(11, cols/2.5, "Q - Rotaciona primeira coluna para cima");
+			write_text(12, cols/2.5, "W - Rotciona segunda coluna para cima");
+			write_text(13, cols/2.5, "E - Rotaciona terceira coluna para cima");
+			write_text(14, cols/2.5, "A - Rotaciona primeira coluna para baixo");
+			write_text(15, cols/2.5, "S - Rotaciona segunda coluna para baixo");
+			write_text(16, cols/2.5, "D - Rotaciona terceira coluna para baixo");
+			write_text(18, cols/2.5, "Pressione J para Jogar");
+			draw_matrix();
+		}
+		cin.ignore(1);
+	}
+}
+
+// Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4) PRECISO AJEITAR ISSO AQUI
+char wait_key(char * possible_keys, int count) {
+	system ("/bin/stty raw");
+
+	while (true) {
+		char x = getchar();
+		cout << '\b' << ' ' << '\b';
+		for (int i = 0; i < count; i++) {
+			if (x == possible_keys[i]) {
+				system ("/bin/stty cooked");
+				return x;
+			}
+		}
+		usleep(10000);
+	}
+}
+
+void write_cube(int i, int j, string sprite_name){
+	vector<string> lines = animations[sprite_name];
+    for (unsigned int ii = 0; ii < lines.size(); ii++) {
+		string line = lines[ii];
+		
+		int cod = -1;
+		bool looked = false;
+		for(int k = (int)line.length() - 1; k >= 0; k--){
+			if ((line[k] >= 48 && line[k] <= 56) || (line[k] >= 65 && line[k] <= 88) || (line[k] >= 97 && line[k] <= 120)) {				
+				if (!looked) {
+					looked = true;
+					
+					if (line[k] >= 65 && line[k] <= 76) {
+						cod = cube_matrix[line[k] - 65][3];
+					} else if (line[k] >= 77 && line[k] <= 88) {
+						cod = cube_matrix[line[k] - 77][4];
+					} else if (line[k] >= 97 && line[k] <= 108) {
+						cod = cube_matrix[line[k] - 97][5];
+					} else if (line[k] >= 109 && line[k] <= 120) {
+						cod = line[k] - 109;
+						int row = cod / 3;
+						int col = cod % 3;
+						
+						cod = cube_matrix[row + 3][col + 6];
+					} else if (line[k] >= 48 && line[k] <= 56) {
+						cod = line[k] - 48;
+						int row = cod / 3;
+						int col = cod % 3;
+						
+						cod = cube_matrix[row + 3][col];
+					}
+					
+					line.insert(k + 1, "\033[0m");
+				}
+				
+				line[k] = ' ';
+			} else {
+				if (looked) {
+					looked = false;
+					line.insert(k + 1, "\033[" + to_string(cod) + "m");
+				}
+			}
+		}
+
+        write_text(ii + i, j, line);
+    }
+	
+}
+
+
 int main() {
     setup();
+
+	while (true) {
+		for (int i = 0; i < 5; i++) {
+			write_cube(0, 0, "AUp_" + to_string(i));
+			draw_matrix();
+			usleep(250000);
+		}
+		write_cube(0, 0, "Default");
+		draw_matrix();
+		usleep(250000);
+	}
+	
+	cin.ignore();
     
-    // Frame trivial:
+    // Escreve menu do jogo
+    draw_menu();
+	
+	// Recebe entrada
+	draw_instructions();
+    
+    /* Frame trivial:
 	write_text(0, 0, "Olá mundo!");
     draw_matrix();
     usleep(3000000);
@@ -167,21 +318,17 @@ int main() {
     string texto = "Olá mundo!";
     write_text(rows / 2, cols / 2 - texto.length() / 2, texto);
     draw_matrix();
-    usleep(3000000);
+    usleep(3000000);*/
     
-    //Frame composto:
-    write_text(10, 10, "Nos duas fomos desenhadas");
-    write_text(20, 20, "no mesmo frame ;D");
-    draw_matrix();
-    usleep(3000000);
     
     //Frame com um frame estático do cubo:
-    write_text(0, 0, "O cubo esta sendo desenhado na posicao 10i10j.");
+    write_text(0, 0, "Bem vindo ao Rubik Cube Simulator!");
     write_sprite(10, 10, "Default");
     draw_matrix();
     usleep(3000000);
     
     // Desenhando uma animação real do cubo:
+    /*
     while (true) {
 		for (int i = 0; i < 5; i++) {
 			write_sprite(0, 0, "BUp_" + to_string(i));
@@ -191,7 +338,7 @@ int main() {
 		write_sprite(0, 0, "Default");
 		draw_matrix();
 		usleep(1000000);
-	}
+	}*/
     
     cin.ignore();
 }
