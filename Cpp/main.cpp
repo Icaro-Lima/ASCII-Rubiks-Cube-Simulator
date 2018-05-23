@@ -289,11 +289,13 @@ void draw_default_cube(int row, int col) {
 }
 
 /**
- * Rotaciona a primeira linha em sentido horário
- */
-void rotate_first_row_left(int row, int col) {
+ * Rotaciona a linha ou coluna desejada conforme passado por parâmetro.
+ * (rotate)
+    **/
+void rotate_cube(int row, int col, string rotate) {
+	
 	for (int i = 0; i < 5; i++) {
-		write_sprite(row, col, "0Left_" + to_string(i));
+		write_sprite(row, col, rotate + to_string(i));
 		draw_matrix();
 		usleep(1000000);
 	}
@@ -304,14 +306,50 @@ void rotate_first_row_left(int row, int col) {
 
 /**
  * Inicia o jogo
- */
+ */	
 void start_game(int row, int col) {
-	char command = wait_key(new char[12] { '7', '9', '4', '6', '1', '3', 'R', 'T', 'Y', 'F', 'G', 'H'}, 12);
+	char command = wait_key(new char[18] { '7', '9', '4', '6', '1', '3',
+											'R', 'T', 'Y', 'F', 'G', 'H',
+											'r', 't', 'y', 'f', 'g', 'h'}, 18);
 	
 	if (command == '7') {
-		rotate_first_row_left(row, col);
+		rotate_cube(row, col, "0Left_");
 		start_game(row, col);
-	} else {
+	} else if (command == '9'){
+		rotate_cube(row, col, "0Right_");
+		start_game(row, col);
+	} else if (command == '4'){
+		rotate_cube(row, col, "1Left_");
+		start_game(row, col);
+	} else if (command == '6'){
+		rotate_cube(row, col, "1Right_");
+		start_game(row, col);
+	} else if (command == '1'){
+		rotate_cube(row, col, "2Left_");
+		start_game(row, col);
+	} else if (command == '3'){
+		rotate_cube(row, col, "2Right_");
+		start_game(row, col);
+	} else if (command == 'R' || command == 'r'){
+		rotate_cube(row, col, "AUp_");
+		start_game(row, col);
+	} else if (command == 'T' || command == 't'){
+		rotate_cube(row, col, "BUp_");
+		start_game(row, col);
+	} else if (command == 'Y' || command == 'y'){
+		rotate_cube(row, col, "CUp_");
+		start_game(row, col);
+	} else if (command == 'F' || command == 'f'){
+		rotate_cube(row, col, "ADown_");
+		start_game(row, col);
+	} else if (command == 'G' || command == 'g'){
+		rotate_cube(row, col, "BDown_");
+		start_game(row, col);
+	} else if (command == 'H' || command == 'h'){
+		rotate_cube(row, col, "CDown_");
+		start_game(row, col);
+	}		
+	else {
 		cin.ignore();
 	}
 	
