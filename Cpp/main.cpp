@@ -231,6 +231,11 @@ char wait_key(char * possible_keys, int count) {
 	return -1;
 }
 
+void draw_default_cube(int row, int col) {
+    write_sprite(row, col, "Default");
+    draw_matrix();
+}
+
 void menu_options() {
 	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'q', 'Q' }, 6);
 	
@@ -239,15 +244,20 @@ void menu_options() {
 	} else if (input == 'q' || input == 'Q') {
 		draw_menu();
 	} else {
-	string header = "Bem vindo ao Rubik Cube Simulator!";
 	int mid_screen = rows/2;
-	write_text(5, mid_screen + 20, header);
-    write_sprite(8, mid_screen, "Default");
-    draw_matrix();
-    usleep(3000000);
+	write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
+    draw_default_cube(2, mid_screen);
+	usleep(3000000);
 	}
+	
 	menu_options();
 	cin.ignore();
+}
+
+
+
+void rotate_first_row_clockwise() {
+	
 }
 
 
@@ -279,7 +289,7 @@ int main() {
     usleep(3000000);
     
     // Desenhando uma animação real do cubo:
-    /*
+    
     while (true) {
 		for (int i = 0; i < 5; i++) {
 			write_sprite(0, 0, "BUp_" + to_string(i));
@@ -289,7 +299,7 @@ int main() {
 		write_sprite(0, 0, "Default");
 		draw_matrix();
 		usleep(1000000);
-	}*/
+	}
     
     cin.ignore();
 }
