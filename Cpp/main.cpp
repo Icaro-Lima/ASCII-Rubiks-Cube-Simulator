@@ -19,12 +19,12 @@ int cube_matrix[12][9]
 {{000, 000, 000, 101, 101, 101, 000, 000, 000},
  {000, 000, 000, 101, 101, 101, 000, 000, 000},
  {000, 000, 000, 101, 101, 101, 000, 000, 000},
- {102, 102, 102, 103, 103, 103, 044, 044, 044},
- {102, 102, 102, 103, 103, 103, 044, 044, 044},
- {102, 102, 102, 103, 103, 103, 044, 044, 044},
- {000, 000, 000, 045, 045, 045, 000, 000, 000},
- {000, 000, 000, 045, 045, 045, 000, 000, 000},
- {000, 000, 000, 045, 045, 045, 000, 000, 000},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {102, 102, 102, 103, 103, 103, 44, 44, 44},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
+ {000, 000, 000, 45, 45, 45, 000, 000, 000},
  {000, 000, 000, 100, 100, 100, 000, 000, 000},
  {000, 000, 000, 100, 100, 100, 000, 000, 000},
  {000, 000, 000, 100, 100, 100, 000, 000, 000}};
@@ -242,19 +242,41 @@ void write_cube(int i, int j, string sprite_name){
     for (unsigned int ii = 0; ii < lines.size(); ii++) {
 		string line = lines[ii];
 		
+		int cod = -1;
 		bool looked = false;
-		for(unsigned int k = 0; k < line.length(); k++){
-			if (line[k] >= 65 && line[k] <= 76) {
-				int cod = cube_matrix[3][line[k] - 65];
-				
+		for(int k = (int)line.length() - 1; k >= 0; k--){
+			if ((line[k] >= 48 && line[k] <= 56) || (line[k] >= 65 && line[k] <= 88) || (line[k] >= 97 && line[k] <= 120)) {				
 				if (!looked) {
 					looked = true;
-					line.insert(k, "\033[" + to_string(cod) + "m");
+					
+					if (line[k] >= 65 && line[k] <= 76) {
+						cod = cube_matrix[line[k] - 65][3];
+					} else if (line[k] >= 77 && line[k] <= 88) {
+						cod = cube_matrix[line[k] - 77][4];
+					} else if (line[k] >= 97 && line[k] <= 108) {
+						cod = cube_matrix[line[k] - 97][5];
+					} else if (line[k] >= 109 && line[k] <= 120) {
+						cod = line[k] - 109;
+						int row = cod / 3;
+						int col = cod % 3;
+						
+						cod = cube_matrix[row + 3][col + 6];
+					} else if (line[k] >= 48 && line[k] <= 56) {
+						cod = line[k] - 48;
+						int row = cod / 3;
+						int col = cod % 3;
+						
+						cod = cube_matrix[row + 3][col];
+					}
+					
+					line.insert(k + 1, "\033[0m");
 				}
+				
+				line[k] = ' ';
 			} else {
 				if (looked) {
 					looked = false;
-					line.insert(k + 1, "\033[0m");
+					line.insert(k + 1, "\033[" + to_string(cod) + "m");
 				}
 			}
 		}
@@ -268,8 +290,18 @@ void write_cube(int i, int j, string sprite_name){
 int main() {
     setup();
 
-	write_cube(0, 0, "Default");
-	draw_matrix();
+	while (true) {
+		for (int i = 0; i < 5; i++) {
+			write_cube(0, 0, "AUp_" + to_string(i));
+			draw_matrix();
+			usleep(250000);
+		}
+		write_cube(0, 0, "Default");
+		draw_matrix();
+		usleep(250000);
+	}
+	
+	cin.ignore();
     
     // Escreve menu do jogo
     draw_menu();
