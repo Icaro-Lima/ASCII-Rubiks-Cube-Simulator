@@ -2,6 +2,8 @@
 
 using namespace std;
 
+void menu_options();
+
 /**
  * Rotaciona a linha ou coluna desejada conforme passado por parâmetro.
  * (rotate)
@@ -9,79 +11,88 @@ using namespace std;
 void rotate_cube(int row, int col, string rotate) {
 	
 	for (int i = 0; i < 5; i++) {
-		write_sprite(row, col, rotate + to_string(i));
+		write_sprite(row, col + 35, rotate + to_string(i));
 		draw_matrix();
-		usleep(1000000);
+		usleep(200000);
 	}
-	write_sprite(row, col, "Default");
+	write_sprite(row, col + 35, "Default");
 	draw_matrix();
-	usleep(1000000);
+	usleep(200000);
 }
 
 /**
  * Inicia o jogo
  */	
 void start_game(int row, int col) {
-	char command = wait_key(new char[18] { '7', '9', '4', '6', '1', '3',
-											'R', 'T', 'Y', 'F', 'G', 'H',
-											'r', 't', 'y', 'f', 'g', 'h'}, 18);
+	char command = wait_key(new char[32] { '7', '9', '4', '6', '1', '3',
+											'Q', 'W', 'E', 'A', 'S', 'D',
+											'q', 'w', 'e', 'a', 's', 'd',
+											'R', 'T', 'Y', 'r', 't', 'y',
+											'F', 'G', 'H', 'f', 'g', 'h',
+											'M', 'm'}, 32);
 	
 	if (command == '7') {
 		rotate_cube(row, col, "0Left_");
-		start_game(row, col);
 	} else if (command == '9'){
 		rotate_cube(row, col, "0Right_");
-		start_game(row, col);
 	} else if (command == '4'){
 		rotate_cube(row, col, "1Left_");
-		start_game(row, col);
 	} else if (command == '6'){
 		rotate_cube(row, col, "1Right_");
-		start_game(row, col);
 	} else if (command == '1'){
 		rotate_cube(row, col, "2Left_");
-		start_game(row, col);
 	} else if (command == '3'){
 		rotate_cube(row, col, "2Right_");
-		start_game(row, col);
-	} else if (command == 'R' || command == 'r'){
+	} else if (command == 'Q' || command == 'q'){
 		rotate_cube(row, col, "AUp_");
-		start_game(row, col);
-	} else if (command == 'T' || command == 't'){
+	} else if (command == 'W' || command == 'w'){
 		rotate_cube(row, col, "BUp_");
-		start_game(row, col);
-	} else if (command == 'Y' || command == 'y'){
+	} else if (command == 'E' || command == 'e'){
 		rotate_cube(row, col, "CUp_");
-		start_game(row, col);
-	} else if (command == 'F' || command == 'f'){
+	} else if (command == 'A' || command == 'a'){
 		rotate_cube(row, col, "ADown_");
-		start_game(row, col);
-	} else if (command == 'G' || command == 'g'){
+	} else if (command == 'S' || command == 's'){
 		rotate_cube(row, col, "BDown_");
-		start_game(row, col);
-	} else if (command == 'H' || command == 'h'){
+	} else if (command == 'D' || command == 'd'){
 		rotate_cube(row, col, "CDown_");
-		start_game(row, col);
-	}		
+	} else if (command == 'R' || command == 'r') {
+		rotate_cube(row, col, "aClockwise_");
+	} else if (command == 'T' || command == 't') {
+		rotate_cube(row, col, "bClockwise_");
+	} else if (command == 'Y' || command == 'y') {
+		rotate_cube(row, col, "cClockwise_");
+	} else if (command == 'F' || command == 'f') {
+		rotate_cube(row, col, "aCounterclockwise_");
+	} else if (command == 'G' || command == 'g') {
+		rotate_cube(row, col, "bCounterclockwise_");
+	} else if (command == 'H' || command == 'h') {
+		rotate_cube(row, col, "cCounterclockwise_");
+	} else if (command == 'M' || command == 'm') {
+		draw_menu();
+		menu_options();
+		return;
+	}
 	else {
 		cin.ignore();
 	}
+	
+	start_game(row, col);
 	
 	
 }
 
 // Exibe menu de opções
 void menu_options() {
-	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'q', 'Q' }, 6);
+	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'm', 'M' }, 6);
 	
 	if (input == 'i' || input == 'I') {
-		draw_instructions();
-	} else if (input == 'q' || input == 'Q') {
+		draw_instructions(5, cols/2.7, false);
+	} else if (input == 'm' || input == 'M') {
 		draw_menu();
 	} else {
 	int mid_screen = rows/2;
 	write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
-    draw_default_cube(2, mid_screen);
+    draw_default_cube(2, mid_screen + 15);
     start_game(2, mid_screen);
 	usleep(3000000);
 	}

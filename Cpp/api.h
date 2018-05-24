@@ -29,15 +29,7 @@ void write_text(unsigned int i, unsigned int j, const string &text) {
     }
 }
 
-/**
- * Desenha um frame do cubo em uma determinada posição.
- */
-void write_sprite(int i, int j, string sprite_name) {
-    vector<string> lines = animations[sprite_name];
-    for (unsigned int ii = 0; ii < lines.size(); ii++) {
-        write_text(ii + i, j, lines[ii]);
-    }
-}
+
 
 /**
  * Desenha um frame e logo em seguida apaga toda a matriz.
@@ -76,24 +68,34 @@ void draw_menu() {
 /**
  * Escreve as instruções do jogo na tela
  */
-void draw_instructions() {
-		int i = 5;
+void draw_instructions(int row, int col, bool ingame) {
+		int i = row;
 		
-		write_text(i++, cols/2.7, "7 - Rotaciona primeira linha em sentido horário");
-		write_text(i++, cols/2.7, "9 - Rotaciona primeira linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "4 - Rotaciona segunda linha em sentido horário");
-		write_text(i++, cols/2.7, "6 - Rotaciona segunda linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "1 - Rotaciona terceira linha em sentido horário");
-		write_text(i++, cols/2.7, "3 - Rotaciona terceira linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "R - Rotaciona primeira coluna para cima");
-		write_text(i++, cols/2.7, "T - Rotciona segunda coluna para cima");
-		write_text(i++, cols/2.7, "Y - Rotaciona terceira coluna para cima");
-		write_text(i++, cols/2.7, "F - Rotaciona primeira coluna para baixo");
-		write_text(i++, cols/2.7, "G - Rotaciona segunda coluna para baixo");
-		write_text(i++, cols/2.7, "H - Rotaciona terceira coluna para baixo");
-		write_text(i++, cols/2.7, "Pressione J para Jogar");
-		write_text(i++, cols/2.7, "Pressione Q para voltar ao Menu");
-		draw_matrix();
+		write_text(i++, col, "7 - Rotaciona 1a linha em sentido horário");
+		write_text(i++, col, "9 - Rotaciona 1a linha em sentido anti-horário");
+		write_text(i++, col, "4 - Rotaciona 2a linha em sentido horário");
+		write_text(i++, col, "6 - Rotaciona 2a linha em sentido anti-horário");
+		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horário");
+		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horário");
+		write_text(i++, col, "Q - Rotaciona 1a coluna para cima");
+		write_text(i++, col, "W - Rotciona 2a coluna para cima");
+		write_text(i++, col, "E - Rotaciona 3a coluna para cima");
+		write_text(i++, col, "A - Rotaciona 1a coluna para baixo");
+		write_text(i++, col, "S - Rotaciona 2a coluna para baixo");
+		write_text(i++, col, "D - Rotaciona 3a coluna para baixo");
+		write_text(i++, col, "R - Rotaciona 1a face em sentido horário");
+		write_text(i++, col, "T - Rotaciona 2a face em sentido horário");
+		write_text(i++, col, "Y - Rotaciona 3a face em sentido horário");
+		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horário");
+		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horário");
+		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horário");
+		
+		if (ingame == false) {
+			write_text(i++, col, "Pressione J para Jogar");
+			write_text(i++, col, "Pressione M para voltar ao Menu");
+		}
+		
+		// draw_matrix();
 }
 
 void write_cube(int i, int j, string sprite_name){
@@ -145,11 +147,23 @@ void write_cube(int i, int j, string sprite_name){
 	
 }
 
+/**
+ * Desenha um frame do cubo em uma determinada posição.
+ */
+void write_sprite(int i, int j, string sprite_name) {
+    vector<string> lines = animations[sprite_name];
+    for (unsigned int ii = 0; ii < lines.size(); ii++) {
+        write_text(ii + i, j+2, lines[ii]);
+    }
+    
+    draw_instructions(i + 8, 0, true);
+}
+
 
 /**
  * Desenha o cubo em formato padrão	
  */
 void draw_default_cube(int row, int col) {
-    write_sprite(row, col, "Default");
+    write_sprite(row, col + 20, "Default");
     draw_matrix();
 }
