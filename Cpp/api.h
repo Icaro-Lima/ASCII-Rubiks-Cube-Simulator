@@ -1,6 +1,9 @@
 #include "base.h"
 
 // Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4)
+/**
+ * Aguarda receber um dos caracteres definidos como parâmetro e o retorna
+ */
 char wait_key(char * possible_keys, int count) {
 	system ("/bin/stty raw");
 
@@ -49,19 +52,20 @@ void draw_matrix() {
 }
 
 /**
- * Escreve o menu na tela
+ * Escreve o menu do jogo na tela
  */
-void draw_menu() {
-	// Escreve menu do jogo
+void draw_menu(int col) {
     string g_name = "-----------------------  RUBIK CUBE SIMULATOR -----------------------";
     string opcao_1 = "Pressione I para Instruções";
     string opcao_2 = "Pressione J para Jogar";
+    string opcao_3 = "Pressione ESC para Sair";
     string team_name = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte";
-    int g_name_col = cols/2 - g_name.length() + 30;
+    int g_name_col = cols/2 - g_name.length()/2;
     write_text(5, g_name_col, g_name);
     write_text(8, g_name_col + 20, opcao_1);
     write_text(9, g_name_col + 20, opcao_2);
-    write_text(11, g_name_col, team_name);
+    write_text(10, g_name_col + 20, opcao_3);
+    write_text(12, g_name_col, team_name);
     draw_matrix();
 }
 
@@ -89,13 +93,14 @@ void draw_instructions(int row, int col, bool ingame) {
 		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horário");
 		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horário");
 		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horário");
+		write_text(++i, col, "ESC - Sair do jogo");
+		write_text(++i, col, "Pressione M para voltar ao Menu");
 		
 		if (ingame == false) {
-			write_text(i++, col, "Pressione J para Jogar");
-			write_text(i++, col, "Pressione M para voltar ao Menu");
+			write_text(++i, col, "Pressione J para Jogar");
+			
 		}
 		
-		// draw_matrix();
 }
 
 void write_cube(int i, int j, string sprite_name){
@@ -156,7 +161,7 @@ void write_sprite(int i, int j, string sprite_name) {
         write_text(ii + i, j+2, lines[ii]);
     }
     
-    draw_instructions(i + 8, 0, true);
+    draw_instructions(i + 8, 2, true);
 }
 
 

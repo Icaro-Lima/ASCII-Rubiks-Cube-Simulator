@@ -1,5 +1,7 @@
 #include "api.h"
 
+#define esc 27
+
 using namespace std;
 
 void menu_options();
@@ -24,12 +26,13 @@ void rotate_cube(int row, int col, string rotate) {
  * Inicia o jogo
  */	
 void start_game(int row, int col) {
-	char command = wait_key(new char[32] { '7', '9', '4', '6', '1', '3',
+	char command = wait_key(new char[33] { '7', '9', '4', '6', '1', '3',
 											'Q', 'W', 'E', 'A', 'S', 'D',
 											'q', 'w', 'e', 'a', 's', 'd',
 											'R', 'T', 'Y', 'r', 't', 'y',
 											'F', 'G', 'H', 'f', 'g', 'h',
-											'M', 'm'}, 32);
+											'M', 'm', esc}, 33);
+	
 	
 	if (command == '7') {
 		rotate_cube(row, col, "0Left_");
@@ -68,12 +71,10 @@ void start_game(int row, int col) {
 	} else if (command == 'H' || command == 'h') {
 		rotate_cube(row, col, "cCounterclockwise_");
 	} else if (command == 'M' || command == 'm') {
-		draw_menu();
+		draw_menu(cols);
 		menu_options();
-		return;
-	}
-	else {
-		cin.ignore();
+	} else if (command == esc) {
+		exit(0);
 	}
 	
 	start_game(row, col);
@@ -81,15 +82,18 @@ void start_game(int row, int col) {
 	
 }
 
-// Exibe menu de opções
+/**
+ * Gerencia a lógica das opções do menu
+ */
 void menu_options() {
-	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'm', 'M' }, 6);
+	char input = wait_key(new char[7] { 'i', 'I', 'j', 'J', 'm', 'M', esc }, 7);
 	
 	if (input == 'i' || input == 'I') {
 		draw_instructions(5, cols/2.7, false);
+		draw_matrix();
 	} else if (input == 'm' || input == 'M') {
-		draw_menu();
-	} else {
+		draw_menu(cols);
+	} else if (input == 'j' || input == 'J') {
 	int mid_screen = rows/2;
 	write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
     draw_default_cube(2, mid_screen + 15);
@@ -97,50 +101,22 @@ void menu_options() {
 	usleep(3000000);
 	}
 	
+	else {
+		exit(0);
+	}
+	
+	
 	menu_options();
-	cin.ignore();
+	
 }
 
 int main() {
     setup();
     
-    // Escreve menu do jogo
-    draw_menu();
+    draw_menu(cols);
     
 	menu_options();
 	
     
-    /* Frame trivial:
-	write_text(0, 0, "Olá mundo!");
-    draw_matrix();
-    usleep(3000000);
-    
-    //Frame trivial com texto centralizado:
-    string texto = "Olá mundo!";
-    write_text(rows / 2, cols / 2 - texto.length() / 2, texto);
-    draw_matrix();
-    usleep(3000000);*/
-    
-    
-    //Frame com um frame estático do cubo:
-    /*
-    write_text(0, 0, "Bem vindo ao Rubik Cube Simulator!");
-    write_sprite(10, 10, "Default");
-    draw_matrix();
-    usleep(3000000);*/
-    
-    // Desenhando uma animação real do cubo:
-    
-    /* while (true) {
-		for (int i = 0; i < 5; i++) {
-			write_sprite(0, 0, "BUp_" + to_string(i));
-			draw_matrix();
-			usleep(1000000);
-		}
-		write_sprite(0, 0, "Default");
-		draw_matrix();
-		usleep(1000000);
-	}
-    
-    cin.ignore();*/
+  
 }
