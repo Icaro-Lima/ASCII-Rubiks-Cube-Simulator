@@ -15,11 +15,11 @@ void rotate_cube(int row, int col, string rotate) {
 	for (int i = 0; i < 5; i++) {
 		write_sprite(row, col + 35, rotate + to_string(i));
 		draw_matrix();
-		usleep(200000);
+		usleep(50000);
 	}
 	write_sprite(row, col + 35, "Default");
 	draw_matrix();
-	usleep(200000);
+	usleep(50000);
 }
 
 /**
