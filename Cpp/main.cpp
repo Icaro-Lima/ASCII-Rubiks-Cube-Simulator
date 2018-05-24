@@ -79,13 +79,13 @@ void menu_options() {
 	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'm', 'M' }, 6);
 	
 	if (input == 'i' || input == 'I') {
-		draw_instructions();
+		draw_instructions(5, cols/2.7);
 	} else if (input == 'm' || input == 'M') {
 		draw_menu();
 	} else {
 	int mid_screen = rows/2;
 	write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
-    draw_default_cube(2, mid_screen);
+    draw_default_cube(2, mid_screen + 15);
     start_game(2, mid_screen);
 	usleep(3000000);
 	}

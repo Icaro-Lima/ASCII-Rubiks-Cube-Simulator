@@ -76,29 +76,29 @@ void draw_menu() {
 /**
  * Escreve as instruções do jogo na tela
  */
-void draw_instructions() {
-		int i = 5;
+void draw_instructions(int row, int col) {
+		int i = row;
 		
-		write_text(i++, cols/2.7, "7 - Rotaciona primeira linha em sentido horário");
-		write_text(i++, cols/2.7, "9 - Rotaciona primeira linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "4 - Rotaciona segunda linha em sentido horário");
-		write_text(i++, cols/2.7, "6 - Rotaciona segunda linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "1 - Rotaciona terceira linha em sentido horário");
-		write_text(i++, cols/2.7, "3 - Rotaciona terceira linha em sentido anti-horário");
-		write_text(i++, cols/2.7, "Q - Rotaciona primeira coluna para cima");
-		write_text(i++, cols/2.7, "W - Rotciona segunda coluna para cima");
-		write_text(i++, cols/2.7, "E - Rotaciona terceira coluna para cima");
-		write_text(i++, cols/2.7, "A - Rotaciona primeira coluna para baixo");
-		write_text(i++, cols/2.7, "S - Rotaciona segunda coluna para baixo");
-		write_text(i++, cols/2.7, "D - Rotaciona terceira coluna para baixo");
-		write_text(i++, cols/2.7, "R - Rotaciona primeira face em sentido horário");
-		write_text(i++, cols/2.7, "T - Rotaciona segunda face em sentido horário");
-		write_text(i++, cols/2.7, "Y - Rotaciona terceira face em sentido horário");
-		write_text(i++, cols/2.7, "F - Rotaciona primeira face em sentido anti-horário");
-		write_text(i++, cols/2.7, "G - Rotaciona segunda face em sentido anti-horário");
-		write_text(i++, cols/2.7, "H - Rotaciona terceira face em sentido anti-horário");
-		write_text(i++, cols/2.7, "Pressione J para Jogar");
-		write_text(i++, cols/2.7, "Pressione M para voltar ao Menu");
+		write_text(i++, col, "7 - Rotaciona primeira linha em sentido horário");
+		write_text(i++, col, "9 - Rotaciona primeira linha em sentido anti-horário");
+		write_text(i++, col, "4 - Rotaciona segunda linha em sentido horário");
+		write_text(i++, col, "6 - Rotaciona segunda linha em sentido anti-horário");
+		write_text(i++, col, "1 - Rotaciona terceira linha em sentido horário");
+		write_text(i++, col, "3 - Rotaciona terceira linha em sentido anti-horário");
+		write_text(i++, col, "Q - Rotaciona primeira coluna para cima");
+		write_text(i++, col, "W - Rotciona segunda coluna para cima");
+		write_text(i++, col, "E - Rotaciona terceira coluna para cima");
+		write_text(i++, col, "A - Rotaciona primeira coluna para baixo");
+		write_text(i++, col, "S - Rotaciona segunda coluna para baixo");
+		write_text(i++, col, "D - Rotaciona terceira coluna para baixo");
+		write_text(i++, col, "R - Rotaciona primeira face em sentido horário");
+		write_text(i++, col, "T - Rotaciona segunda face em sentido horário");
+		write_text(i++, col, "Y - Rotaciona terceira face em sentido horário");
+		write_text(i++, col, "F - Rotaciona primeira face em sentido anti-horário");
+		write_text(i++, col, "G - Rotaciona segunda face em sentido anti-horário");
+		write_text(i++, col, "H - Rotaciona terceira face em sentido anti-horário");
+		write_text(i++, col, "Pressione J para Jogar");
+		write_text(i++, col, "Pressione M para voltar ao Menu");
 		draw_matrix();
 }
 
