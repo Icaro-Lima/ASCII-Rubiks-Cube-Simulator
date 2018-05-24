@@ -2,6 +2,8 @@
 
 using namespace std;
 
+void menu_options();
+
 /**
  * Rotaciona a linha ou coluna desejada conforme passado por parâmetro.
  * (rotate)
@@ -9,11 +11,11 @@ using namespace std;
 void rotate_cube(int row, int col, string rotate) {
 	
 	for (int i = 0; i < 5; i++) {
-		write_sprite(row, col, rotate + to_string(i));
+		write_sprite(row, col + 35, rotate + to_string(i));
 		draw_matrix();
 		usleep(200000);
 	}
-	write_sprite(row, col, "Default");
+	write_sprite(row, col + 35, "Default");
 	draw_matrix();
 	usleep(200000);
 }
@@ -22,11 +24,12 @@ void rotate_cube(int row, int col, string rotate) {
  * Inicia o jogo
  */	
 void start_game(int row, int col) {
-	char command = wait_key(new char[30] { '7', '9', '4', '6', '1', '3',
+	char command = wait_key(new char[32] { '7', '9', '4', '6', '1', '3',
 											'Q', 'W', 'E', 'A', 'S', 'D',
 											'q', 'w', 'e', 'a', 's', 'd',
 											'R', 'T', 'Y', 'r', 't', 'y',
-											'F', 'G', 'H', 'f', 'g', 'h'}, 30);
+											'F', 'G', 'H', 'f', 'g', 'h',
+											'M', 'm'}, 32);
 	
 	if (command == '7') {
 		rotate_cube(row, col, "0Left_");
@@ -64,6 +67,10 @@ void start_game(int row, int col) {
 		rotate_cube(row, col, "bCounterclockwise_");
 	} else if (command == 'H' || command == 'h') {
 		rotate_cube(row, col, "cCounterclockwise_");
+	} else if (command == 'M' || command == 'm') {
+		draw_menu();
+		menu_options();
+		return;
 	}
 	else {
 		cin.ignore();
@@ -79,7 +86,7 @@ void menu_options() {
 	char input = wait_key(new char[6] { 'i', 'I', 'j', 'J', 'm', 'M' }, 6);
 	
 	if (input == 'i' || input == 'I') {
-		draw_instructions(5, cols/2.7);
+		draw_instructions(5, cols/2.7, false);
 	} else if (input == 'm' || input == 'M') {
 		draw_menu();
 	} else {
