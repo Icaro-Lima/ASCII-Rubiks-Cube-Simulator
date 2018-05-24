@@ -187,7 +187,6 @@ void write_sprite(int i, int j, string sprite_name) {
     draw_instructions(i + 8, 2, true);
 }
 
-
 /**
  * Desenha o cubo em formato padrão	
  */
@@ -195,6 +194,68 @@ void draw_default_cube(int row, int col)
 {
 	write_sprite(row, col + 20, "Default");
 	draw_matrix();
+}
+
+void shuffle_cube()
+{
+
+	for (int i = 0; i < 12; i++)
+	{
+
+		int element = rand() % 12 + 1;
+
+		switch (element)
+		{
+
+		case 1:
+			// funcao da rotaçao 1
+
+			break;
+		case 2:
+			// funcao da rotaçao 2
+			break;
+
+		case 3:
+			// funcao da rotaçao 3
+			break;
+
+		case 4:
+			// funcao da rotaçao 4
+			break;
+
+		case 5:
+			// funcao da rotaçao 5
+			break;
+
+		case 6:
+			// funcao da rotaçao 6
+			break;
+
+		case 7:
+			// funcao da rotaçao 7
+			break;
+
+		case 8:
+			// funcao da rotaçao 8
+			break;
+
+		case 9:
+			// funcao da rotaçao 9
+			break;
+
+		case 10:
+			// funcao da rotaçao 10
+			break;
+
+		case 11:
+			// funcao da rotaçao 11
+			break;
+
+		default:
+			// funcao da rotaçao 12
+			break;
+		}
+	}
 }
 
 void shuffle_cube()
