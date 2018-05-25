@@ -82,24 +82,24 @@ void draw_menu() {
 void write_instructions(int row, int col, bool ingame) {
 		int i = row;
 		
-		write_text(i++, col, "7 - Rotaciona 1a linha em sentido horário");
-		write_text(i++, col, "9 - Rotaciona 1a linha em sentido anti-horário");
-		write_text(i++, col, "4 - Rotaciona 2a linha em sentido horário");
-		write_text(i++, col, "6 - Rotaciona 2a linha em sentido anti-horário");
-		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horário");
-		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horário");
+		write_text(i++, col, "7 - Rotaciona 1a linha em sentido horario");
+		write_text(i++, col, "9 - Rotaciona 1a linha em sentido anti-horario");
+		write_text(i++, col, "4 - Rotaciona 2a linha em sentido horario");
+		write_text(i++, col, "6 - Rotaciona 2a linha em sentido anti-horario");
+		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horario");
+		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horario");
 		write_text(i++, col, "Q - Rotaciona 1a coluna para cima");
 		write_text(i++, col, "W - Rotciona 2a coluna para cima");
 		write_text(i++, col, "E - Rotaciona 3a coluna para cima");
 		write_text(i++, col, "A - Rotaciona 1a coluna para baixo");
 		write_text(i++, col, "S - Rotaciona 2a coluna para baixo");
 		write_text(i++, col, "D - Rotaciona 3a coluna para baixo");
-		write_text(i++, col, "R - Rotaciona 1a face em sentido horário");
-		write_text(i++, col, "T - Rotaciona 2a face em sentido horário");
-		write_text(i++, col, "Y - Rotaciona 3a face em sentido horário");
-		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horário");
-		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horário");
-		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horário");
+		write_text(i++, col, "R - Rotaciona 1a face em sentido horario");
+		write_text(i++, col, "T - Rotaciona 2a face em sentido horario");
+		write_text(i++, col, "Y - Rotaciona 3a face em sentido horario");
+		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horario");
+		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horario");
+		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horario");
 		write_text(++i, col, "ESC - Sair do jogo");
 		write_text(++i, col, "Pressione M para voltar ao Menu");
 		
@@ -172,7 +172,7 @@ void write_cube(int i, int j, string sprite_name)
 		write_text(ii + i, j, line);
 	}
 	
-	write_instructions(i + 8, 2, true);
+	write_instructions(i + 8, 0, true);
 }
 
 /**

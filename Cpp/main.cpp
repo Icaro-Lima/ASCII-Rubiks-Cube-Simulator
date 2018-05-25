@@ -21,6 +21,40 @@ void rotate_cube(string rotate) {
 	
 	if (rotate == "0Left_") {
 		zeroEsq();
+	} else if (rotate == "0Right_") {
+		zeroDir();
+	} else if (rotate == "1Left_") {
+		umEsq();
+	} else if (rotate == "1Right_") {
+		umDir();
+	} else if (rotate == "2Left_") {
+		doisEsq();
+	} else if (rotate == "2Right_") {
+		doisDir();
+	} else if (rotate == "AUp_") {
+		ACima();
+	} else if (rotate == "ADown_") {
+		ABaixo();
+	} else if (rotate == "BUp_") {
+		BCima();
+	} else if (rotate == "BDown_") {
+		BBaixo();
+	} else if (rotate == "CUp_") {
+		CCima();
+	} else if (rotate == "CDown_") {
+		CBaixo();
+	} else if (rotate == "aClockwise_") {
+		aHorario();
+	} else if (rotate == "bClockwise_") {
+		bHorario();
+	} else if (rotate == "cClockwise_") {
+		cHorario();
+	} else if (rotate == "aCounterclockwise_") {
+		aAntiHorario();
+	} else if (rotate == "bCounterclockwise_") {
+		bAntiHorario();
+	} else if (rotate == "cCounterclockwise_") {
+		cAntiHorario();
 	}
 	
 	write_cube(CUBE_ORIGIN_ROW, cubo_mid_col, "Default");
@@ -86,6 +120,15 @@ void game_loop() {
 	game_loop();
 }
 
+void start_game() {
+	string bem_vindo = "Bem vindo ao Rubik Cube Simulator!";
+	write_text(2, cols / 2 - bem_vindo.length() / 2, bem_vindo);
+	write_cube(2, cubo_mid_col, "Default");
+	draw_matrix();
+	game_loop();
+	usleep(3000000);	
+}
+
 /**
  * Gerencia a lógica das opções do menu
  */
@@ -98,12 +141,7 @@ void menu_options() {
 	} else if (input == 'm' || input == 'M') {
 		draw_menu();
 	} else if (input == 'j' || input == 'J') {
-		string bem_vindo = "Bem vindo ao Rubik Cube Simulator!";
-		write_text(2, cols / 2 - bem_vindo.length() / 2, bem_vindo);
-		write_cube(2, cubo_mid_col, "Default");
-		draw_matrix();
-		game_loop();
-		usleep(3000000);
+		start_game();
 	} else {
 		exit(0);
 	}
