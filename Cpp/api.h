@@ -109,8 +109,10 @@ void write_instructions(int row, int col, bool ingame) {
 		}
 }
 
-void write_cube(int i, int j, string sprite_name)
+void write_cube(int i, int j, string sprite_name, bool instructions = true)
 {
+	if (instructions) write_instructions(i + 8, 0, true);
+	
 	vector<string> lines = animations[sprite_name];
 	for (unsigned int ii = 0; ii < lines.size(); ii++)
 	{
@@ -172,8 +174,6 @@ void write_cube(int i, int j, string sprite_name)
 
 		write_text(ii + i, j, line);
 	}
-	
-	write_instructions(i + 8, 0, true);
 }
 
 /**

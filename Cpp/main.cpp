@@ -326,9 +326,18 @@ void menu_options()
 	menu_options();
 }
 
+void draw_intro() {
+	write_text(animations["Default"].size() + 1, cols / 2 - 11, "Boyzoez Cube Simulator");
+	write_cube(0, cols / 2 - animations["Default"][0].length() / 2, "Default", false);
+	draw_matrix();
+	usleep(6000000);
+}
+
 int main()
 {
 	setup();
+
+	draw_intro();
 
 	draw_menu();
 
