@@ -5,13 +5,11 @@
 #include <iostream>
 #include <sys/ioctl.h>
 
-
 using namespace std;
 
 const string assets_path = "../Assets";
 
 int cube_matrix[12][9]
- 
 {{000, 000, 000, 101, 101, 101, 000, 000, 000},
  {000, 000, 000, 101, 101, 101, 000, 000, 000},
  {000, 000, 000, 101, 101, 101, 000, 000, 000},
@@ -29,6 +27,7 @@ int cube_matrix[12][9]
 map< string, vector<string> > animations;
 string ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
 unsigned int rows, cols; // Tamanho do terminal, que também é o tamanho da matrix.
+int cubo_mid_col;
 
 /**
  * AUXILIAR!
@@ -58,6 +57,7 @@ void load_animations() {
     string cube_path = assets_path + "/Cubo";
 
     animations["Default"] = read_file(cube_path + "/Default.txt");
+    cubo_mid_col = cols / 2 - animations["Default"][0].length() / 2;
 
     vector<string> names;
     names.push_back("0Left");
