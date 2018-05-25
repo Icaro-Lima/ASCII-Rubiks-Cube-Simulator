@@ -57,7 +57,7 @@ void load_animations() {
     string cube_path = assets_path + "/Cubo";
 
     animations["Default"] = read_file(cube_path + "/Default.txt");
-    cubo_mid_col = cols / 2 - animations["Default"][0].length() / 2;
+    cubo_mid_col = cols / 2 - animations["Default"][0].length() / 2 - 8;
 
     vector<string> names;
     names.push_back("0Left");
