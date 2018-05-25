@@ -13,11 +13,11 @@ void menu_options();
 void rotate_cube(int row, int col, string rotate) {
 	
 	for (int i = 0; i < 5; i++) {
-		write_sprite(row, col + 35, rotate + to_string(i));
+		write_sprite(row, col , rotate + to_string(i));
 		draw_matrix();
 		usleep(50000);
 	}
-	write_sprite(row, col + 35, "Default");
+	write_sprite(row, col , "Default");
 	draw_matrix();
 	usleep(50000);
 }
@@ -35,41 +35,41 @@ void start_game(int row, int col) {
 	
 	
 	if (command == '7') {
-		rotate_cube(row, col, "0Left_");
+		rotate_cube(row, col + 35, "0Left_");
 	} else if (command == '9'){
-		rotate_cube(row, col, "0Right_");
+		rotate_cube(row, col + 35, "0Right_");
 	} else if (command == '4'){
-		rotate_cube(row, col, "1Left_");
+		rotate_cube(row, col + 35, "1Left_");
 	} else if (command == '6'){
-		rotate_cube(row, col, "1Right_");
+		rotate_cube(row, col + 35, "1Right_");
 	} else if (command == '1'){
-		rotate_cube(row, col, "2Left_");
+		rotate_cube(row, col + 35, "2Left_");
 	} else if (command == '3'){
-		rotate_cube(row, col, "2Right_");
+		rotate_cube(row, col + 35, "2Right_");
 	} else if (command == 'Q' || command == 'q'){
-		rotate_cube(row, col, "AUp_");
+		rotate_cube(row, col + 35, "AUp_");
 	} else if (command == 'W' || command == 'w'){
-		rotate_cube(row, col, "BUp_");
+		rotate_cube(row, col + 35, "BUp_");
 	} else if (command == 'E' || command == 'e'){
-		rotate_cube(row, col, "CUp_");
+		rotate_cube(row, col + 35, "CUp_");
 	} else if (command == 'A' || command == 'a'){
-		rotate_cube(row, col, "ADown_");
+		rotate_cube(row, col + 35, "ADown_");
 	} else if (command == 'S' || command == 's'){
-		rotate_cube(row, col, "BDown_");
+		rotate_cube(row, col + 35, "BDown_");
 	} else if (command == 'D' || command == 'd'){
-		rotate_cube(row, col, "CDown_");
+		rotate_cube(row, col + 35, "CDown_");
 	} else if (command == 'R' || command == 'r') {
-		rotate_cube(row, col, "aClockwise_");
+		rotate_cube(row, col + 35, "aClockwise_");
 	} else if (command == 'T' || command == 't') {
-		rotate_cube(row, col, "bClockwise_");
+		rotate_cube(row, col + 35, "bClockwise_");
 	} else if (command == 'Y' || command == 'y') {
-		rotate_cube(row, col, "cClockwise_");
+		rotate_cube(row, col + 35, "cClockwise_");
 	} else if (command == 'F' || command == 'f') {
-		rotate_cube(row, col, "aCounterclockwise_");
+		rotate_cube(row, col + 35, "aCounterclockwise_");
 	} else if (command == 'G' || command == 'g') {
-		rotate_cube(row, col, "bCounterclockwise_");
+		rotate_cube(row, col + 35, "bCounterclockwise_");
 	} else if (command == 'H' || command == 'h') {
-		rotate_cube(row, col, "cCounterclockwise_");
+		rotate_cube(row, col + 35, "cCounterclockwise_");
 	} else if (command == 'M' || command == 'm') {
 		draw_menu(cols);
 		menu_options();
