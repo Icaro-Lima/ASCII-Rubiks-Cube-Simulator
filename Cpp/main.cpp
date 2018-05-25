@@ -11,13 +11,14 @@ void menu_options();
  */
 void start_game(int row, int col)
 {
-	char command = wait_key(new char[33]{'7', '9', '4', '6', '1', '3',
+
+	char command = wait_key(new char[35]{'7', '9', '4', '6', '1', '3',
 										 'Q', 'W', 'E', 'A', 'S', 'D',
 										 'q', 'w', 'e', 'a', 's', 'd',
 										 'R', 'T', 'Y', 'r', 't', 'y',
 										 'F', 'G', 'H', 'f', 'g', 'h',
-										 'M', 'm', esc},
-							33);
+										 'M', 'm', 'Z', 'z', esc},
+							35);
 
 	if (command == '7')
 	{
@@ -93,12 +94,17 @@ void start_game(int row, int col)
 	}
 	else if (command == 'M' || command == 'm')
 	{
+
 		draw_menu(cols);
 		menu_options();
 	}
 	else if (command == esc)
 	{
 		exit(0);
+	}
+	else if (command == 'Z' || command == 'z')
+	{
+		shuffle_cube(row, col);
 	}
 
 	start_game(row, col);
@@ -125,9 +131,10 @@ void menu_options()
 		int mid_screen = rows / 2;
 		write_text(2, mid_screen + 20, "Bem vindo ao Rubik Cube Simulator!");
 		draw_default_cube(2, mid_screen + 15);
+		shuffle_cube(2, mid_screen);
 		start_game(2, mid_screen);
+
 		usleep(3000000);
-		//shuffle_cube(2, mid_screen);
 	}
 	else
 	{

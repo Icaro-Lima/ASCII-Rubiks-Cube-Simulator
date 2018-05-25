@@ -104,6 +104,8 @@ void draw_instructions(int row, int col, bool ingame) {
 		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horário");
 		write_text(++i, col, "ESC - Sair do jogo");
 		write_text(++i, col, "Pressione M para voltar ao Menu");
+		write_text(++i, col, "Pressione Z para embaralhar o cubo");
+
 		
 		if (ingame == false) {
 			write_text(++i, col, "Pressione J para Jogar");
@@ -219,7 +221,7 @@ void rotate_cube(int row, int col, string rotate)
 void shuffle_cube(int row, int col)
 {
 
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		int element = rand() % 18 + 1;
 
