@@ -1,4 +1,6 @@
 #include "base.h"
+// esse include de baixo que buga tudo
+#include "movimentos_logicos.h"
 
 // Exemplo: wait_key(new char[4] { 'w', 'a', 's', 'd' }, 4)
 /**
@@ -196,64 +198,107 @@ void draw_default_cube(int row, int col)
 	draw_matrix();
 }
 
-void shuffle_cube()
+void shuffle_cube(int row, int col)
 {
 
 	for (int i = 0; i < 12; i++)
 	{
-
-		int element = rand() % 12 + 1;
+		int element = rand() % 18 + 1;
 
 		switch (element)
 		{
 
 		case 1:
-			// funcao da rotaçao 1
-
+			rotate_cube(row, col, "0Left_");
+			zeroEsq();
 			break;
 		case 2:
-			// funcao da rotaçao 2
+			rotate_cube(row, col, "0Right_");
+			zeroDir();
 			break;
 
 		case 3:
-			// funcao da rotaçao 3
+			rotate_cube(row, col, "1Left_");
+			umEsq();
 			break;
 
 		case 4:
-			// funcao da rotaçao 4
+			rotate_cube(row, col, "1Right_");
+			umDir();
 			break;
 
 		case 5:
-			// funcao da rotaçao 5
+			rotate_cube(row, col, "2Left_");
+			doisEsq();
 			break;
 
 		case 6:
-			// funcao da rotaçao 6
+			rotate_cube(row, col, "2Right_");
+			doisDir();
 			break;
 
 		case 7:
-			// funcao da rotaçao 7
+			rotate_cube(row, col, "AUp_");
+			ACima();
 			break;
 
 		case 8:
-			// funcao da rotaçao 8
+			rotate_cube(row, col, "BUp_");
+			BCima();
 			break;
 
 		case 9:
-			// funcao da rotaçao 9
+			rotate_cube(row, col, "CUp_");
+			CCima();
 			break;
 
 		case 10:
-			// funcao da rotaçao 10
+			rotate_cube(row, col, "ADown_");
+			ABaixo();
 			break;
 
 		case 11:
-			// funcao da rotaçao 11
+			rotate_cube(row, col, "BDown_");
+			BBaixo();
+			break;
+
+		case 12:
+			rotate_cube(row, col, "CDown_");
+			CBaixo();
+			break;
+
+		case 13:
+			rotate_cube(row, col, "aClockwise_");
+			aHorario();
+			break;
+
+		case 14:
+			rotate_cube(row, col, "bClockwise_");
+			bHorario();
+			break;
+
+		case 15:
+			rotate_cube(row, col, "cClockwise_");
+			cHorario();
+			break;
+
+		case 16:
+			rotate_cube(row, col, "aCounterclockwise_");
+			aAntiHorario();
+			break;
+
+		case 17:
+			rotate_cube(row, col, "bCounterclockwise_");
+			bAntiHorario();
 			break;
 
 		default:
-			// funcao da rotaçao 12
+			rotate_cube(row, col, "cCounterclockwise_");
+			cAntiHorario();
 			break;
 		}
+
+	start_game();
 	}
 }
+
