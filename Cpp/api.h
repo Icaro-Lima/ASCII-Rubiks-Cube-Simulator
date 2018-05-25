@@ -100,6 +100,7 @@ void write_instructions(int row, int col, bool ingame) {
 		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horario");
 		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horario");
 		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horario");
+		write_text(i++, col, "X - Embaralha o cubo");
 		write_text(++i, col, "ESC - Sair do jogo");
 		write_text(++i, col, "Pressione M para voltar ao Menu");
 		
