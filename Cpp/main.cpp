@@ -327,6 +327,29 @@ void menu_options()
 }
 
 void draw_intro() {
+	animations["Intro"] = vector<string>();
+	
+	for (unsigned int i = 0; i < rows; i++) {
+		animations["Intro"].push_back(string(cols - 1, ' '));
+	}
+	
+	for (unsigned int t = 0; t < rows; t++) {
+		for (unsigned int j = 0; j < cols - 1; j++) {
+			for (unsigned int i = 0; i < rows; i++) {
+				if (animations["Intro"][i][j] == ' ') {
+					if (rand() % 3 == 1) {
+						animations["Intro"][i][j] = 65 + rand() % 26;
+						break;
+					}
+				}
+			}
+		}
+		
+		write_sprite(0, 0, "Intro");
+		draw_matrix();
+		usleep(20000);
+	}
+	
 	write_text(animations["Default"].size() + 1, cols / 2 - 11, "Boyzoez Cube Simulator");
 	write_cube(0, cols / 2 - animations["Default"][0].length() / 2, "Default", false);
 	draw_matrix();
