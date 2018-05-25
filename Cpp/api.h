@@ -198,6 +198,24 @@ void draw_default_cube(int row, int col)
 	draw_matrix();
 }
 
+/**
+ * Realiza o movimento passado por 'rotate', desenhando o cubo a partir de row e col.
+ * (rotate)
+**/
+void rotate_cube(int row, int col, string rotate)
+{
+
+	for (int i = 0; i < 5; i++)
+	{
+		write_sprite(row, col + 35, rotate + to_string(i));
+		draw_matrix();
+		usleep(50000);
+	}
+	write_sprite(row, col + 35, "Default");
+	draw_matrix();
+	usleep(50000);
+}
+
 void shuffle_cube(int row, int col)
 {
 
@@ -297,8 +315,6 @@ void shuffle_cube(int row, int col)
 			cAntiHorario();
 			break;
 		}
-
-	start_game();
 	}
 }
 

@@ -7,27 +7,6 @@ using namespace std;
 void menu_options();
 
 /**
- * Rotaciona a linha ou coluna desejada conforme passado por parâmetro.
- * (rotate)
-    **/
-void rotate_cube(int row, int col, string rotate)
-{
-
-	for (int i = 0; i < 5; i++)
-	{
-		write_sprite(row, col + 35, rotate + to_string(i));
-		draw_matrix();
-		usleep(50000);
-	}
-	write_sprite(row, col + 35, "Default");
-	draw_matrix();
-	usleep(50000);
-}
-
-
-
-
-/**
  * Inicia o jogo
  */
 void start_game(int row, int col)
@@ -150,7 +129,6 @@ void menu_options()
 		usleep(3000000);
 		//shuffle_cube(2, mid_screen);
 	}
-
 	else
 	{
 		exit(0);
