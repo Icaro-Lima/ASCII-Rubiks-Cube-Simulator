@@ -42,6 +42,7 @@ void write_text(unsigned int i, unsigned int j, const string &text)
  */
 void draw_matrix()
 {
+	system("clear");
 	for (unsigned int i = 0; i < rows; i++)
 	{
 		for (unsigned int j = 0; j < cols; j++)
@@ -61,53 +62,50 @@ void draw_matrix()
 /**
  * Escreve o menu do jogo na tela
  */
-void draw_menu(int col) {
+void draw_menu() {
     string g_name = "-----------------------  RUBIK CUBE SIMULATOR -----------------------";
     string opcao_1 = "Pressione I para Instruções";
     string opcao_2 = "Pressione J para Jogar";
     string opcao_3 = "Pressione ESC para Sair";
     string team_name = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte";
-    int g_name_col = cols/2 - g_name.length()/2;
-    write_text(5, g_name_col, g_name);
-    write_text(8, g_name_col + 20, opcao_1);
-    write_text(9, g_name_col + 20, opcao_2);
-    write_text(10, g_name_col + 20, opcao_3);
-    write_text(12, g_name_col, team_name);
+    write_text(5, cols / 2 - g_name.length() / 2, g_name);
+    write_text(8, cols / 2 - opcao_1.length() / 2, opcao_1);
+    write_text(9, cols / 2 - opcao_2.length() / 2, opcao_2);
+    write_text(10, cols / 2 - opcao_3.length() / 2, opcao_3);
+    write_text(12, cols / 2 - team_name.length() / 2, team_name);
     draw_matrix();
 }
 
 /**
  * Escreve as instruções do jogo na tela
  */
-void draw_instructions(int row, int col, bool ingame) {
+void write_instructions(int row, int col, bool ingame) {
 		int i = row;
 		
-		write_text(i++, col, "7 - Rotaciona 1a linha em sentido horário");
-		write_text(i++, col, "9 - Rotaciona 1a linha em sentido anti-horário");
-		write_text(i++, col, "4 - Rotaciona 2a linha em sentido horário");
-		write_text(i++, col, "6 - Rotaciona 2a linha em sentido anti-horário");
-		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horário");
-		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horário");
+		write_text(i++, col, "7 - Rotaciona 1a linha em sentido horario");
+		write_text(i++, col, "9 - Rotaciona 1a linha em sentido anti-horario");
+		write_text(i++, col, "4 - Rotaciona 2a linha em sentido horario");
+		write_text(i++, col, "6 - Rotaciona 2a linha em sentido anti-horario");
+		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horario");
+		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horario");
 		write_text(i++, col, "Q - Rotaciona 1a coluna para cima");
 		write_text(i++, col, "W - Rotciona 2a coluna para cima");
 		write_text(i++, col, "E - Rotaciona 3a coluna para cima");
 		write_text(i++, col, "A - Rotaciona 1a coluna para baixo");
 		write_text(i++, col, "S - Rotaciona 2a coluna para baixo");
 		write_text(i++, col, "D - Rotaciona 3a coluna para baixo");
-		write_text(i++, col, "R - Rotaciona 1a face em sentido horário");
-		write_text(i++, col, "T - Rotaciona 2a face em sentido horário");
-		write_text(i++, col, "Y - Rotaciona 3a face em sentido horário");
-		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horário");
-		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horário");
-		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horário");
+		write_text(i++, col, "R - Rotaciona 1a face em sentido horario");
+		write_text(i++, col, "T - Rotaciona 2a face em sentido horario");
+		write_text(i++, col, "Y - Rotaciona 3a face em sentido horario");
+		write_text(i++, col, "F - Rotaciona 1a face em sentido anti-horario");
+		write_text(i++, col, "G - Rotaciona 2a face em sentido anti-horario");
+		write_text(i++, col, "H - Rotaciona 3a face em sentido anti-horario");
 		write_text(++i, col, "ESC - Sair do jogo");
 		write_text(++i, col, "Pressione M para voltar ao Menu");
 		
 		if (ingame == false) {
 			write_text(++i, col, "Pressione J para Jogar");
-			
 		}
-		
 }
 
 void write_cube(int i, int j, string sprite_name)
@@ -173,6 +171,8 @@ void write_cube(int i, int j, string sprite_name)
 
 		write_text(ii + i, j, line);
 	}
+	
+	write_instructions(i + 8, 0, true);
 }
 
 /**
@@ -183,17 +183,6 @@ void write_sprite(int i, int j, string sprite_name) {
     for (unsigned int ii = 0; ii < lines.size(); ii++) {
         write_text(ii + i, j+2, lines[ii]);
     }
-    
-    draw_instructions(i + 8, 2, true);
-}
-
-/**
- * Desenha o cubo em formato padrão	
- */
-void draw_default_cube(int row, int col)
-{
-	write_sprite(row, col + 20, "Default");
-	draw_matrix();
 }
 
 void shuffle_cube()
