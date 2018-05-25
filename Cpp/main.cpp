@@ -15,12 +15,15 @@ void menu_options();
 void rotate_cube(string rotate) {
 	for (int i = 0; i < 5; i++) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		write_sprite(row, col , rotate + to_string(i));
 		draw_matrix();
 		usleep(50000);
 	}
 	write_sprite(row, col , "Default");
 =======
+=======
+>>>>>>> 285787ca82064e8066a36a8591be340b5ace4e08
 		write_cube(CUBE_ORIGIN_ROW, cubo_mid_col, rotate + to_string(i));
 		draw_matrix();
 		usleep(50000);
@@ -65,6 +68,9 @@ void rotate_cube(string rotate) {
 	}
 	
 	write_cube(CUBE_ORIGIN_ROW, cubo_mid_col, "Default");
+<<<<<<< HEAD
+>>>>>>> 285787ca82064e8066a36a8591be340b5ace4e08
+=======
 >>>>>>> 285787ca82064e8066a36a8591be340b5ace4e08
 	draw_matrix();
 	usleep(50000);
