@@ -182,6 +182,6 @@ void write_cube(int i, int j, string sprite_name, bool instructions = true)
 void write_sprite(int i, int j, string sprite_name) {
     vector<string> lines = animations[sprite_name];
     for (unsigned int ii = 0; ii < lines.size(); ii++) {
-        write_text(ii + i, j+2, lines[ii]);
+        write_text(ii + i, j, lines[ii]);
     }
 }

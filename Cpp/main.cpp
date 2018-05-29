@@ -328,9 +328,9 @@ void menu_options()
 
 void draw_intro() {
 	for (int i = 0; i < 44; i++) {
-		write_sprite(rows / 2 - 13, cols / 2 - 44, "Logo_" + to_string(i));
+		write_sprite(rows / 2 - 20, 0, "Logo_" + to_string(i));
 		draw_matrix();
-		usleep(50000);
+		usleep(70000);
 	}
 }
 

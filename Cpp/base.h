@@ -102,10 +102,12 @@ void load_animations() {
 void fill_matrix() {
     for (unsigned int i = 0; i < rows; i++) {
         for (unsigned int j = 0; j < 500; j++) {
-			if (j < cols)
+			if (j < cols) {
 				matrix[i][j] = ' ';
-			else
+			}
+			else {
 				matrix[i][j] = '\0';
+			}
         }
     }
 }
