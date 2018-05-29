@@ -25,7 +25,7 @@ int cube_matrix[12][9]
 
 
 map< string, vector<string> > animations;
-string ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
+char ** matrix; // Matriz que armazena o estado atual das 'escrituras', antes de ser desenhada no terminal.
 unsigned int rows, cols; // Tamanho do terminal, que também é o tamanho da matrix.
 int cubo_mid_col;
 
@@ -57,7 +57,7 @@ void load_animations() {
     string cube_path = assets_path + "/Cubo";
 
     animations["Default"] = read_file(cube_path + "/Default.txt");
-    cubo_mid_col = cols / 2 - animations["Default"][0].length() / 2 - 8;
+    cubo_mid_col = cols / 2 - animations["Default"][0].length() / 2;
 
     vector<string> names;
     names.push_back("0Left");
@@ -101,8 +101,11 @@ void load_animations() {
  */
 void fill_matrix() {
     for (unsigned int i = 0; i < rows; i++) {
-        for (unsigned int j = 0; j < cols; j++) {
-            matrix[i][j] = ' ';
+        for (unsigned int j = 0; j < 500; j++) {
+			if (j < cols)
+				matrix[i][j] = ' ';
+			else
+				matrix[i][j] = '\0';
         }
     }
 }
@@ -120,11 +123,11 @@ void setup() {
     struct winsize terminal_size;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminal_size);
     rows = terminal_size.ws_row;
-    cols = terminal_size.ws_col;
+    cols = 204;//terminal_size.ws_col;
 
-    matrix = new string *[rows];
+    matrix = new char *[rows];
     for (unsigned int i = 0; i < rows; i++) {
-        matrix[i] = new string [cols];
+        matrix[i] = new char[500];
     }
 
     fill_matrix();

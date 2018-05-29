@@ -10,7 +10,7 @@ char wait_key(char * possible_keys, int count) {
 	while (true)
 	{
 		char x = getchar();
-		cout << '\b' << ' ' << '\b';
+		printf("\b \b");
 		for (int i = 0; i < count; i++)
 		{
 			if (x == possible_keys[i])
@@ -30,7 +30,7 @@ void write_text(unsigned int i, unsigned int j, const string &text)
 {
 	for (unsigned int jj = 0; jj < text.length(); jj++)
 	{
-		if (text[jj] != ' ' && i < rows && j + jj < cols)
+		if (text[jj] != ' ' && i < rows)
 		{
 			matrix[i][j + jj] = text[jj];
 		}
@@ -45,14 +45,14 @@ void draw_matrix()
 	system("clear");
 	for (unsigned int i = 0; i < rows; i++)
 	{
-		for (unsigned int j = 0; j < cols; j++)
+		for (unsigned int j = 0; matrix[i][j] != '\0'; j++)
 		{
-			cout << matrix[i][j];
+			printf("%c", matrix[i][j]);
 		}
 
 		if (i < rows - 1)
 		{
-			cout << endl;
+			printf("\n");
 		}
 	}
 
