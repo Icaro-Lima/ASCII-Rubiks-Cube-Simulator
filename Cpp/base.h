@@ -88,6 +88,11 @@ void load_animations() {
             animations[name] = read_file(cube_path + "/"  + names[i] + "/" + (char)(48 + j) + ".txt");
         }
     }
+    
+    for (unsigned int i = 0; i < 44; i++) {
+		string name = "Logo_" + to_string(i);
+		animations[name] = read_file(assets_path + "/Logo/" + to_string(i) + ".txt");
+	}
 }
 
 /**
