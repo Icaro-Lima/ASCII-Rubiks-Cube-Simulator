@@ -30,7 +30,7 @@ void write_text(unsigned int i, unsigned int j, const string &text)
 {
 	for (unsigned int jj = 0; jj < text.length(); jj++)
 	{
-		if (text[jj] != ' ' && i < rows)
+		if (i < rows)
 		{
 			matrix[i][j + jj] = text[jj];
 		}
