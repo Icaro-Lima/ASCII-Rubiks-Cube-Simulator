@@ -8,6 +8,7 @@
 using namespace std;
 
 const string assets_path = "../Assets";
+const int line_limit = 500;
 
 int cube_matrix[12][9]
 {{000, 000, 000, 101, 101, 101, 000, 000, 000},
@@ -101,7 +102,7 @@ void load_animations() {
  */
 void fill_matrix() {
     for (unsigned int i = 0; i < rows; i++) {
-        for (unsigned int j = 0; j < 500; j++) {
+        for (unsigned int j = 0; j < line_limit; j++) {
 			if (j < cols) {
 				matrix[i][j] = ' ';
 			}
@@ -125,11 +126,11 @@ void setup() {
     struct winsize terminal_size;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminal_size);
     rows = terminal_size.ws_row;
-    cols = 204;//terminal_size.ws_col;
+    cols = terminal_size.ws_col;
 
     matrix = new char *[rows];
     for (unsigned int i = 0; i < rows; i++) {
-        matrix[i] = new char[500];
+        matrix[i] = new char[line_limit];
     }
 
     fill_matrix();
