@@ -89,7 +89,7 @@ void write_instructions(int row, int col, bool ingame) {
 		write_text(i++, col, "1 - Rotaciona 3a linha em sentido horario");
 		write_text(i++, col, "3 - Rotaciona 3a linha em sentido anti-horario");
 		write_text(i++, col, "Q - Rotaciona 1a coluna para cima");
-		write_text(i++, col, "W - Rotciona 2a coluna para cima");
+		write_text(i++, col, "W - Rotaciona 2a coluna para cima");
 		write_text(i++, col, "E - Rotaciona 3a coluna para cima");
 		write_text(i++, col, "A - Rotaciona 1a coluna para baixo");
 		write_text(i++, col, "S - Rotaciona 2a coluna para baixo");
