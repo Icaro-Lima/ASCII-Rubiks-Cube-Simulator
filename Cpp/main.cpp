@@ -327,7 +327,7 @@ void menu_options()
 }
 
 void draw_intro() {
-	const int intro_rows = 40;
+	const int intro_rows = 13;
 	const int intro_cols = 88;
 	for (int i = 0; i < 44; i++) {
 		write_sprite(rows / 2 - intro_rows / 2, cols / 2 - intro_cols / 2, "Logo_" + to_string(i));
