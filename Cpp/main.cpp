@@ -98,7 +98,9 @@ void rotate_cube(string rotate)
 	draw_matrix();
 	usleep(50000);
 }
-
+/**
+ * Realiza o embaralhamento do cubo.
+ */
 void shuffle_cube()
 {
 
@@ -287,6 +289,11 @@ void game_loop()
 	game_loop();
 }
 
+/**
+ * Inicializa e desenha o cubo em seu estado padrão(default) e após isso
+ * já realiza o embaralhamento.
+ * 										
+ */
 void start_game()
 {
 	string bem_vindo = "Bem vindo ao Rubik Cube Simulator!";
@@ -326,6 +333,9 @@ void menu_options()
 	menu_options();
 }
 
+/**
+ * Desenha a entrada inicial do jogo.
+ */
 void draw_intro() {
 	const int intro_rows = 13;
 	const int intro_cols = 88;

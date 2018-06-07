@@ -109,6 +109,10 @@ void write_instructions(int row, int col, bool ingame) {
 		}
 }
 
+/**
+ * Escreve em uma face qualquer do cubo aplicando a cor necessária.
+ * 
+ */
 void write_cube(int i, int j, string sprite_name, bool instructions = true)
 {
 	if (instructions) write_instructions(i + 8, 0, true);
