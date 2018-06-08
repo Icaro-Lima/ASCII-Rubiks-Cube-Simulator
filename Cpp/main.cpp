@@ -18,7 +18,7 @@ void rotate_cube(string rotate)
 	{
 		write_cube(CUBE_ORIGIN_ROW, cubo_mid_col, rotate + to_string(i));
 		draw_matrix();
-		usleep(50000);
+		usleep(30000);
 	}
 
 	if (rotate == "0Left_")
