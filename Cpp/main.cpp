@@ -300,7 +300,7 @@ void start_game()
 	write_text(2, cols / 2 - bem_vindo.length() / 2, bem_vindo);
 	write_cube(2, cubo_mid_col, "Default");
 	draw_matrix();
-	shuffle_cube();
+	//shuffle_cube();
 	game_loop();
 	usleep(3000000);
 }

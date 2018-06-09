@@ -10,7 +10,7 @@ char wait_key(char * possible_keys, int count) {
 	while (true)
 	{
 		char x = getchar();
-		printf("\b \b");
+		//printf("\b \b");
 		for (int i = 0; i < count; i++)
 		{
 			if (x == possible_keys[i])
