@@ -5,8 +5,7 @@
  * Aguarda receber um dos caracteres definidos como parâmetro e o retorna
  */
 char wait_key(char * possible_keys, int count) {
-	system ("/bin/stty raw");
-
+	system("/bin/stty raw");
 	while (true)
 	{
 		char x = getchar();
@@ -42,19 +41,22 @@ void write_text(unsigned int i, unsigned int j, const string &text)
  */
 void draw_matrix()
 {
-	system("clear");
-	for (unsigned int i = 0; i < rows; i++)
+	string acum = "";
+	for (unsigned int i = 0; i < rows - 1; i++)
 	{
 		for (unsigned int j = 0; matrix[i][j] != '\0'; j++)
 		{
-			printf("%c", matrix[i][j]);
+			acum += matrix[i][j];
+			//printf("%c", matrix[i][j]);
 		}
 
 		if (i < rows - 1)
 		{
-			printf("\n");
+			acum += '\n';
+			//printf("\n");
 		}
 	}
+	cout << acum << endl;
 
 	fill_matrix();
 }
