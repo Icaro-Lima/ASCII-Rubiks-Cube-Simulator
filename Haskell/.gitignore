@@ -1,0 +1,10 @@
+# Ignorar tudo!
+*
+
+# Porém, não ignorar o seguinte:
+!.gitignore
+!base.hs
+!main.hs
+!api.hs
+!movimentos_logicos.hs
+!Makefile
