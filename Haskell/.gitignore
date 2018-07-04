@@ -7,5 +7,6 @@
 !main.hs
 !api.hs
 !movimentos_logicos.hs
+!TermSize.hs
 !Makefile
 !README.md
