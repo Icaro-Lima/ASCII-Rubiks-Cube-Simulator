@@ -12,7 +12,9 @@ assets_path = "../Assets"
 line_limit = 500
 
 -- |Número de linhas existentes no console.
-rows = fst (unsafeDupablePerformIO getTermSize)
+size = unsafeDupablePerformIO getTermSize
+rows = fst size
+cols = snd size
 
 {-|
   Retorna uma lista de strings, onde cada string corresponde a uma linha
@@ -39,8 +41,20 @@ loadAnimations = do
     idx <- ["0","1","2","3","4"]] ++ [("Default",getFileLines (cube_path ++ "/Default.txt"))] ++ 
     [("Logo_" ++ idx,getFileLines (assets_path ++ "/Logo/" ++ idx ++ ".txt")) | idx <- map (show) [0..43]])
 
+-- |Função auxiliar de filledMatrix, não deve ser chamada diretamente.
+filledMatrixAux :: Int -> [String]
+filledMatrixAux i
+  | i < rows = [(replicate cols ' ') ++ (replicate (line_limit - cols) '\0')] ++ filledMatrixAux (i + 1)
+  | otherwise = []
+
+-- |Retorna uma matriz de caracteres, rows x line_limit, cada linha com
+-- cols espaços e (line_limit - cols) nulls.
+filledMatrix :: [String]
+filledMatrix = filledMatrixAux 0
+
 main :: IO()
 main = do
+  mapM_ (putStr) filledMatrix
   print rows
   mapM_ (putStrLn) (fromMaybe [""] (Map.lookup "Logo_0" (loadAnimations)))
   print "Let's go!"
