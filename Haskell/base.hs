@@ -3,16 +3,32 @@ import Data.Maybe (fromMaybe)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import System.IO.Unsafe (unsafeDupablePerformIO)
+import TermSize
 
+-- |Caminho até a pasta Assets.
 assets_path = "../Assets"
+
+-- |Limite do tamanho de uma linha.
 line_limit = 500
 
--- Método auxiliar de 
+-- |Número de linhas existentes no console.
+rows = fst (unsafeDupablePerformIO getTermSize)
+
+{-|
+  Retorna uma lista de strings, onde cada string corresponde a uma linha
+  do arquivo lido.
+-}
 getFileLines :: String -> [String]
 getFileLines path = do
   let file = unsafeDupablePerformIO (readFile path)
   lines file
-  
+
+{-|
+  Carrega todas as animações do cubo: 
+  0Left_0,
+  2Right_4,
+  ...
+-}
 loadAnimations :: Map String [String]
 loadAnimations = do
   let cube_path = assets_path ++ "/Cubo"
@@ -25,5 +41,6 @@ loadAnimations = do
 
 main :: IO()
 main = do
+  print rows
   mapM_ (putStrLn) (fromMaybe [""] (Map.lookup "Logo_0" (loadAnimations)))
   print "Let's go!"
