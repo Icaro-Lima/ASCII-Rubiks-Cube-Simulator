@@ -5,7 +5,7 @@
 !.gitignore
 !Base.hs
 !main.hs
-!api.hs
+!Api.hs
 !movimentos_logicos.hs
 !TermSize.hs
 !Makefile
