@@ -152,4 +152,17 @@ zeroDir cubeMatrix =
     giraFaceAntiHorario 0 3 2 5 cubeMatrix
 
 
+umEsq :: [[Int]] -> [Int]
+umEsq cubeMatrix = 
+    let a = getMatrixLine 4 0 1 2 cubeMatrix
+        b = getMatrixLine 4 3 4 5 cubeMatrix
+        c = getMatrixLine 4 6 7 8 cubeMatrix
+        d = getMatrixLine 10 3 4 5 cubeMatrix
+    
+    swapL 4 0 2 b cubeMatrix
+    swapL 4 3 5 c cubeMatrix
+    swapL 4 6 8 d cubeMatrix
+    swapL 10 3 5 a cubeMatrix
+
+
 
