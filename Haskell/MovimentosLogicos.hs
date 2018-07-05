@@ -192,6 +192,20 @@ doisEsq cubeMatrix =
 
     giraFaceAntiHorario 6 3 8 5 cubeMatrix
 
+doisDir :: [[Int]] -> [[Int]]
+doisDir cubeMatrix = 
+    let a = getMatrixLine 5 0 1 2 cubeMatrix
+        b = getMatrixLine 5 3 4 5 cubeMatrix
+        c = getMatrixLine 5 6 7 8 cubeMatrix
+        d = getMatrixLine 9 3 4 5 cubeMatrix
+    
+    swapL 5 0 2 d cubeMatrix
+    swapL 5 3 5 a cubeMatrix
+    swapL 5 6 8 b cubeMatrix
+    swapL 9 3 5 c cubeMatrix
+
+    giraFaceHorario 6 3 8 5 cubeMatrix
+
 
 
 
