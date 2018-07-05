@@ -27,3 +27,16 @@ giraFaceAntiHorario lIni cIni lFim cFim =
     swapL lFim cIni cFim d cubeMatrix
     swapC cIni lIni cFim a cubeMatrix
 
+giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [Int]
+giraFaceHorario lIni cIni lFim cFim =
+    let a = getMatrixLine lIni cIni cFim-1 cFim cubeMatrix
+        b = getMatrixCol cFim lFim lFim-1 lIni cubeMatrix
+        c = getMatrixLine lFim cIni cFim-1 cFim cubeMatrix
+        d = getMatrixCol cIni lFim lFim-1 lIni cubeMatrix
+
+    swapL lIni cIni cFim d
+    swapC cIni lIni lFim c
+    swapL lFim cIni cFim b
+    swapC cFim lIni lFim a
+
+
