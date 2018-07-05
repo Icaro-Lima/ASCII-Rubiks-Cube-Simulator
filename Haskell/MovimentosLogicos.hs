@@ -15,7 +15,7 @@ getMatrixCol coluna a b c cubeMatrix =
   [genericIndex (genericIndex cubeMatrix c) coluna]
 
 
-giraFaceAntiHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [Int]
+giraFaceAntiHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
 giraFaceAntiHorario lIni cIni lFim cFim cubeMatrix = 
     let a = getMatrixLine lIni cFim cFim-1 cIni cubeMatrix
         b = getMatrixCol cFim lIni lFim-1 lFim cubeMatrix
@@ -27,7 +27,7 @@ giraFaceAntiHorario lIni cIni lFim cFim cubeMatrix =
     swapL lFim cIni cFim d cubeMatrix
     swapC cIni lIni cFim a cubeMatrix
 
-giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [Int]
+giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
 giraFaceHorario lIni cIni lFim cFim cubeMatrix =
     let a = getMatrixLine lIni cIni cFim-1 cFim cubeMatrix
         b = getMatrixCol cFim lFim lFim-1 lIni cubeMatrix
@@ -39,7 +39,7 @@ giraFaceHorario lIni cIni lFim cFim cubeMatrix =
     swapL lFim cIni cFim b cubeMatrix
     swapC cFim lIni lFim a cubeMatrix
 
-aAntiHorario :: [[Int]] -> [Int]
+aAntiHorario :: [[Int]] -> [[Int]]
 aAntiHorario cubeMatrix = 
     let a = getMatrixLine 2 5 4 3 cubeMatrix
         b = getMatrixCol 6 3 4 5 cubeMatrix
@@ -55,7 +55,7 @@ aAntiHorario cubeMatrix =
     giraFaceAntiHorario 3 3 5 5 cubeMatrix
 
 
-aHorario :: [[Int]] -> [Int]
+aHorario :: [[Int]] -> [[Int]]
 aHorario cubeMatrix = 
     let a = getMatrixLine 2 3 4 5 cubeMatrix
         b = getMatrixCol 6 5 4 3 cubeMatrix
@@ -70,7 +70,7 @@ aHorario cubeMatrix =
     giraFaceHorario 3 3 5 5 cubeMatrix
 
 
-bAntiHorario :: [[Int]] -> [Int]
+bAntiHorario :: [[Int]] -> [[Int]]
 bAntiHorario cubeMatrix = 
     let a = getMatrixLine 1 5 4 3 cubeMatrix
         b = getMatrixCol 7 3 4 5 cubeMatrix
@@ -82,7 +82,7 @@ bAntiHorario cubeMatrix =
     swapL 7 3 5 d cubeMatrix
     swapC 1 3 5 a cubeMatrix
     
-bHorario :: [[Int]] -> [Int]
+bHorario :: [[Int]] -> [[Int]]
 bHorario cubeMatrix = 
     let a = getMatrixLine 1 3 4 5 cubeMatrix
         b = getMatrixCol 7 5 4 3 cubeMatrix
@@ -94,7 +94,7 @@ bHorario cubeMatrix =
     swapL 7 3 5 b cubeMatrix
     swapC 7 3 5 a cubeMatrix
 
-cAntiHorario :: [[Int]] -> [Int]
+cAntiHorario :: [[Int]] -> [[Int]]
 cAntiHorario cubeMatrix = 
     let a = getMatrixLine 0 5 4 3 cubeMatrix
         b = getMatrixCol 8 3 4 5 cubeMatrix
@@ -108,7 +108,7 @@ cAntiHorario cubeMatrix =
 
     giraFaceHorario 9 3 11 5 cubeMatrix
 
-cHorario :: [[Int]] -> [Int]
+cHorario :: [[Int]] -> [[Int]]
 cHorario cubeMatrix = 
     let a = getMatrixLine 0 3 4 5 cubeMatrix
         b = getMatrixCol 8 5 4 3 cubeMatrix
@@ -123,7 +123,7 @@ cHorario cubeMatrix =
     giraFaceAntiHorario 9 3 11 5 cubeMatrix
 
 
-zeroEsq :: [[Int]] -> [Int]
+zeroEsq :: [[Int]] -> [[Int]]
 zeroEsq cubeMatrix = 
     let a = getMatrixLine 3 0 1 2 cubeMatrix
         b = getMatrixLine 3 3 4 5 cubeMatrix
@@ -137,7 +137,7 @@ zeroEsq cubeMatrix =
 
     giraFaceHorario 0 3 2 5 cubeMatrix
 
-zeroDir :: [[Int]] -> [Int]
+zeroDir :: [[Int]] -> [[Int]]
 zeroDir cubeMatrix = 
     let a = getMatrixLine 3 0 1 2 cubeMatrix
         b = getMatrixLine 3 3 4 5 cubeMatrix
@@ -152,7 +152,7 @@ zeroDir cubeMatrix =
     giraFaceAntiHorario 0 3 2 5 cubeMatrix
 
 
-umEsq :: [[Int]] -> [Int]
+umEsq :: [[Int]] -> [[Int]]
 umEsq cubeMatrix = 
     let a = getMatrixLine 4 0 1 2 cubeMatrix
         b = getMatrixLine 4 3 4 5 cubeMatrix
@@ -164,7 +164,8 @@ umEsq cubeMatrix =
     swapL 4 6 8 d cubeMatrix
     swapL 10 3 5 a cubeMatrix
 
-umDir :: [[Int]] -> [Int]
+
+umDir :: [[Int]] -> [[Int]]
 umDir cubeMatrix = 
     let a = getMatrixLine 4 0 1 2 cubeMatrix
         b = getMatrixLine 4 3 4 5 cubeMatrix
@@ -176,7 +177,8 @@ umDir cubeMatrix =
     swapL 4 6 8 b cubeMatrix
     swapL 10 3 5 c cubeMatrix
 
-doisEsq :: [[Int]] -> [Int]
+
+doisEsq :: [[Int]] -> [[Int]]
 doisEsq cubeMatrix = 
     let a = getMatrixLine 5 0 1 2 cubeMatrix
         b = getMatrixLine 5 3 4 5 cubeMatrix
@@ -189,6 +191,8 @@ doisEsq cubeMatrix =
     swapL 9 3 5 a cubeMatrix
 
     giraFaceAntiHorario 6 3 8 5 cubeMatrix
+
+
 
 
 
