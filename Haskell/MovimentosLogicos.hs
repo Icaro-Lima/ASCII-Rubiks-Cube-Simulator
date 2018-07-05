@@ -82,5 +82,18 @@ bAntiHorario cubeMatrix =
     swapL 7 3 5 d cubeMatrix
     swapC 1 3 5 a cubeMatrix
     
+bHorario :: [[Int]] -> [Int]
+bHorario cubeMatrix = 
+    let a = getMatrixLine 1 3 4 5 cubeMatrix
+        b = getMatrixCol 7 5 4 3 cubeMatrix
+        c = getMatrixLine 7 3 4 5 cubeMatrix
+        d = getMatrixCol 1 5 4 3 cubeMatrix
+    
+    swapL 1 3 5 d cubeMatrix
+    swapC 1 3 5 c cubeMatrix
+    swapL 7 3 5 b cubeMatrix
+    swapC 7 3 5 a cubeMatrix
+
+
 
 
