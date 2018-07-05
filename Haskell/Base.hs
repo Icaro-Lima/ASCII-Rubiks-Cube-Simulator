@@ -72,6 +72,10 @@ writeTextAux i ii j text (h:t)
   | ii == i = [insertWithoutShift text j h] ++ (writeTextAux i (ii + 1) j text t)
   | otherwise = [h] ++ (writeTextAux i (ii + 1) j text t)
 
+matrixToString :: [String] -> String
+matrixToString [] = ""
+matrixToString (h:t) = h ++ "\n" ++ matrixToString t
+
 main :: IO ()
 main = do
   mapM_ (putStr) filledMatrix
