@@ -57,7 +57,7 @@ moveSelect x
 shuffle 0 = return ()
 shuffle n =
   do
-    print (moveSelect (unsafePerformIO (getStdRandom (randomR (0, 18)))))
+    moveSelect (unsafePerformIO (getStdRandom (randomR (0, 18))))
     shuffle (n-1)
 -}
 
