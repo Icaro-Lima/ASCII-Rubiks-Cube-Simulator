@@ -1,11 +1,11 @@
 # Esse makefile está inutilizado por enquanto...
-main: main.cpp base.h api.h movimentos_logicos.h
-	g++ -std=c++11 main.cpp -o main
+api: Api.hs Base.hs
+	ghc Api.hs
 
 all: run
 
-run: main
-	./main
+run: api
+	./Api
 
 clean:
-	rm main
+	-rm -rf *.hi *.o Main Base Api MovimentosLogicos
