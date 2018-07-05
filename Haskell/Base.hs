@@ -121,6 +121,13 @@ colorizeStringAux (h:t) matrixOfColors looked
 colorizeString :: String -> [[Int]] -> String
 colorizeString str matrixOfColors = colorizeStringAux str matrixOfColors False
 
+writtenCubeAux :: Int -> Int -> Int -> [String] -> [[Int]] -> [String] -> [String]
+writtenCubeAux i ii j (h:t) matrixOfColors (hh:tt)
+  | ii < i = [hh] ++ (writtenCubeAux i (ii + 1) j (h:t) matrixOfColors tt)
+  | otherwise = [Base.insertWithoutShift (Base.colorizeString h matrixOfColors) j hh] ++ (writtenCubeAux i (ii + 1) j t matrixOfColors tt)
+writtenCubeAux i ii j [] matrixOfColors (hh:tt) = [hh] ++ (writtenCubeAux i (ii + 1) j [] matrixOfColors tt)
+writtenCubeAux i ii j [] matrixOfColors [] = []
+
 main :: IO ()
 main = do
   print rows

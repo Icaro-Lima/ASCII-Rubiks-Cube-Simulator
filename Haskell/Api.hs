@@ -4,8 +4,6 @@ import qualified Data.Map.Strict as Map
 import System.IO.Unsafe                                        
 import System.Random
 
-
-
 {-|
   Escreve texto a partir de uma determinada posição.
   Int :      Posição i na matriz.
@@ -16,15 +14,16 @@ import System.Random
 writeText :: Int -> Int -> String -> [String] -> [String]
 writeText i j text matrix = Base.writeTextAux i 0 j text matrix
 
-writeCube :: Int -> Int -> String -> Bool -> [String] -> [String]
-writeCube i j animation instructions matrix = do
+-- |Escreve um cubo colorido na matriz de entrada e retorna uma nova matriz.
+writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]
+writtenCube i j animation instructions matrixOfColors matrix = do
   let matrixWithInstructions = if instructions
                                then matrix --writeInstructions i j True matrix
                                else matrix
   
-  let lines = Map.lookup animation Base.animations
+  let frame = fromMaybe ["Erow!"] (Map.lookup animation Base.animations)
                                
-  matrixWithInstructions                 
+  Base.writtenCubeAux i 0 j frame matrixOfColors matrixWithInstructions
   
 -- |Retorna uma matriz de caracteres vazia, rows x line_limit, cada linha com
 -- cols espaços e (line_limit - cols) nulls.
@@ -83,6 +82,5 @@ shuffle n =
 
 main :: IO()
 main = do
-  putStr (Base.colorizeString "#######zzzzzzz        #000##AAAAAA####DDDD##ddd#nn##kkk##" Base.cube_matrix)
-  drawMatrix (fromMaybe [""] (Map.lookup "Default" Base.loadAnimations))
+  drawMatrix (writtenCube 0 0 "0Left_4" False Base.cube_matrix filledMatrix)
   --print (writeText 3 10 "Icaro" (fromMaybe [""] (Map.lookup "0Left_0" Base.loadAnimations)))
