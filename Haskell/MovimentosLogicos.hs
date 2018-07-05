@@ -164,5 +164,17 @@ umEsq cubeMatrix =
     swapL 4 6 8 d cubeMatrix
     swapL 10 3 5 a cubeMatrix
 
+umDir :: [[Int]] -> [Int]
+umDir cubeMatrix = 
+    let a = getMatrixLine 4 0 1 2 cubeMatrix
+        b = getMatrixLine 4 3 4 5 cubeMatrix
+        c = getMatrixLine 4 6 7 8 cubeMatrix
+        d = getMatrixLine 10 3 4 5 cubeMatrix
+
+    swapL 4 0 2 d cubeMatrix
+    swapL 4 3 5 a cubeMatrix
+    swapL 4 6 8 b cubeMatrix
+    swapL 10 3 5 c cubeMatrix
+
 
 
