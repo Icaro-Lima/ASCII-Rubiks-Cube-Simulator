@@ -247,6 +247,18 @@ bBaixo cubeMatrix =
     swapC 4 6 8 b cubeMatrix
     swapC 4 9 11 c cubeMatrix
 
+bCima :: [[Int]] -> [[Int]]
+bCima cubeMatrix = 
+    let a = getMatrixCol 4 0 1 2 cubeMatrix
+        b = getMatrixCol 4 3 4 5 cubeMatrix
+        c = getMatrixCol 4 6 7 8 cubeMatrix
+        d = getMatrixCol 4 9 10 11 cubeMatrix
+
+    swapC 4 0 2 b cubeMatrix
+    swapC 4 3 5 c cubeMatrix
+    swapC 4 6 8 d cubeMatrix
+    swapC 4 9 11 a cubeMatrix
+
 
 
 
