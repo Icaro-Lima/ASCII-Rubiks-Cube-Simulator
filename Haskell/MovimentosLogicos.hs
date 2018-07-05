@@ -259,6 +259,3 @@ bCima cubeMatrix =
     swapC 4 6 8 d cubeMatrix
     swapC 4 9 11 a cubeMatrix
 
-
-
-
