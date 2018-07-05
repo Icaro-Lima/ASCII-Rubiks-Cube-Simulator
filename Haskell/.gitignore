@@ -4,9 +4,9 @@
 # Porém, não ignorar o seguinte:
 !.gitignore
 !Base.hs
-!main.hs
+!Main.hs
 !Api.hs
-!movimentos_logicos.hs
+!MovimentosLogicos.hs
 !TermSize.hs
 !Makefile
 !README.md

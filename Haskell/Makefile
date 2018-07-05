@@ -8,4 +8,4 @@ run: main
 	./main
 
 clean:
-	-rm -rf *.hi *.o Base api
+	-rm -rf *.hi *.o Main Base Api MovimentosLogicos
