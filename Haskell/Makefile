@@ -8,4 +8,4 @@ run: main
 	./main
 
 clean:
-	-rm -rf *.hi *.o base
+	-rm -rf *.hi *.o Base api

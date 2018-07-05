@@ -3,7 +3,7 @@
 
 # Porém, não ignorar o seguinte:
 !.gitignore
-!base.hs
+!Base.hs
 !main.hs
 !api.hs
 !movimentos_logicos.hs
