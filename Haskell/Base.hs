@@ -1,3 +1,5 @@
+module Base where
+
 import Data.Typeable (typeOf)
 import Data.Maybe (fromMaybe)
 import Data.Map.Strict (Map)
@@ -52,7 +54,25 @@ filledMatrixAux i
 filledMatrix :: [String]
 filledMatrix = filledMatrixAux 0
 
-main :: IO()
+{-|
+  Insere uma String em outra, na posição determinada, substituindo
+  imediatamente os caracteres sobrepostos.
+  String :      String a ser inserida.
+  Int :      Posição para inserir.
+  String :   String original.
+-}
+insertWithoutShift :: String -> Int -> String -> String
+insertWithoutShift str j original = do
+  let strSize = length str
+  let originalSize = length original
+  (take j original) ++ str ++ (drop (j + strSize) original)
+
+writeTextAux :: Int -> Int -> Int -> String -> [String] -> [String]
+writeTextAux i ii j text (h:t)
+  | ii == i = [insertWithoutShift text j h] ++ (writeTextAux i (ii + 1) j text t)
+  | otherwise = [h] ++ (writeTextAux i (ii + 1) j text t)
+
+main :: IO ()
 main = do
   mapM_ (putStr) filledMatrix
   print rows
