@@ -6,6 +6,8 @@ import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import System.IO.Unsafe (unsafeDupablePerformIO)
 import TermSize
+import Data.Char
+import Data.List
 
 cube_matrix =
   [[000, 000, 000, 101, 101, 101, 000, 000, 000],
@@ -91,6 +93,38 @@ writeTextAux i ii j text (h:t)
 matrixToString :: [String] -> String
 matrixToString [] = ""
 matrixToString (h:t) = h ++ "\n" ++ matrixToString t
+
+colorizeStringAux :: String -> [[Int]] -> Bool -> String
+colorizeStringAux [] matrixOfColors looked = []
+colorizeStringAux (h:t) matrixOfColors looked
+  | ord h >= 65 && ord h <= 76 && looked == False = "\x1b[" ++ (show (genericIndex (genericIndex matrixOfColors ((ord h) - 65)) 3)) ++ "m " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 65 && ord h <= 76 && looked == True = " " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 77 && ord h <= 88 && looked == False = "\x1b[" ++ (show (genericIndex (genericIndex matrixOfColors ((ord h) - 77)) 4)) ++ "m " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 77 && ord h <= 88 && looked == True = " " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 97 && ord h <= 108 && looked == False = "\x1b[" ++ (show (genericIndex (genericIndex matrixOfColors ((ord h) - 97)) 5)) ++ "m " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 97 && ord h <= 108 && looked == True = " " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 109 && ord h <= 120 && looked == False = do
+    let cod = (ord h) - 109
+    let row = cod `div` 3
+    let col = cod `rem` 3
+    "\x1b[" ++ (show (genericIndex (genericIndex matrixOfColors (row + 3)) (col + 6))) ++ "m " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 109 && ord h <= 120 && looked == True = " " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 48 && ord h <= 56 && looked == False = do
+    let cod = (ord h) - 48
+    let row = cod `div` 3
+    let col = cod `rem` 3
+    "\x1b[" ++ (show (genericIndex (genericIndex matrixOfColors (row + 3)) (col))) ++ "m " ++ (colorizeStringAux t matrixOfColors True)
+  | ord h >= 48 && ord h <= 56 && looked == True = " " ++ (colorizeStringAux t matrixOfColors True)
+  | not (ord h >= 65 && ord h <= 76) && not (ord h >= 77 && ord h <= 88) && not (ord h >= 97 && ord h <= 108) && not (ord h >= 109 && ord h <= 120) && not (ord h >= 48 && ord h <= 56) && looked == True = "\x1b[0m" ++ [h] ++ (colorizeStringAux t matrixOfColors False)
+  | otherwise = [h] ++ colorizeStringAux t matrixOfColors looked
+
+{-|
+  Retorna uma nova String colorida.
+  String :  A String a ser colorida.
+  [[Int]] : A matriz de cores.
+-}
+colorizeString :: String -> [[Int]] -> String
+colorizeString str matrixOfColors = colorizeStringAux str matrixOfColors False
 
 main :: IO ()
 main = do
