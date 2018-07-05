@@ -3,8 +3,10 @@
 
 # Porém, não ignorar o seguinte:
 !.gitignore
-!base.hs
-!main.hs
-!api.hs
-!movimentos_logicos.hs
+!Base.hs
+!Main.hs
+!Api.hs
+!MovimentosLogicos.hs
+!TermSize.hs
 !Makefile
+!README.md
