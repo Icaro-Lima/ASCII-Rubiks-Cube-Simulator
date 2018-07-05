@@ -25,7 +25,13 @@ writeCube i j animation instructions matrix = do
   let lines = Map.lookup animation Base.animations
                                
   matrixWithInstructions                 
+  
+-- |Retorna uma matriz de caracteres vazia, rows x line_limit, cada linha com
+-- cols espaços e (line_limit - cols) nulls.
+filledMatrix :: [String]
+filledMatrix = Base.filledMatrixAux 0
 
+-- |Desenha a matrix no console.
 drawMatrix :: [String] -> IO()
 drawMatrix strs = putStr (Base.matrixToString strs)
 

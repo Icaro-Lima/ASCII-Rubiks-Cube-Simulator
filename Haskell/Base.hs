@@ -67,11 +67,6 @@ filledMatrixAux i
   | i < rows = [(replicate cols ' ') ++ (replicate (line_limit - cols) '\0')] ++ filledMatrixAux (i + 1)
   | otherwise = []
 
--- |Retorna uma matriz de caracteres, rows x line_limit, cada linha com
--- cols espaços e (line_limit - cols) nulls.
-filledMatrix :: [String]
-filledMatrix = filledMatrixAux 0
-
 {-|
   Insere uma String em outra, na posição determinada, substituindo
   imediatamente os caracteres sobrepostos.
@@ -128,7 +123,6 @@ colorizeString str matrixOfColors = colorizeStringAux str matrixOfColors False
 
 main :: IO ()
 main = do
-  mapM_ (putStr) filledMatrix
   print rows
   mapM_ (putStrLn) (fromMaybe [""] (Map.lookup "Logo_0" (loadAnimations)))
   print "Let's go!"
