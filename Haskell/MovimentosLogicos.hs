@@ -55,6 +55,22 @@ aAntiHorario cubeMatrix =
     giraFaceAntiHorario 3 3 5 5 cubeMatrix
 
 
+aHorario :: [[Int]] -> [Int]
+aHorario cubeMatrix = 
+    let a = getMatrixLine 2 3 4 5 cubeMatrix
+        b = getMatrixCol 6 5 4 3 cubeMatrix
+        c = getMatrixLine 6 3 4 5 cubeMatrix
+        d = getMatrixCol 2 5 4 3 cubeMatrix
 
+    swapL 2 3 5 d cubeMatrix
+    swapC 2 3 5 c cubeMatrix
+    swapL 6 3 5 b cubeMatrix
+    swapC 6 3 5 a cubeMatrix
+
+    giraFaceHorario 3 3 5 5 cubeMatrix
+
+
+
+    
 
 
