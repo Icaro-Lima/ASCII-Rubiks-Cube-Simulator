@@ -235,5 +235,18 @@ aCima cubeMatrix =
     giraFaceHorario 3 0 5 2 cubeMatrix
 
 
+bBaixo :: [[Int]] -> [[Int]]
+bBaixo cubeMatrix = 
+    let a = getMatrixCol 4 0 1 2 cubeMatrix
+        b = getMatrixCol 4 3 4 5 cubeMatrix
+        c = getMatrixCol 4 6 7 8 cubeMatrix
+        d = getMatrixCol 4 9 10 11 cubeMatrix
+    
+    swapC 4 0 2 d cubeMatrix
+    swapC 4 3 5 a cubeMatrix
+    swapC 4 6 8 b cubeMatrix
+    swapC 4 9 11 c cubeMatrix
+
+
 
 
