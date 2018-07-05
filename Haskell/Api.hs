@@ -3,6 +3,8 @@ import qualified Base as Base
 import qualified Data.Map.Strict as Map
 import System.IO.Unsafe                                        
 import System.Random
+import Debug.Trace
+import System.Sleep
 
 {-|
   Escreve texto a partir de uma determinada posição.
@@ -78,9 +80,16 @@ shuffle n =
     shuffle (n-1)
 -}
 
-
+-- |Utilizar assim: mapM_ (Base.enganaMain) (drawLogoAnimation 0)
+drawLogoAnimation :: Int -> [IO()]
+drawLogoAnimation 44 = []
+drawLogoAnimation i = do
+  [drawMatrix (writtenCube (Base.rows `div` 2 - 6) (Base.cols `div` 2 - 44) ("Logo_" ++ show i) False Base.cube_matrix filledMatrix)] ++ 
+    [sleep 0.07] ++
+    drawLogoAnimation (i + 1)
 
 main :: IO()
 main = do
-  drawMatrix (writtenCube 0 0 "0Left_4" False Base.cube_matrix filledMatrix)
+  mapM_ (Base.enganaMain) (drawLogoAnimation 0)
+  --drawMatrix (writtenCube 0 (Base.cols `div` 2 - 44) "Logo_0" False Base.cube_matrix filledMatrix)
   --print (writeText 3 10 "Icaro" (fromMaybe [""] (Map.lookup "0Left_0" Base.loadAnimations)))

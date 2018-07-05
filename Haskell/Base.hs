@@ -128,6 +128,9 @@ writtenCubeAux i ii j (h:t) matrixOfColors (hh:tt)
 writtenCubeAux i ii j [] matrixOfColors (hh:tt) = [hh] ++ (writtenCubeAux i (ii + 1) j [] matrixOfColors tt)
 writtenCubeAux i ii j [] matrixOfColors [] = []
 
+enganaMain :: IO() -> IO()
+enganaMain x = x
+
 main :: IO ()
 main = do
   print rows
