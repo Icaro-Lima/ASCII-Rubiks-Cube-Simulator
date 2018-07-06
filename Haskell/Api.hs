@@ -18,6 +18,16 @@ waitKey valid = do
   if elem c valid
   then c
   else waitKey valid
+  
+hGetLines' :: IO Char
+hGetLines' = unsafeInterleaveIO $ do
+    readable <- hIsReadable stdin
+    if readable
+        then do
+            x  <- hGetChar stdin
+            xs <- hGetLines'
+            return x
+        else return ' '
 
 {-|
   Escreve texto a partir de uma determinada posição.

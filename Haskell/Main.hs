@@ -1,8 +1,43 @@
 import qualified Base as Base
 import qualified Api as Api
+import qualified MovimentosLogicos as ML
 import System.Sleep
 import System.IO.Unsafe (unsafeDupablePerformIO)
 import System.IO
+
+gameLoop :: [[Int]] -> IO()
+gameLoop logicalMatrix = do
+  
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix Api.filledMatrix)
+
+  command <- getChar
+
+  if command == 'F' || command  == 'f' then
+    rotateCube "aCounterclockwise_" logicalMatrix
+  else
+    rotateCube "" logicalMatrix
+    
+
+  gameLoop logicalMatrix
+  
+rotateCube :: String -> [[Int]] -> IO()
+rotateCube movement logicalMatrix = do
+
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "0") True logicalMatrix Api.filledMatrix)
+  sleep 0.03
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "1") True logicalMatrix Api.filledMatrix)
+  sleep 0.03
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "2") True logicalMatrix Api.filledMatrix)
+  sleep 0.03
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "3") True logicalMatrix Api.filledMatrix)
+  sleep 0.03
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "4") True logicalMatrix Api.filledMatrix)
+  sleep 0.03
+  
+  if movement == "aCounterclockwise_" then
+    gameLoop (ML.aAntiHorario logicalMatrix)
+  else
+    gameLoop logicalMatrix
 
 startGame :: IO()
 startGame = do
@@ -11,9 +46,11 @@ startGame = do
   let logicalMatrix = Base.cube_matrix
   
   let a = Api.writeText 2 ((Base.cols `div` 2) - ((length bemVindo) `div` 2)) bemVindo Api.filledMatrix
-  let b = Api.writtenCube 2 Base.cubo_mid_col "Default" True logicalMatrix a
+  let b = Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix a
 
   Api.drawMatrix b
+  
+  gameLoop Base.cube_matrix
 
 drawMenu :: IO()
 drawMenu = do
@@ -30,19 +67,22 @@ drawMenu = do
   
   Api.drawMatrix w
 
-menuOptions :: [IO()]
+menuOptions :: IO()
 menuOptions = do
 
-  let input = Api.waitKey ['i','I','j','J','m','M']
+  input <- getChar
   
-  [hWaitForInput stdin 1000] ++
-    (if input == 'i' || input == 'I' then ([Api.drawMatrix (Api.writeInstructions 5 (div Base.cols 2) False Api.filledMatrix)] ++ [sleep 0.7] ++ menuOptions)
-    else if input == 'm' || input == 'M' then ([drawMenu] ++ [sleep 0.7] ++ menuOptions)
-    else if input == 'j' || input == 'J' then ([startGame] ++ [sleep 0.7] ++ menuOptions)
-    else menuOptions)
+  if input == 'i' || input == 'I' then Api.drawMatrix (Api.writeInstructions 5 (div Base.cols 2) False Api.filledMatrix)
+  else if input == 'm' || input == 'M' then drawMenu
+  else if input == 'j' || input == 'J' then startGame
+  else menuOptions
+  
+  sleep 0.7
+  
+  menuOptions
 
 main :: IO()
 main = do
   --mapM_ (Base.enganaMain) (Api.drawLogoAnimation 0)
   drawMenu
-  mapM_ (Base.enganaMain) menuOptions
+  menuOptions

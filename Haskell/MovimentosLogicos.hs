@@ -1,3 +1,5 @@
+module MovimentosLogicos where
+
 import Data.List
 import qualified Base as Base
 
@@ -53,19 +55,22 @@ giraFaceAntiHorario lIni cIni lFim cFim matrix = do
 aAntiHorario :: [[Int]] -> [[Int]]
 aAntiHorario matrix = do
   let a = getMatrixLine 2 5 4 3 matrix
-  let b = getMatrixLine 6 3 4 5 matrix
+  let b = getMatrixCol 6 3 4 5 matrix
   let c = getMatrixLine 6 5 4 3 matrix
-  let d = getMatrixLine 2 3 4 5 matrix
+  let d = getMatrixCol 2 3 4 5 matrix
   
   let xx = swapL 2 3 5 b matrix
   let yy = swapC 6 3 5 c xx
   let zz =  swapL 6 3 5 d yy
-  swapC 2 3 5 a zz
+  let kk = swapC 2 3 5 a zz
+  
+  giraFaceAntiHorario 3 3 5 5 kk
 
 main :: IO()
 main = do
   mapM_ (print) Base.cube_matrix
   print ""
   mapM_ (print) (aAntiHorario Base.cube_matrix)
+  --mapM_ (print) (swapC 7 8 10 [90,91,92] Base.cube_matrix)
 
   print "Works!"

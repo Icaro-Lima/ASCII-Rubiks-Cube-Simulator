@@ -36,7 +36,7 @@ size = unsafeDupablePerformIO getTermSize
 rows = fst size
 cols = snd size
 
-cube_origin_row = 0
+cube_origin_row = 0 :: Int
 cubo_mid_col = (cols `div` 2) - (75 `div` 2)
 
 esc = '\x1b'
