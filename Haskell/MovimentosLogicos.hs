@@ -91,6 +91,18 @@ module MovimentosLogicos where
       let kk = swapC 6 3 5 a zz
       
       giraFaceHorario 3 3 5 5 kk
+
+    bAntiHorario :: [[Int]] -> [[Int]]
+    bAntiHorario matrix = do
+      let a = getMatrixLine 1 5 4 3 matrix
+      let b = getMatrixCol 7 3 4 5 matrix
+      let c = getMatrixLine 7 5 4 3 matrix
+      let d = getMatrixCol 1 3 4 5 matrix
+      
+      let xx = swapL 1 3 5 b matrix
+      let yy = swapC 7 3 5 c xx
+      let zz = swapL 7 3 5 d yy
+      swapC 1 3 5 a zz
     
     main :: IO()
     main = do
@@ -100,8 +112,11 @@ module MovimentosLogicos where
       print "===== aAH ====="
       mapM_ (print) (aAntiHorario Base.cube_matrix)
       print "================"
-      print "===== AH  ====="
+      print "===== aH  ====="
       mapM_ (print) (aHorario Base.cube_matrix)
+      print "================"
+      print "===== bAH  ====="
+      mapM_ (print) (bAntiHorario Base.cube_matrix)
       print "================"
       
     
