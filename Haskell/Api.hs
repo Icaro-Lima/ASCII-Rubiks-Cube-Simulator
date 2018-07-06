@@ -6,6 +6,14 @@ import System.Random
 import Debug.Trace
 import System.Sleep
 
+
+-- |Char a ser buscado, copia dos possiveis char, possiveis char, tamanho
+waitKey :: Char -> [Char] -> Int -> Char
+waitKey letra [] count = ' '
+waitKey letra (x:xs) count 
+     |letra == x = x
+     |otherwise = waitKey letra xs count
+
 {-|
   Escreve texto a partir de uma determinada posição.
   Int :      Posição i na matriz.
