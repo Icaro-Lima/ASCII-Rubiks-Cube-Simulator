@@ -188,43 +188,34 @@ doisDir cubeMatrix = do
 bigABaixo :: [[Int]] -> [[Int]]
 bigABaixo cubeMatrix = do
     let a = getMatrixCol 3 0 1 2 cubeMatrix
-        b = getMatrixCol 3 3 4 5 cubeMatrix
-        c = getMatrixCol 3 6 7 8 cubeMatrix
-        d = getMatrixCol 3 9 10 11 cubeMatrix
-    
-    swapC 3 0 2 d cubeMatrix
-    swapC 3 3 5 a cubeMatrix
-    swapC 3 6 8 b cubeMatrix
-    swapC 3 9 11 c cubeMatrix
-
-    giraFaceHorario 3 0 5 2 cubeMatrix
+    let b = getMatrixCol 3 3 4 5 cubeMatrix
+    let c = getMatrixCol 3 6 7 8 cubeMatrix
+    let d = getMatrixCol 3 9 10 11 cubeMatrix
+    let matrix = (swapC 3 9 11 c (swapC 3 6 8 b (swapC 3 3 5 a (swapC 3 0 2 d cubeMatrix))))
+  
+    giraFaceHorario 3 0 5 2 matrix
 
 bigACima :: [[Int]] -> [[Int]]
 bigACima cubeMatrix = do
     let a = getMatrixCol 3 0 1 2 cubeMatrix
-        b = getMatrixCol 3 3 4 5 cubeMatrix
-        c = getMatrixCol 3 6 7 8 cubeMatrix
-        d = getMatrixCol 3 9 10 11 cubeMatrix
+    let b = getMatrixCol 3 3 4 5 cubeMatrix
+    let c = getMatrixCol 3 6 7 8 cubeMatrix
+    let d = getMatrixCol 3 9 10 11 cubeMatrix
+    let matrix = (swapC 3 9 11 c (swapC 3 6 8 b (swapC 3 3 5 a (swapC 3 0 2 d cubeMatrix))))
 
-    swapC 3 0 2 d cubeMatrix
-    swapC 3 3 5 a cubeMatrix
-    swapC 3 6 8 b cubeMatrix
-    swapC 3 9 11 c cubeMatrix
-
-    giraFaceHorario 3 0 5 2 cubeMatrix
+    giraFaceHorario 3 0 5 2 matrix
 
 
 bigBBaixo :: [[Int]] -> [[Int]]
 bigBBaixo cubeMatrix = do
     let a = getMatrixCol 4 0 1 2 cubeMatrix
-        b = getMatrixCol 4 3 4 5 cubeMatrix
-        c = getMatrixCol 4 6 7 8 cubeMatrix
-        d = getMatrixCol 4 9 10 11 cubeMatrix
+    let b = getMatrixCol 4 3 4 5 cubeMatrix
+    let c = getMatrixCol 4 6 7 8 cubeMatrix
+    let d = getMatrixCol 4 9 10 11 cubeMatrix
     
-    swapC 4 0 2 d cubeMatrix
-    swapC 4 3 5 a cubeMatrix
-    swapC 4 6 8 b cubeMatrix
-    swapC 4 9 11 c cubeMatrix
+    swapC 4 9 11 c cubeMatrix (swapC 4 6 8 b cubeMatrix (swapC 4 3 5 a cubeMatrix (swapC 4 0 2 d cubeMatrix)))
+    
+    
 
 bigBCima :: [[Int]] -> [[Int]]
 bigBCima cubeMatrix = do
@@ -233,10 +224,7 @@ bigBCima cubeMatrix = do
         c = getMatrixCol 4 6 7 8 cubeMatrix
         d = getMatrixCol 4 9 10 11 cubeMatrix
 
-    swapC 4 0 2 b cubeMatrix
-    swapC 4 3 5 c cubeMatrix
-    swapC 4 6 8 d cubeMatrix
-    swapC 4 9 11 a cubeMatrix
+    swapC 4 9 11 a (swapC 4 6 8 d  (swapC 4 3 5 c (swapC 4 0 2 b cubeMatrix)))
 
 
 
