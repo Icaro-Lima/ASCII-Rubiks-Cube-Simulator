@@ -24,6 +24,12 @@ gameLoop logicalMatrix = do
     rotateCube "2Left_" logicalMatrix
   else if command == '3' || command == '3' then
     rotateCube "2Right_" logicalMatrix
+  else if command == 'Q' || command == 'q' then
+    rotateCube "AUp_" logicalMatrix
+  else if command == 'W' || command == 'w' then
+    rotateCube "BUp_" logicalMatrix
+  else if command == 'E' || command == 'e' then
+    rotateCube "CUp_" logicalMatrix
     
     
     
@@ -72,6 +78,12 @@ rotateCube movement logicalMatrix = do
     gameLoop (ML.doisEsq logicalMatrix) 
   else if movement == "2Right_" then
     gameLoop (ML.doisDir logicalMatrix)  
+  else if movement == "AUp_" then
+    gameLoop (ML.aCima logicalMatrix)  
+  else if movement == "BUp_" then
+    gameLoop (ML.bCima logicalMatrix)  
+  else if movement == "CUp_" then
+    gameLoop (ML.cCima logicalMatrix)  
     
     
     
