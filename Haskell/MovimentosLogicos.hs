@@ -50,7 +50,7 @@ module MovimentosLogicos where
       swapL lIni cIni cFim b
         (swapC cFim lIni lFim c
         (swapL lFim cIni cFim d
-        (swapC cIni cIni lFim a matrix)))
+        (swapC cIni lIni lFim a matrix)))
 
     giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
     giraFaceHorario lIni cIni lFim cFim matrix = do
@@ -128,6 +128,20 @@ module MovimentosLogicos where
       let yy = swapC 8 3 5 c xx
       let zz = swapL 8 3 5 d yy
       let kk = swapC 0 3 5 a zz 
+      
+      giraFaceHorario 9 3 11 5 kk
+      
+    cHorario :: [[Int]] -> [[Int]]
+    cHorario matrix = do
+      let a = getMatrixLine 0 3 4 5 matrix
+      let b = getMatrixCol 8 5 4 3 matrix
+      let c = getMatrixLine 8 3 4 5 matrix
+      let d = getMatrixCol 0 5 4 3 matrix
+      
+      let xx = swapL 0 3 5 d matrix
+      let yy = swapC 0 3 5 c xx
+      let zz = swapL 8 3 5 b yy
+      let kk = swapC 8 3 5 a zz
       
       giraFaceHorario 9 3 11 5 kk
 

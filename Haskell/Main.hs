@@ -12,8 +12,18 @@ gameLoop logicalMatrix = do
 
   command <- getChar
 
-  if command == 'F' || command  == 'f' then
+  if command == 'R' || command == 'r' then
+    rotateCube "aClockwise_" logicalMatrix
+  else if command == 'T' || command == 't' then
+    rotateCube "bClockwise_" logicalMatrix
+  else if command == 'Y' || command == 'y' then
+    rotateCube "cClockwise_" logicalMatrix
+  else if command == 'F' || command  == 'f' then
     rotateCube "aCounterclockwise_" logicalMatrix
+  else if command == 'G' || command  == 'g' then
+    rotateCube "bCounterclockwise_" logicalMatrix
+  else if command == 'H' || command  == 'h' then
+    rotateCube "cCounterclockwise_" logicalMatrix
   else
     rotateCube "" logicalMatrix
     
@@ -34,8 +44,18 @@ rotateCube movement logicalMatrix = do
   Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "4") True logicalMatrix Api.filledMatrix)
   sleep 0.03
   
-  if movement == "aCounterclockwise_" then
+  if movement == "aClockwise_" then
+    gameLoop (ML.aHorario logicalMatrix)
+  else if movement == "bClockwise_" then
+    gameLoop (ML.bHorario logicalMatrix)
+  else if movement == "cClockwise_" then
+    gameLoop (ML.cHorario logicalMatrix)
+  else if movement == "aCounterclockwise_" then
     gameLoop (ML.aAntiHorario logicalMatrix)
+  else if movement == "bCounterclockwise_" then
+    gameLoop (ML.bAntiHorario logicalMatrix)
+  else if movement == "cCounterclockwise_" then
+    gameLoop (ML.cAntiHorario logicalMatrix)
   else
     gameLoop logicalMatrix
 
