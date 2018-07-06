@@ -124,9 +124,9 @@ module MovimentosLogicos where
       let c = getMatrixLine 8 5 4 3 matrix
       let d = getMatrixCol 0 3 4 5 matrix
       
-      let xx = swapL 0 3 5 d matrix
+      let xx = swapL 0 3 5 b matrix
       let yy = swapC 8 3 5 c xx
-      let zz = swapL 8 3 5 b yy
+      let zz = swapL 8 3 5 d yy
       let kk = swapC 0 3 5 a zz 
       
       giraFaceHorario 9 3 11 5 kk
