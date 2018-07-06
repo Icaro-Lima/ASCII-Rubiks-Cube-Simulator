@@ -4,6 +4,8 @@ import qualified MovimentosLogicos as ML
 import System.Sleep
 import System.IO.Unsafe (unsafeDupablePerformIO)
 import System.IO
+import System.IO.Unsafe                                        
+import System.Random
 
 gameLoop :: [[Int]] -> IO()
 gameLoop logicalMatrix = do
@@ -54,6 +56,8 @@ gameLoop logicalMatrix = do
     rotateCube "cCounterclockwise_" logicalMatrix
   else if command == 'M' || command == 'm' then
     menuOptions True
+  else if command == 'X' || command == 'x' then
+    shuffle 20 logicalMatrix  
   else
     rotateCube "" logicalMatrix
     
@@ -162,7 +166,35 @@ menuOptions menu = do
     
   menuOptions False
 
+moveSelect :: Int -> [[Int]] ->IO()
+moveSelect x logicalMatrix
+  | x == 1 = rotateCube "0Left_" logicalMatrix
+  | x == 2 = rotateCube "0Right_" logicalMatrix
+  | x == 3 = rotateCube "1Left_" logicalMatrix
+  | x == 4 = rotateCube "1Right_" logicalMatrix
+  | x == 5 = rotateCube "2Left_" logicalMatrix
+  | x == 6 = rotateCube "2Right_" logicalMatrix
+  | x == 7 = rotateCube "AUp_" logicalMatrix
+  | x == 8 = rotateCube "BUp_" logicalMatrix
+  | x == 9 = rotateCube "CUp_" logicalMatrix
+  | x == 10 = rotateCube "ADown_" logicalMatrix
+  | x == 11 = rotateCube "BDown_" logicalMatrix
+  | x == 12 = rotateCube "CDown_" logicalMatrix
+  | x == 13 = rotateCube "aClockwise_" logicalMatrix
+  | x == 14 = rotateCube "bClockwise_" logicalMatrix
+  | x == 15 = rotateCube "cClockwise_" logicalMatrix
+  | x == 16 = rotateCube "aCounterclockwise_" logicalMatrix
+  | x == 17 = rotateCube "bCounterclockwise_" logicalMatrix
+  | otherwise = rotateCube "cCounterclockwise_" logicalMatrix
+
+shuffle 0 _ = return ()
+shuffle n logicalMatrix =
+  do
+    moveSelect (unsafePerformIO (getStdRandom (randomR (0, 18)))) logicalMatrix
+    shuffle (n-1) logicalMatrix
+
+
 main :: IO()
 main = do
-  --mapM_ (Base.enganaMain) (Api.drawLogoAnimation 0)
+  mapM_ (Base.enganaMain) (Api.drawLogoAnimation 0)
   menuOptions True

@@ -41,8 +41,9 @@ writeText i j text matrix = Base.writeTextAux i 0 j text matrix
 
 writeInstructions :: Int -> Int -> Bool -> [String] -> [String]
 writeInstructions i j inGame matrix= do
-  writeText (i + 20) j "Pressione J para Jogar"
-    (writeText (i + 19) j "Pressione M para voltar ao Menu"
+  writeText (i + 21) j "Pressione J para Jogar"
+    (writeText (i + 20) j "Pressione M para voltar ao Menu"
+    (writeText (i + 19) j "Pressione X para embaralhar o cubo"
     (writeText (i + 17) j "H - Rotaciona 3a face em sentido anti-horario"
     (writeText (i + 16) j "G - Rotaciona 2a face em sentido anti-horario"
     (writeText (i + 15) j "F - Rotaciona 1a face em sentido anti-horario"
@@ -60,7 +61,7 @@ writeInstructions i j inGame matrix= do
     (writeText (i + 3) j "6 - Rotaciona 2a linha em sentido anti-horario"
     (writeText (i + 2) j "4 - Rotaciona 2a linha em sentido horario"
     (writeText (i + 1) j "9 - Rotaciona 1a linha em sentido anti-horario"
-    (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix)))))))))))))))))))
+    (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix))))))))))))))))))))
 
 -- |Escreve um cubo colorido na matriz de entrada e retorna uma nova matriz.
 writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]
@@ -81,44 +82,6 @@ filledMatrix = Base.filledMatrixAux 0
 -- |Desenha a matrix no console.
 drawMatrix :: [String] -> IO()
 drawMatrix strs = putStr (Base.matrixToString strs)
-
-{- Comentado pra nao causar erros.
-Movimentos numerados serão substituidos por 
-chamadas da funcao rotatecube.
-Lembrando que pra funcionar, precisa instalar o cabal e
-com ele instalar o random
-Comandos:
-sudo apt-get install cabal-install
-cabal update
-cabal install random
-Exemplo de chamada da funcão:
-shuffle 20
-moveSelect :: Int -> IO()
-moveSelect x
-  | x == 1 = movimento1
-  | x == 2 = movimento2
-  | x == 3 = movimento3
-  | x == 4 = movimento4
-  | x == 5 = movimento5
-  | x == 6 = movimento6
-  | x == 7 = movimento7
-  | x == 8 = movimento8
-  | x == 9 = movimento9
-  | x == 10 = movimento10
-  | x == 11 = movimento11
-  | x == 12 = movimento12
-  | x == 13 = movimento13
-  | x == 14 = movimento14
-  | x == 15 = movimento15
-  | x == 16 = movimento16
-  | x == 17 = movimento17
-  | otherwise = movimento18 
-shuffle 0 = return ()
-shuffle n =
-  do
-    moveSelect (unsafePerformIO (getStdRandom (randomR (0, 18))))
-    shuffle (n-1)
--}
 
 -- |Utilizar assim: mapM_ (Base.enganaMain) (drawLogoAnimation 0)
 drawLogoAnimation :: Int -> [IO()]
