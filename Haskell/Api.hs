@@ -64,6 +64,15 @@ writeInstructions i j inGame matrix= do
     (writeText (i + 1) j "9 - Rotaciona 1a linha em sentido anti-horario"
     (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix)))))))))))))))))))))
 
+
+writeMenu :: Int -> Int -> Bool -> [String] -> [String]
+writeMenu i j inGame matrix= do
+  writeText (i + 22) j "-----------------------  RUBIK CUBE SIMULATOR -----------------------"
+    (writeText (i + 21) j "Pressione I para Instruções"
+    (writeText (i + 20) j "Pressione J para Jogar"
+    (writeText (i + 18) j "Pressione ESC para Sair"
+    (writeText (i + 17) j "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte" matrix))))
+
 -- |Escreve um cubo colorido na matriz de entrada e retorna uma nova matriz.
 writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]
 writtenCube i j animation instructions matrixOfColors matrix = do
