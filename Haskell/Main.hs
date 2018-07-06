@@ -18,6 +18,16 @@ gameLoop logicalMatrix = do
     rotateCube "0Right_" logicalMatrix
   else if command == '4' || command == '4' then
     rotateCube "1Left_" logicalMatrix
+  else if command == '6' || command == '6' then
+    rotateCube "1Right_" logicalMatrix
+  else if command == '1' || command == '1' then
+    rotateCube "2Left_" logicalMatrix
+  else if command == '3' || command == '3' then
+    rotateCube "2Right_" logicalMatrix
+    
+    
+    
+    
   else if command == 'R' || command == 'r' then
     rotateCube "aClockwise_" logicalMatrix
   else if command == 'T' || command == 't' then
@@ -56,6 +66,18 @@ rotateCube movement logicalMatrix = do
     gameLoop (ML.zeroDir logicalMatrix)
   else if movement == "1Left_" then
     gameLoop (ML.umEsq logicalMatrix)
+  else if movement == "1Right_" then
+    gameLoop (ML.umDir logicalMatrix)
+  else if movement == "2Left_" then
+    gameLoop (ML.doisEsq logicalMatrix) 
+  else if movement == "2Right_" then
+    gameLoop (ML.doisDir logicalMatrix)  
+    
+    
+    
+    
+    
+   
   else if movement == "aClockwise_" then
     gameLoop (ML.aHorario logicalMatrix)
   else if movement == "bClockwise_" then
