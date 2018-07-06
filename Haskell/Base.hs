@@ -36,6 +36,11 @@ size = unsafeDupablePerformIO getTermSize
 rows = fst size
 cols = snd size
 
+cube_origin_row = 0 :: Int
+cubo_mid_col = (cols `div` 2) - (75 `div` 2)
+
+esc = '\x1b'
+
 {-|
   Retorna uma lista de strings, onde cada string corresponde a uma linha
   do arquivo lido.
@@ -81,6 +86,7 @@ insertWithoutShift str j original = do
   (take j original) ++ str ++ (drop (j + strSize) original)
 
 writeTextAux :: Int -> Int -> Int -> String -> [String] -> [String]
+writeTextAux i ii j text [] = []
 writeTextAux i ii j text (h:t)
   | ii == i = [insertWithoutShift text j h] ++ (writeTextAux i (ii + 1) j text t)
   | otherwise = [h] ++ (writeTextAux i (ii + 1) j text t)
