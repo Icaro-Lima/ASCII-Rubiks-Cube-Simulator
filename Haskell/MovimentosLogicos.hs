@@ -55,14 +55,14 @@ module MovimentosLogicos where
     giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
     giraFaceHorario lIni cIni lFim cFim matrix = do
       let a = getMatrixLine lIni cIni (cFim - 1) cFim matrix
-      let b = getMatrixLine cFim lFim (lFim - 1) lIni matrix
+      let b = getMatrixCol cFim lFim (lFim - 1) lIni matrix
       let c = getMatrixLine lFim cIni (cFim - 1) cFim matrix
-      let d = getMatrixLine cIni lFim (lFim - 1) lIni matrix
+      let d = getMatrixCol cIni lFim (lFim - 1) lIni matrix
       
       swapL lIni cIni cFim d
-        (swapL cFim lIni lFim c
-        (swapC lFim cIni cFim b
-        (swapL cFim lIni lFim a matrix)))
+        (swapC cIni lIni lFim c
+        (swapL lFim cIni cFim b
+        (swapC cFim lIni lFim a matrix)))
         
     aAntiHorario :: [[Int]] -> [[Int]]
     aAntiHorario matrix = do
