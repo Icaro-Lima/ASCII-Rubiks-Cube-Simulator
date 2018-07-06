@@ -41,10 +41,8 @@ writeText i j text matrix = Base.writeTextAux i 0 j text matrix
 
 writeInstructions :: Int -> Int -> Bool -> [String] -> [String]
 writeInstructions i j inGame matrix= do
-  writeText (i + 22) j "Pressione J para Jogar"
-    (writeText (i + 21) j "Pressione M para voltar ao Menu"
-    (writeText (i + 20) j "ESC - Sair do jogo"
-    (writeText (i + 18) j "X - Embaralha o cubo"
+  writeText (i + 20) j "Pressione J para Jogar"
+    (writeText (i + 19) j "Pressione M para voltar ao Menu"
     (writeText (i + 17) j "H - Rotaciona 3a face em sentido anti-horario"
     (writeText (i + 16) j "G - Rotaciona 2a face em sentido anti-horario"
     (writeText (i + 15) j "F - Rotaciona 1a face em sentido anti-horario"
@@ -62,7 +60,7 @@ writeInstructions i j inGame matrix= do
     (writeText (i + 3) j "6 - Rotaciona 2a linha em sentido anti-horario"
     (writeText (i + 2) j "4 - Rotaciona 2a linha em sentido horario"
     (writeText (i + 1) j "9 - Rotaciona 1a linha em sentido anti-horario"
-    (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix)))))))))))))))))))))
+    (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix)))))))))))))))))))
 
 -- |Escreve um cubo colorido na matriz de entrada e retorna uma nova matriz.
 writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]

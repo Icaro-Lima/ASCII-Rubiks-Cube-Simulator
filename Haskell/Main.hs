@@ -127,15 +127,15 @@ drawMenu = do
   let gName = "-----------------------  RUBIK CUBE SIMULATOR -----------------------"
   let opcao1 = "Pressione I para Instruções"
   let opcao2 = "Pressione J para Jogar"
-  let opcao3 = "Pressione ESC para Sair"
   let teamName = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte"
   
   let x = Api.writeText 5 ((div Base.cols 2) - (div (length gName) 2)) gName Api.filledMatrix
-  let y = Api.writeText 9 ((div Base.cols 2) - (div (length opcao1) 2)) opcao1 x
-  let z = Api.writeText 10 ((div Base.cols 2) - (div (length opcao2) 2)) opcao2 y
-  let w = Api.writeText 12 ((div Base.cols 2) - (div (length opcao3) 2)) opcao3 z
+  let y = Api.writeText 8 ((div Base.cols 2) - (div (length opcao1) 2)) opcao1 x
+  let z = Api.writeText 9 ((div Base.cols 2) - (div (length opcao2) 2)) opcao2 y
+  let k = Api.writeText 11 ((div Base.cols 2) - (div (length teamName) 2)) teamName z
+
   
-  Api.drawMatrix w
+  Api.drawMatrix k
 
 menuOptions :: Bool -> IO()
 menuOptions menu = do
