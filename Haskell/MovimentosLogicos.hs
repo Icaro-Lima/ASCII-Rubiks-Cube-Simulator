@@ -43,10 +43,10 @@ swapC j comeco fim array logicalMatrix = do
 giraFaceAntiHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
 giraFaceAntiHorario lIni cIni lFim cFim cubeMatrix = do
     let a = getMatrixLine lIni cFim cFim-1 cIni cubeMatrix
-    let b = getMatrixCol cFim lIni lFim-1 lFim cubeMatrix
-    let c = getMatrixLine lFim cFim cFim-1 cIni cubeMatrix
-    let d = getMatrixCol cIni lIni lFim-1 lFim
-    let matrix = (swapL lFim cIni cFim d (swapC cFim lIni lFim c (swapL lIni cIni cFim b cubeMatrix)))
+        b = getMatrixCol cFim lIni lFim-1 lFim cubeMatrix
+        c = getMatrixLine lFim cFim cFim-1 cIni cubeMatrix
+        d = getMatrixCol cIni lIni lFim-1 lFim cubeMatrix
+        matrix = (swapL lFim cIni cFim d (swapC cFim lIni lFim c (swapL lIni cIni cFim b cubeMatrix)))
 
     swapC cIni lIni cFim a matrix
 
