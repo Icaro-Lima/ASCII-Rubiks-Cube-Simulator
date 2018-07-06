@@ -16,11 +16,36 @@ import System.Sleep
 writeText :: Int -> Int -> String -> [String] -> [String]
 writeText i j text matrix = Base.writeTextAux i 0 j text matrix
 
+writeInstructions :: Int -> Int -> Bool -> [String] -> [String]
+writeInstructions i j inGame matrix= do
+  writeText (i + 22) j "Pressione J para Jogar"
+    (writeText (i + 21) j "Pressione M para voltar ao Menu"
+    (writeText (i + 20) j "ESC - Sair do jogo"
+    (writeText (i + 18) j "X - Embaralha o cubo"
+    (writeText (i + 17) j "H - Rotaciona 3a face em sentido anti-horario"
+    (writeText (i + 16) j "G - Rotaciona 2a face em sentido anti-horario"
+    (writeText (i + 15) j "F - Rotaciona 1a face em sentido anti-horario"
+    (writeText (i + 14) j "Y - Rotaciona 3a face em sentido horario"
+    (writeText (i + 13) j "T - Rotaciona 2a face em sentido horario"
+    (writeText (i + 12) j "R - Rotaciona 1a face em sentido horario"
+    (writeText (i + 11) j "D - Rotaciona 3a coluna para baixo"
+    (writeText (i + 10) j "S - Rotaciona 2a coluna para baixo"
+    (writeText (i + 9) j "A - Rotaciona 1a coluna para baixo"
+    (writeText (i + 8) j "E - Rotaciona 3a coluna para cima"
+    (writeText (i + 7) j "W - Rotaciona 2a coluna para cima"
+    (writeText (i + 6) j "Q - Rotaciona 1a coluna para cima"
+    (writeText (i + 5) j "3 - Rotaciona 3a linha em sentido anti-horario"
+    (writeText (i + 4) j "1 - Rotaciona 3a linha em sentido horario"
+    (writeText (i + 3) j "6 - Rotaciona 2a linha em sentido anti-horario"
+    (writeText (i + 2) j "4 - Rotaciona 2a linha em sentido horario"
+    (writeText (i + 1) j "9 - Rotaciona 1a linha em sentido anti-horario"
+    (writeText i j "7 - Rotaciona 1a linha em sentido horario" matrix)))))))))))))))))))))
+
 -- |Escreve um cubo colorido na matriz de entrada e retorna uma nova matriz.
 writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]
 writtenCube i j animation instructions matrixOfColors matrix = do
   let matrixWithInstructions = if instructions
-                               then matrix --writeInstructions i j True matrix
+                               then writeInstructions 0 0 True matrix
                                else matrix
   
   let frame = fromMaybe ["Erow!"] (Map.lookup animation Base.animations)
@@ -90,6 +115,6 @@ drawLogoAnimation i = do
 
 main :: IO()
 main = do
-  mapM_ (Base.enganaMain) (drawLogoAnimation 0)
-  --drawMatrix (writtenCube 0 (Base.cols `div` 2 - 44) "Logo_0" False Base.cube_matrix filledMatrix)
+  --mapM_ (Base.enganaMain) (drawLogoAnimation 0)
+  drawMatrix (writtenCube 0 (Base.cols `div` 2 - 44) "Default" True Base.cube_matrix filledMatrix)
   --print (writeText 3 10 "Icaro" (fromMaybe [""] (Map.lookup "0Left_0" Base.loadAnimations)))

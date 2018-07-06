@@ -81,6 +81,7 @@ insertWithoutShift str j original = do
   (take j original) ++ str ++ (drop (j + strSize) original)
 
 writeTextAux :: Int -> Int -> Int -> String -> [String] -> [String]
+writeTextAux i ii j text [] = []
 writeTextAux i ii j text (h:t)
   | ii == i = [insertWithoutShift text j h] ++ (writeTextAux i (ii + 1) j text t)
   | otherwise = [h] ++ (writeTextAux i (ii + 1) j text t)
