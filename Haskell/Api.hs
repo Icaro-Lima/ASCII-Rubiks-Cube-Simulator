@@ -62,21 +62,16 @@ drawMatrix :: [String] -> IO()
 drawMatrix strs = putStr (Base.matrixToString strs)
 
 {- Comentado pra nao causar erros.
-
 Movimentos numerados serão substituidos por 
 chamadas da funcao rotatecube.
-
 Lembrando que pra funcionar, precisa instalar o cabal e
 com ele instalar o random
-
 Comandos:
 sudo apt-get install cabal-install
 cabal update
 cabal install random
-
 Exemplo de chamada da funcão:
 shuffle 20
-
 moveSelect :: Int -> IO()
 moveSelect x
   | x == 1 = movimento1
@@ -97,7 +92,6 @@ moveSelect x
   | x == 16 = movimento16
   | x == 17 = movimento17
   | otherwise = movimento18 
-
 shuffle 0 = return ()
 shuffle n =
   do
