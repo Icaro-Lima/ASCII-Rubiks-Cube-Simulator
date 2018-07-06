@@ -36,10 +36,6 @@ gameLoop logicalMatrix = do
     rotateCube "BDown_" logicalMatrix
   else if command == 'D' || command == 'd' then
     rotateCube "CDown_" logicalMatrix
-    
-    
-    
-    
   else if command == 'R' || command == 'r' then
     rotateCube "aClockwise_" logicalMatrix
   else if command == 'T' || command == 't' then
@@ -52,6 +48,8 @@ gameLoop logicalMatrix = do
     rotateCube "bCounterclockwise_" logicalMatrix
   else if command == 'H' || command  == 'h' then
     rotateCube "cCounterclockwise_" logicalMatrix
+  else if command == 'M' || command == 'm' then
+    menuOptions True
   else
     rotateCube "" logicalMatrix
     
@@ -139,22 +137,26 @@ drawMenu = do
   
   Api.drawMatrix w
 
-menuOptions :: IO()
-menuOptions = do
+menuOptions :: Bool -> IO()
+menuOptions menu = do
+
+  if menu then
+    drawMenu
+  else
+    putStr ""
 
   input <- getChar
   
   if input == 'i' || input == 'I' then Api.drawMatrix (Api.writeInstructions 5 (div Base.cols 2) False Api.filledMatrix)
   else if input == 'm' || input == 'M' then drawMenu
   else if input == 'j' || input == 'J' then startGame
-  else menuOptions
+  else menuOptions False
   
   sleep 0.7
   
-  menuOptions
+  menuOptions False
 
 main :: IO()
 main = do
   --mapM_ (Base.enganaMain) (Api.drawLogoAnimation 0)
-  drawMenu
-  menuOptions
+  menuOptions True
