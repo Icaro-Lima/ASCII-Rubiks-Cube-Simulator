@@ -7,12 +7,14 @@ import Debug.Trace
 import System.Sleep
 
 
--- |Char a ser buscado, copia dos possiveis char, possiveis char, tamanho
-waitKey :: Char -> [Char] -> Int -> Char
-waitKey letra [] count = ' '
-waitKey letra (x:xs) count 
-     |letra == x = x
-     |otherwise = waitKey letra xs count
+-- |Retorna o primeiro caractere lido da lista de caracteres.
+waitKey :: [Char] -> Char
+waitKey valid = do
+  let c = unsafeDupablePerformIO getChar;
+  
+  if elem c valid
+  then c
+  else waitKey valid
 
 {-|
   Escreve texto a partir de uma determinada posição.
