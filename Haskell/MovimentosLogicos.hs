@@ -20,7 +20,7 @@ getMatrixCol coluna a b c cubeMatrix =
 
 swapL :: Int -> Int -> Int -> [Int] -> [[Int]] -> [[Int]]
 swapL i comeco fim array logicalMatrix = do
-  let linha = genericIndex logicalMatrix i
+  let linha = genericIndex logica   lMatrix i
   
   take i logicalMatrix ++
     [(take comeco linha) ++ array ++ (drop (fim + 1) linha)] ++
@@ -40,17 +40,14 @@ swapC j comeco fim array logicalMatrix = do
 
 
 
-giraFaceAntiHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
-giraFaceAntiHorario lIni cIni lFim cFim cubeMatrix = do
-    let a = getMatrixLine lIni cFim cFim-1 cIni cubeMatrix
-    let b = getMatrixCol cFim lIni lFim-1 lFim cubeMatrix
-    let c = getMatrixLine lFim cFim cFim-1 cIni cubeMatrix
+giraFaceAntiHorario :: Int -> Int -> Int -> Int -> [[Int]] -> IO([[Int]])
+giraFaceAntiHorario lIni cIni lFim cFim matrix = do
+    let a = getMatrixLine lIni cFim cFim-1 cIni matrix
+    let b = getMatrixCol cFim lIni lFim-1 lFim matrix
+    let c = getMatrixLine lFim cFim cFim-1 cIni matrix
     let d = getMatrixCol cIni lIni lFim-1 lFim
-    let cubeMatrix = swapL lIni cIni cFim b cubeMatrix
-    let cubeMatrix = swapC cFim lIni lFim c cubeMatrix
-    let cubeMatrix = swapL lFim cIni cFim d cubeMatrix
-
-    swapC cIni lIni cFim a cubeMatrix
+    return (swapC (cIni lIni cFim a matrix))
+    {-return swapC $ cIni lIni cFim a (swapL $ lFim cIni cFim d (swapC $ cFim lIni lFim c (swapL $ lIni cIni cFim b matrix)))-}
 
 
 giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
