@@ -264,22 +264,46 @@ module MovimentosLogicos where
       let kk = swapC 5 9 11 a zz 
       
       giraFaceHorario 3 6 5 8 kk
- 
- 
-{-
-	vector<int> a = getMatrixCol(5, 0, 1, 2);
-	vector<int> b = getMatrixCol(5, 3, 4, 5);
-	vector<int> c = getMatrixCol(5, 6, 7, 8);
-	vector<int> d = getMatrixCol(5, 9, 10, 11);
-		
-	swapC(5, 0, 2, b);
-	swapC(5, 3, 5, c);
-	swapC(5, 6, 8, d);
-	swapC(5, 9, 11, a);
-		
-	giraFaceHorario(3, 6, 5, 8);
--}
-
+      
+    aBaixo :: [[Int]] -> [[Int]]
+    aBaixo matrix = do
+      let a = getMatrixCol 3 0 1 2 matrix
+      let b = getMatrixCol 3 3 4 5 matrix
+      let c = getMatrixCol 3 6 7 8 matrix
+      let d = getMatrixCol 3 9 10 11 matrix
+      
+      let xx = swapC 3 0 2 d matrix
+      let yy = swapC 3 3 5 a xx
+      let zz = swapC 3 6 8 b yy
+      let kk = swapC 3 9 11 c zz
+      
+      giraFaceHorario 3 0 5 2 kk 
+      
+    bBaixo :: [[Int]] -> [[Int]]
+    bBaixo matrix = do
+      let a = getMatrixCol 4 0 1 2 matrix
+      let b = getMatrixCol 4 3 4 5 matrix
+      let c = getMatrixCol 4 6 7 8 matrix
+      let d = getMatrixCol 4 9 10 11 matrix
+      
+      let xx = swapC 4 0 2 d matrix
+      let yy = swapC 4 3 5 a xx
+      let zz = swapC 4 6 8 b yy
+      swapC 4 9 11 c zz 
+      
+    cBaixo :: [[Int]] -> [[Int]]
+    cBaixo matrix = do
+      let a = getMatrixCol 5 0 1 2 matrix
+      let b = getMatrixCol 5 3 4 5 matrix
+      let c = getMatrixCol 5 6 7 8 matrix
+      let d = getMatrixCol 5 9 10 11 matrix
+      
+      let xx = swapC 5 0 2 d matrix
+      let yy = swapC 5 3 5 a xx
+      let zz = swapC 5 6 8 b yy
+      let kk = swapC 5 9 11 c zz 
+      
+      giraFaceAntiHorario 3 6 5 8 kk
 
     main :: IO()
     main = do

@@ -30,6 +30,12 @@ gameLoop logicalMatrix = do
     rotateCube "BUp_" logicalMatrix
   else if command == 'E' || command == 'e' then
     rotateCube "CUp_" logicalMatrix
+  else if command == 'A' || command == 'a' then
+    rotateCube "ADown_" logicalMatrix
+  else if command == 'S' || command == 's' then
+    rotateCube "BDown_" logicalMatrix
+  else if command == 'D' || command == 'd' then
+    rotateCube "CDown_" logicalMatrix
     
     
     
@@ -84,12 +90,12 @@ rotateCube movement logicalMatrix = do
     gameLoop (ML.bCima logicalMatrix)  
   else if movement == "CUp_" then
     gameLoop (ML.cCima logicalMatrix)  
-    
-    
-    
-    
-    
-   
+  else if movement == "ADown_" then
+    gameLoop (ML.aBaixo logicalMatrix)  
+  else if movement == "BDown_" then
+    gameLoop (ML.bBaixo logicalMatrix)  
+  else if movement == "CDown_" then
+    gameLoop (ML.cBaixo logicalMatrix)  
   else if movement == "aClockwise_" then
     gameLoop (ML.aHorario logicalMatrix)
   else if movement == "bClockwise_" then
