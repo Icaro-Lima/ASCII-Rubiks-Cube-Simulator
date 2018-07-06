@@ -68,7 +68,7 @@ writeInstructions i j inGame matrix= do
 writtenCube :: Int -> Int -> String -> Bool -> [[Int]] -> [String] -> [String]
 writtenCube i j animation instructions matrixOfColors matrix = do
   let matrixWithInstructions = if instructions
-                               then writeInstructions 0 0 True matrix
+                               then writeInstructions 1 0 True matrix
                                else matrix
   
   let frame = fromMaybe ["Erow!"] (Map.lookup animation Base.animations)
