@@ -46,9 +46,9 @@ giraFaceAntiHorario lIni cIni lFim cFim cubeMatrix = do
     let b = getMatrixCol cFim lIni lFim-1 lFim cubeMatrix
     let c = getMatrixLine lFim cFim cFim-1 cIni cubeMatrix
     let d = getMatrixCol cIni lIni lFim-1 lFim
-    let cubeMatrix = (swapL lFim cIni cFim d (swapC cFim lIni lFim c (swapL lIni cIni cFim b cubeMatrix)))
+    let matrix = (swapL lFim cIni cFim d (swapC cFim lIni lFim c (swapL lIni cIni cFim b cubeMatrix)))
 
-    swapC cIni lIni cFim a cubeMatrix
+    swapC cIni lIni cFim a matrix
 
 
 giraFaceHorario :: Int -> Int -> Int -> Int -> [[Int]] -> [[Int]]
@@ -57,9 +57,9 @@ giraFaceHorario lIni cIni lFim cFim cubeMatrix = do
     let b = getMatrixCol cFim lFim lFim-1 lIni cubeMatrix
     let c = getMatrixLine lFim cIni cFim-1 cFim cubeMatrix
     let d = getMatrixCol cIni lFim lFim-1 lIni cubeMatrix
-    let cubeMatrix = (swapL lFim cIni cFim b cubeMatrix (swapC cIni lIni lFim c (swapL lIni cIni cFim d cubeMatrix)))
+    let matrix = (swapL lFim cIni cFim b cubeMatrix (swapC cIni lIni lFim c (swapL lIni cIni cFim d cubeMatrix)))
 
-    swapC cFim lIni lFim a cubeMatrix
+    swapC cFim lIni lFim a matrix
 
 aAntiHorario :: [[Int]] -> [[Int]]
 aAntiHorario cubeMatrix = do
@@ -67,9 +67,9 @@ aAntiHorario cubeMatrix = do
     let b = getMatrixCol 6 3 4 5 cubeMatrix
     let c = getMatrixLine 6 5 4 3 cubeMatrix
     let d = getMatrixCol 2 3 4 5 cubeMatrix
-    let cubeMatrix = (swapC 2 3 5 a (swapL 6 3 5 d (swapC 6 3 5 c (swapL 2 3 5 b cubeMatrix))))
+    let matrix = (swapC 2 3 5 a (swapL 6 3 5 d (swapC 6 3 5 c (swapL 2 3 5 b cubeMatrix))))
 
-    giraFaceAntiHorario 3 3 5 5 cubeMatrix
+    giraFaceAntiHorario 3 3 5 5 matrix
 
 
 aHorario :: [[Int]] -> [[Int]]
@@ -78,45 +78,38 @@ aHorario cubeMatrix = do
     let b = getMatrixCol 6 5 4 3 cubeMatrix
     let c = getMatrixLine 6 3 4 5 cubeMatrix
     let d = getMatrixCol 2 5 4 3 cubeMatrix
-    let cubeMatrix = (swapC 6 3 5 a (swapL 6 3 5 b (swapC 2 3 5 c (swapL 2 3 5 d cubeMatrix))))
+    let matrix = (swapC 6 3 5 a (swapL 6 3 5 b (swapC 2 3 5 c (swapL 2 3 5 d cubeMatrix))))
     
-    giraFaceHorario 3 3 5 5 cubeMatrix
+    giraFaceHorario 3 3 5 5 matrix
 
 
 bAntiHorario :: [[Int]] -> [[Int]]
 bAntiHorario cubeMatrix = do
     let a = getMatrixLine 1 5 4 3 cubeMatrix
-        b = getMatrixCol 7 3 4 5 cubeMatrix
-        c = getMatrixLine 7 5 4 3 cubeMatrix
-        d = getMatrixCol 1 3 4 5 cubeMatrix
-        cubeMatrix = swapL 1 3 5 b cubeMatrix
-        cubeMatrix = swapC 7 3 5 c cubeMatrix
-        cubeMatrix = swapL 7 3 5 d cubeMatrix
+    let b = getMatrixCol 7 3 4 5 cubeMatrix
+    let c = getMatrixLine 7 5 4 3 cubeMatrix
+    let d = getMatrixCol 1 3 4 5 cubeMatrix
+    let matrix = (swapL 7 3 5 d (swapC 7 3 5 c (swapL 1 3 5 b cubeMatrix)))
     
-    swapC 1 3 5 a cubeMatrix
+    swapC 1 3 5 a matrix
     
 bHorario :: [[Int]] -> [[Int]]
 bHorario cubeMatrix = do
     let a = getMatrixLine 1 3 4 5 cubeMatrix
-        b = getMatrixCol 7 5 4 3 cubeMatrix
-        c = getMatrixLine 7 3 4 5 cubeMatrix
-        d = getMatrixCol 1 5 4 3 cubeMatrix
-        cubeMatrix = swapL 1 3 5 d cubeMatrix
-        cubeMatrix = swapC 1 3 5 c cubeMatrix
-        cubeMatrix = swapL 7 3 5 b cubeMatrix
+    let b = getMatrixCol 7 5 4 3 cubeMatrix
+    let c = getMatrixLine 7 3 4 5 cubeMatrix
+    let d = getMatrixCol 1 5 4 3 cubeMatrix
+    let matrix = (swapL 7 3 5 b (swapC 1 3 5 c (swapL 1 3 5 d cubeMatrix)))
     
-    swapC 7 3 5 a cubeMatrix
+    swapC 7 3 5 a matrix
 
 cAntiHorario :: [[Int]] -> [[Int]]
 cAntiHorario cubeMatrix = do
     let a = getMatrixLine 0 5 4 3 cubeMatrix
-        b = getMatrixCol 8 3 4 5 cubeMatrix
-        c = getMatrixLine 8 5 4 3 cubeMatrix
-        d = getMatrixCol 0 3 4 5 cubeMatrix
-        cubeMatrix = swapL 0 3 5 b cubeMatrix
-        cubeMatrix = swapC 8 3 5 c cubeMatrix
-        cubeMatrix = swapL 8 3 5 d cubeMatrix
-        cubeMatrix = swapC 0 3 5 a cubeMatrix
+    let b = getMatrixCol 8 3 4 5 cubeMatrix
+    let c = getMatrixLine 8 5 4 3 cubeMatrix
+    let d = getMatrixCol 0 3 4 5 cubeMatrix
+    let matrix = (swapC 0 3 5 a (swapL 8 3 5 d (swapC 8 3 5 c (swapL 0 3 5 b cubeMatrix))))
     
     giraFaceHorario 9 3 11 5 cubeMatrix
 
