@@ -111,61 +111,48 @@ cAntiHorario cubeMatrix = do
     let d = getMatrixCol 0 3 4 5 cubeMatrix
     let matrix = (swapC 0 3 5 a (swapL 8 3 5 d (swapC 8 3 5 c (swapL 0 3 5 b cubeMatrix))))
     
-    giraFaceHorario 9 3 11 5 cubeMatrix
+    giraFaceHorario 9 3 11 5 matrix
 
 cHorario :: [[Int]] -> [[Int]]
 cHorario cubeMatrix = do
     let a = getMatrixLine 0 3 4 5 cubeMatrix
-        b = getMatrixCol 8 5 4 3 cubeMatrix
-        c = getMatrixLine 8 3 4 5 cubeMatrix
-        d = getMatrixCol 0 5 4 3 cubeMatrix
-        cubeMatrix = swapL 0 3 5 d cubeMatrix
-        cubeMatrix = swapC 0 3 5 c cubeMatrix
-        cubeMatrix = swapL 8 3 5 b cubeMatrix
-        cubeMatrix = swapC 8 3 5 a cubeMatrix
+    let b = getMatrixCol 8 5 4 3 cubeMatrix
+    let c = getMatrixLine 8 3 4 5 cubeMatrix
+    let d = getMatrixCol 0 5 4 3 cubeMatrix
+    let matrix = (swapC 8 3 5 a (swapL 8 3 5 b (swapC 0 3 5 c (swapL 0 3 5 d cubeMatrix))))
 
-    giraFaceAntiHorario 9 3 11 5 cubeMatrix
+    giraFaceAntiHorario 9 3 11 5 matrix
 
 
 zeroEsq :: [[Int]] -> [[Int]]
 zeroEsq cubeMatrix = do
     let a = getMatrixLine 3 0 1 2 cubeMatrix
-        b = getMatrixLine 3 3 4 5 cubeMatrix
-        c = getMatrixLine 3 6 7 8 cubeMatrix
-        d = getMatrixLine 11 3 4 5 cubeMatrix
-        cubeMatrix = swapL 3 0 2 b cubeMatrix
-        cubeMatrix = swapL 3 3 5 c cubeMatrix
-        cubeMatrix = swapL 3 6 8 d cubeMatrix
-        cubeMatrix = swapL 11 3 5 a cubeMatrix
+    let b = getMatrixLine 3 3 4 5 cubeMatrix
+    let c = getMatrixLine 3 6 7 8 cubeMatrix
+    let d = getMatrixLine 11 3 4 5 cubeMatrix
+    let matrix = (swapL 11 3 5 a (swapL 3 6 8 d (swapL 3 3 5 c (swapL 3 0 2 b cubeMatrix))))
 
-    giraFaceHorario 0 3 2 5 cubeMatrix
+    giraFaceHorario 0 3 2 5 matrix
 
 zeroDir :: [[Int]] -> [[Int]]
 zeroDir cubeMatrix = do
     let a = getMatrixLine 3 0 1 2 cubeMatrix
-        b = getMatrixLine 3 3 4 5 cubeMatrix
-        c = getMatrixLine 3 6 7 8 cubeMatrix
-        d = getMatrixLine 11 3 4 5 cubeMatrix
+    let b = getMatrixLine 3 3 4 5 cubeMatrix
+    let c = getMatrixLine 3 6 7 8 cubeMatrix
+    let d = getMatrixLine 11 3 4 5 cubeMatrix
+    let matrix = (swapL 11 3 5 c (swapL 3 6 8 b (swapL 3 3 5 a (swapL 3 0 2 d cubeMatrix))))
 
-    swapL 3 0 2 d cubeMatrix
-    swapL 3 3 5 a cubeMatrix
-    swapL 3 6 8 b cubeMatrix
-    swapL 11 3 5 c cubeMatrix
-
-    giraFaceAntiHorario 0 3 2 5 cubeMatrix
+    giraFaceAntiHorario 0 3 2 5 matrix
 
 
 umEsq :: [[Int]] -> [[Int]]
 umEsq cubeMatrix = do
     let a = getMatrixLine 4 0 1 2 cubeMatrix
-        b = getMatrixLine 4 3 4 5 cubeMatrix
-        c = getMatrixLine 4 6 7 8 cubeMatrix
-        d = getMatrixLine 10 3 4 5 cubeMatrix
+    let b = getMatrixLine 4 3 4 5 cubeMatrix
+    let c = getMatrixLine 4 6 7 8 cubeMatrix
+    let d = getMatrixLine 10 3 4 5 cubeMatrix
     
-    swapL 4 0 2 b cubeMatrix
-    swapL 4 3 5 c cubeMatrix
-    swapL 4 6 8 d cubeMatrix
-    swapL 10 3 5 a cubeMatrix
+    swapL 10 3 5 a (swapL 4 6 8 d (swapL 4 3 5 c (swapL 4 0 2 b cubeMatrix)))
 
 
 umDir :: [[Int]] -> [[Int]]
