@@ -1,11 +1,11 @@
 # Esse makefile está inutilizado por enquanto...
-api: Api.hs Base.hs
-	ghc Api.hs
+Main: Main.hs MovimentosLogicos.hs TermSize.hs Api.hs Base.hs
+	ghc Main.hs
 
 all: run
 
-run: api
-	./Api
+run: Main
+	./Main
 
 clean:
 	-rm -rf *.hi *.o Main Base Api MovimentosLogicos
