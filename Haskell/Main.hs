@@ -10,7 +10,11 @@ gameLoop logicalMatrix = do
   
   Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix Api.filledMatrix)
 
+  hSetBuffering stdin NoBuffering
+
   command <- getChar
+  
+  hSetBuffering stdin LineBuffering
   
   if command == '7' || command == '7' then
     rotateCube "0Left_" logicalMatrix
@@ -145,15 +149,17 @@ menuOptions menu = do
   else
     putStr ""
 
+  hSetBuffering stdin NoBuffering
+
   input <- getChar
+  
+  hSetBuffering stdin LineBuffering
   
   if input == 'i' || input == 'I' then Api.drawMatrix (Api.writeInstructions 5 (div Base.cols 2) False Api.filledMatrix)
   else if input == 'm' || input == 'M' then drawMenu
   else if input == 'j' || input == 'J' then startGame
   else menuOptions False
-  
-  sleep 0.7
-  
+    
   menuOptions False
 
 main :: IO()
