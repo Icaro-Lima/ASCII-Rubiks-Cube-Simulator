@@ -144,6 +144,61 @@ module MovimentosLogicos where
       let kk = swapC 8 3 5 a zz
       
       giraFaceHorario 9 3 11 5 kk
+    
+    zeroEsq :: [[Int]] -> [[Int]]
+    zeroEsq matrix = do
+      let a = getMatrixLine 3 0 1 2 matrix
+      let b = getMatrixLine 3 3 4 5 matrix
+      let c = getMatrixLine 3 6 7 8 matrix
+      let d = getMatrixLine 11 3 4 5 matrix
+      
+      let xx = swapL 3 0 2 b matrix
+      let yy = swapL 3 3 5 c xx
+      let zz = swapL 3 6 8 d yy
+      let kk = swapL 11 3 5 a zz
+      
+      giraFaceHorario 0 3 2 5 kk  
+    
+    zeroDir :: [[Int]] -> [[Int]]
+    zeroDir matrix = do
+      let a = getMatrixLine 3 0 1 2 matrix
+      let b = getMatrixLine 3 3 4 5 matrix
+      let c = getMatrixLine 3 6 7 8 matrix
+      let d = getMatrixLine 11 3 4 5 matrix
+      
+      let xx = swapL 3 0 2 d matrix
+      let yy = swapL 3 3 5 a xx
+      let zz = swapL 3 6 8 b yy
+      let kk = swapL 11 3 5 c zz
+      
+      giraFaceAntiHorario 0 3 2 5 kk  
+      
+    umEsq :: [[Int]] -> [[Int]]
+    umEsq matrix = do
+      let a = getMatrixLine 4 0 1 2 matrix
+      let b = getMatrixLine 4 3 4 5 matrix
+      let c = getMatrixLine 4 6 7 8 matrix
+      let d = getMatrixLine 10 3 4 5 matrix
+      
+      let xx = swapL 4 0 2 b matrix
+      let yy = swapL 4 3 5 c xx
+      let zz = swapL 4 6 8 d yy
+      swapL 10 3 5 a zz
+ 
+ 
+ 
+{-
+	vector<int> a = getMatrixLine(4, 0, 1, 2);
+	vector<int> b = getMatrixLine(4, 3, 4, 5);
+	vector<int> c = getMatrixLine(4, 6, 7, 8);
+	vector<int> d = getMatrixLine(10, 3, 4, 5);
+		
+	swapL(4, 0, 2, b);
+	swapL(4, 3, 5, c);
+	swapL(4, 6, 8, d);
+	swapL(10, 3, 5, a);
+}
+-}
 
 
     main :: IO()

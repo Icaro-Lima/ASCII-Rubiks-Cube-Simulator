@@ -11,8 +11,14 @@ gameLoop logicalMatrix = do
   Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix Api.filledMatrix)
 
   command <- getChar
-
-  if command == 'R' || command == 'r' then
+  
+  if command == '7' || command == '7' then
+    rotateCube "0Left_" logicalMatrix
+  else if command == '9' || command == '9' then
+    rotateCube "0Right_" logicalMatrix
+  else if command == '4' || command == '4' then
+    rotateCube "1Left_" logicalMatrix
+  else if command == 'R' || command == 'r' then
     rotateCube "aClockwise_" logicalMatrix
   else if command == 'T' || command == 't' then
     rotateCube "bClockwise_" logicalMatrix
@@ -44,7 +50,13 @@ rotateCube movement logicalMatrix = do
   Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "4") True logicalMatrix Api.filledMatrix)
   sleep 0.03
   
-  if movement == "aClockwise_" then
+  if movement == "0Left_" then
+    gameLoop (ML.zeroEsq logicalMatrix)
+  else if movement == "0Right_" then
+    gameLoop (ML.zeroDir logicalMatrix)
+  else if movement == "1Left_" then
+    gameLoop (ML.umEsq logicalMatrix)
+  else if movement == "aClockwise_" then
     gameLoop (ML.aHorario logicalMatrix)
   else if movement == "bClockwise_" then
     gameLoop (ML.bHorario logicalMatrix)
