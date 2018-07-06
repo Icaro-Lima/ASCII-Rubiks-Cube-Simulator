@@ -36,6 +36,11 @@ size = unsafeDupablePerformIO getTermSize
 rows = fst size
 cols = snd size
 
+cube_origin_row = 0
+cubo_mid_col = (cols `div` 2) - (75 `div` 2)
+
+esc = '\x1b'
+
 {-|
   Retorna uma lista de strings, onde cada string corresponde a uma linha
   do arquivo lido.

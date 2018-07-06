@@ -1,3 +1,5 @@
+module Api where
+
 import Data.Maybe (fromMaybe)
 import qualified Base as Base
 import qualified Data.Map.Strict as Map
@@ -5,13 +7,14 @@ import System.IO.Unsafe
 import System.Random
 import Debug.Trace
 import System.Sleep
+import System.IO
 
 
 -- |Retorna o primeiro caractere lido da lista de caracteres.
 waitKey :: [Char] -> Char
 waitKey valid = do
-  let c = unsafeDupablePerformIO getChar;
-  
+  let c = unsafePerformIO (getChar)
+    
   if elem c valid
   then c
   else waitKey valid
