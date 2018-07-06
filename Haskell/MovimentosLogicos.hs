@@ -95,7 +95,7 @@ bAntiHorario cubeMatrix = do
     
 bHorario :: [[Int]] -> [[Int]]
 bHorario cubeMatrix = do
-    a <- getMatrixLine 1 3 4 5 cubeMatrix
+    a <- [getMatrixLine 1 3 4 5 cubeMatrix]
     b <- getMatrixCol 7 5 4 3 cubeMatrix
     c <- getMatrixLine 7 3 4 5 cubeMatrix
     d <- getMatrixCol 1 5 4 3 cubeMatrix
@@ -226,6 +226,26 @@ bigBCima cubeMatrix = do
 
     swapC 4 9 11 a (swapC 4 6 8 d  (swapC 4 3 5 c (swapC 4 0 2 b cubeMatrix)))
 
+
+bigCBaixo :: [[Int]] -> [[Int]]
+bigCBaixo cubeMatrix = do
+    a <- getMatrixCol 5 0 1 2 cubeMatrix
+    b <- getMatrixCol 5 3 4 5 cubeMatrix
+    c <- getMatrixCol 5 6 7 8 cubeMatrix
+    d <- getMatrixCol 5 9 10 11 cubeMatrix
+    matrix <- (swapC 5 9 11 c (swapC 5 6 8 b (swapC 5 3 5 a (swapC 5 0 2 d cubeMatrix)))) 
+
+    giraFaceAntiHorario 3 6 5 8 matrix
+
+bigCCima :: [[Int]] -> [[Int]]
+bigCCima cubeMatrix = do
+   a <- getMatrixCol 5 0 1 2 cubeMatrix
+   b <- getMatrixCol 5 3 4 5 cubeMatrix
+   c <- getMatrixCol 5 6 7 8 cubeMatrix
+   d <- getMatrixCol 5 9 10 11 cubeMatrix
+   matrix <- (swapC 5 9 11 a (swapC 5 6 8 d (swapC 5 3 5 c (swapC 5 0 2 b cubeMatrix))))
+
+   giraFaceHorario 3 6 5 8 matrix
 
 
 main :: IO()
