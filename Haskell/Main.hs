@@ -10,7 +10,7 @@ import System.Random
 gameLoop :: [[Int]] -> IO()
 gameLoop logicalMatrix = do
   
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col "Default" True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
 
   hSetBuffering stdin NoBuffering
 

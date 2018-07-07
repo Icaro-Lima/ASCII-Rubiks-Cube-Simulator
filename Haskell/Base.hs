@@ -134,6 +134,11 @@ writtenCubeAux i ii j (h:t) matrixOfColors (hh:tt)
 writtenCubeAux i ii j [] matrixOfColors (hh:tt) = [hh] ++ (writtenCubeAux i (ii + 1) j [] matrixOfColors tt)
 writtenCubeAux i ii j [] matrixOfColors [] = []
 
+colorizeLogicalLine :: [Int] -> String
+colorizeLogicalLine [] = ""
+colorizeLogicalLine (h:t) = do
+  "\x1b[" ++ (show h) ++ "m  " ++ "\x1b[0m" ++ colorizeLogicalLine t
+
 enganaMain :: IO() -> IO()
 enganaMain x = x
 

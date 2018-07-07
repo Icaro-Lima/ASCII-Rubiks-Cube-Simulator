@@ -8,6 +8,7 @@ import System.Random
 import Debug.Trace
 import System.Sleep
 import System.IO
+import Data.List
 
 
 -- |Retorna o primeiro caractere lido da lista de caracteres.
@@ -82,6 +83,21 @@ filledMatrix = Base.filledMatrixAux 0
 -- |Desenha a matrix no console.
 drawMatrix :: [String] -> IO()
 drawMatrix strs = putStr (Base.matrixToString strs)
+
+writeLogicalMatrix :: Int -> Int -> [[Int]] -> [String] -> [String]
+writeLogicalMatrix i j logicalMatrix matrix = do
+  let a = writeText (i) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 0)) matrix
+  let b = writeText (i + 1) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 1)) a
+  let c = writeText (i + 2) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 2)) b
+  let d = writeText (i + 3) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 3)) c
+  let e = writeText (i + 4) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 4)) d
+  let f = writeText (i + 5) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 5)) e
+  let g = writeText (i + 6) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 6)) f
+  let h = writeText (i + 7) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 7)) g
+  let ii = writeText (i + 8) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 8)) h
+  let jj = writeText (i + 9) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 9)) ii
+  let k = writeText (i + 10) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 10)) jj
+  writeText (i + 11) j (Base.colorizeLogicalLine (genericIndex logicalMatrix 11)) k
 
 -- |Utilizar assim: mapM_ (Base.enganaMain) (drawLogoAnimation 0)
 drawLogoAnimation :: Int -> [IO()]
