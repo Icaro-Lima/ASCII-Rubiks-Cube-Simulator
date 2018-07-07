@@ -305,6 +305,18 @@ module MovimentosLogicos where
       
       giraFaceAntiHorario 3 6 5 8 kk
 
+    printLogicalLine :: [Int] -> IO()
+    printLogicalLine [] = putStrLn ""
+    printLogicalLine (h:t) = do
+      putStr ("\x1b[" ++ (show h) ++ "m  " ++ "\x1b[0m")
+      printLogicalLine t
+
+    printLogicalMatrix :: [[Int]] -> IO()
+    printLogicalMatrix [] = putStr ""
+    printLogicalMatrix (h:t) = do
+      printLogicalLine h
+      printLogicalMatrix t
+
     main :: IO()
     main = do
       print "===== Base ====="
