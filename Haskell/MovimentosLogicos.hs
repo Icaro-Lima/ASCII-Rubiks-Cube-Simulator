@@ -182,8 +182,8 @@ module MovimentosLogicos where
       
       let xx = swapL 4 0 2 b matrix
       let yy = swapL 4 3 5 c xx
-      let zz = swapL 4 6 8 d yy
-      swapL 10 3 5 a zz
+      let zz = swapL 4 6 8 (reverse d) yy
+      swapL 10 3 5 (reverse a) zz
     
     umDir :: [[Int]] -> [[Int]]
     umDir matrix = do
@@ -192,10 +192,10 @@ module MovimentosLogicos where
       let c = getMatrixLine 4 6 7 8 matrix
       let d = getMatrixLine 10 3 4 5 matrix
       
-      let xx = swapL 4 0 2 d matrix
+      let xx = swapL 4 0 2 (reverse d) matrix
       let yy = swapL 4 3 5 a xx
       let zz = swapL 4 6 8 b yy
-      swapL 10 3 5 c zz
+      swapL 10 3 5 (reverse c) zz
       
     doisEsq :: [[Int]] -> [[Int]]
     doisEsq matrix = do
