@@ -206,8 +206,8 @@ module MovimentosLogicos where
       
       let xx = swapL 5 0 2 b matrix
       let yy = swapL 5 3 5 c xx
-      let zz = swapL 5 6 8 d yy
-      let kk = swapL 9 3 5 a zz
+      let zz = swapL 5 6 8 (reverse d) yy
+      let kk = swapL 9 3 5 (reverse a) zz
       
       giraFaceAntiHorario 6 3 8 5 kk  
     
@@ -218,10 +218,10 @@ module MovimentosLogicos where
       let c = getMatrixLine 5 6 7 8 matrix
       let d = getMatrixLine 9 3 4 5 matrix
       
-      let xx = swapL 5 0 2 d matrix
+      let xx = swapL 5 0 2 (reverse d) matrix
       let yy = swapL 5 3 5 a xx
       let zz = swapL 5 6 8 b yy
-      let kk = swapL 9 3 5 c zz
+      let kk = swapL 9 3 5 (reverse c) zz
       
       giraFaceHorario 6 3 8 5 kk  
       
