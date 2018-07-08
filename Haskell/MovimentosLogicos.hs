@@ -129,7 +129,7 @@ module MovimentosLogicos where
       let zz = swapL 8 3 5 d yy
       let kk = swapC 0 3 5 a zz 
       
-      giraFaceAntiHorario 9 3 11 5 kk
+      giraFaceHorario 9 3 11 5 kk
       
     cHorario :: [[Int]] -> [[Int]]
     cHorario matrix = do
@@ -143,7 +143,7 @@ module MovimentosLogicos where
       let zz = swapL 8 3 5 b yy
       let kk = swapC 8 3 5 a zz
       
-      giraFaceHorario 9 3 11 5 kk
+      giraFaceAntiHorario 9 3 11 5 kk
     
     zeroEsq :: [[Int]] -> [[Int]]
     zeroEsq matrix = do
