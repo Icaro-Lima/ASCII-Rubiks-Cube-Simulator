@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -148,6 +149,9 @@ void zeroEsq() {
 	vector<int> c = getMatrixLine(3, 6, 7, 8);
 	vector<int> d = getMatrixLine(11, 3, 4, 5);
 		
+	reverse(d.begin(), d.end());
+	reverse(a.begin(), a.end());
+		
 	swapL(3, 0, 2, b);
 	swapL(3, 3, 5, c);
 	swapL(3, 6, 8, d);
@@ -161,6 +165,9 @@ void zeroDir() {
 	vector<int> b = getMatrixLine(3, 3, 4, 5);
 	vector<int> c = getMatrixLine(3, 6, 7, 8);
 	vector<int> d = getMatrixLine(11, 3, 4, 5);
+		
+	reverse(d.begin(), d.end());
+	reverse(c.begin(), c.end());
 		
 	swapL(3, 0, 2, d);
 	swapL(3, 3, 5, a);
@@ -176,6 +183,9 @@ void umEsq() {
 	vector<int> c = getMatrixLine(4, 6, 7, 8);
 	vector<int> d = getMatrixLine(10, 3, 4, 5);
 		
+	reverse(d.begin(), d.end());
+	reverse(a.begin(), a.end());
+		
 	swapL(4, 0, 2, b);
 	swapL(4, 3, 5, c);
 	swapL(4, 6, 8, d);
@@ -188,6 +198,9 @@ void umDir() {
 	vector<int> c = getMatrixLine(4, 6, 7, 8);
 	vector<int> d = getMatrixLine(10, 3, 4, 5);
 		
+	reverse(d.begin(), d.end());
+	reverse(c.begin(), c.end());
+		
 	swapL(4, 0, 2, d);
 	swapL(4, 3, 5, a);
 	swapL(4, 6, 8, b);
@@ -199,6 +212,9 @@ void doisEsq() {
 	vector<int> b = getMatrixLine(5, 3, 4, 5);
 	vector<int> c = getMatrixLine(5, 6, 7, 8);
 	vector<int> d = getMatrixLine(9, 3, 4, 5);
+		
+	reverse(d.begin(), d.end());
+	reverse(a.begin(), a.end());
 		
 	swapL(5, 0, 2, b);
 	swapL(5, 3, 5, c);
@@ -213,6 +229,9 @@ void doisDir() {
 	vector<int> b = getMatrixLine(5, 3, 4, 5);
 	vector<int> c = getMatrixLine(5, 6, 7, 8);
 	vector<int> d = getMatrixLine(9, 3, 4, 5);
+		
+	reverse(d.begin(), d.end());
+	reverse(c.begin(), c.end());
 		
 	swapL(5, 0, 2, d);
 	swapL(5, 3, 5, a);
