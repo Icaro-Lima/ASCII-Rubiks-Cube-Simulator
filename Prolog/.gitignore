@@ -1,0 +1,11 @@
+# Ignorar tudo!
+*
+
+# Porém, não ignorar o seguinte:
+!.gitignore
+!Base.pl
+!Main.pl
+!Api.pl
+!MovimentosLogicos.pl
+!Makefile
+!README.md
