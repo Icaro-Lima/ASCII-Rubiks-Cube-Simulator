@@ -1,7 +1,33 @@
-wait_key(ValidKeys, ReturnedKey) :-
+cubeMatrix(
+  [[000, 000, 000, 101, 101, 101, 000, 000, 000],
+   [000, 000, 000, 101, 101, 101, 000, 000, 000],
+   [000, 000, 000, 101, 101, 101, 000, 000, 000],
+   [102, 102, 102, 103, 103, 103, 044, 044, 044],
+   [102, 102, 102, 103, 103, 103, 044, 044, 044],
+   [102, 102, 102, 103, 103, 103, 044, 044, 044],
+   [000, 000, 000, 045, 045, 045, 000, 000, 000],
+   [000, 000, 000, 045, 045, 045, 000, 000, 000],
+   [000, 000, 000, 045, 045, 045, 000, 000, 000],
+   [000, 000, 000, 100, 100, 100, 000, 000, 000],
+   [000, 000, 000, 100, 100, 100, 000, 000, 000],
+   [000, 000, 000, 100, 100, 100, 000, 000, 000]]).
+   
+assetsPath("../Assets").
+
+lineLimit(500).
+
+rows(Width)  :- tty_size(Width, _).
+cols(Height) :- tty_size(_, Height).
+
+cubeOriginRow(0).
+cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
+
+esc("\e").
+
+waitKey(ValidKeys, ReturnedKey) :-
 get_single_char(X),
 char_code(Y, X),
 (member(Y, ValidKeys) ->
 ReturnedKey = Y;
-wait_key(ValidKeys, K), ReturnedKey = K
+waitKey(ValidKeys, K), ReturnedKey = K
 ).
