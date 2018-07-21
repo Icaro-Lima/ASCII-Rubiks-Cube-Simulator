@@ -1,6 +1,7 @@
 :- initialization(main).
 :- include('Api.pl').
+:- include('Base.pl').
 
 main :-
-cubeOriginRow(X),
-write(X).
+readFileLines("Base.pl", List),
+writeln(List).
