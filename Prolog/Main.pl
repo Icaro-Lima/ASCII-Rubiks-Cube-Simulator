@@ -3,4 +3,5 @@
 :- include('Base.pl').
 
 main :-
-	loadAnimations().
+	loadAnimations(X),
+	writeln(X).

@@ -37,7 +37,7 @@ readFileLines(FileName, List) :-
     readLinesFromSTream(Stream, List),!,
 	close(Stream).
 
-ruleForFrameNames(Name, Frame) :-
+ruleForCubeFrameNames(Name, Frame) :-
 	member(NameWithoutSep, ['0Left', '1Left', '2Left', '0Right', '1Right',
 	'2Right', 'AUp', 'BUp', 'CUp', 'ADown', 'BDown', 'CDown', 'aClockwise',
 	'bClockwise', 'cClockwise', 'aCounterclockwise', 'bCounterclockwise',
@@ -68,15 +68,42 @@ ruleForFrameNames(Name, Frame) :-
 
 	readFileLines(CubePathBarNameBarAnimTxt, Frame).
 
-loadAnimations() :-
+ruleForLogoFrameNames(Name, Frame) :-
+	between(0, 43, Number),
+	atom_number(NumberAtom, Number),
+	atom_concat('Logo_', NumberAtom, Name),
+
+	assetsPath(AssetsPath),
+
+	string_concat(AssetsPath, "/Logo/", PathWithLogo),
+
+	atom_string(NumberAtom, NumberString),
+
+	string_concat(PathWithLogo, NumberString, PathWithLogoNumber),
+
+	string_concat(PathWithLogoNumber, ".txt", FullPath),
+
+	readFileLines(FullPath, Frame).
+
+inserListOfTuplesInDict(Dict, [(Key, Value)|[]], DictOut) :-
+	DictOut = Dict.put(Key, Value).
+
+inserListOfTuplesInDict(Dict, [(Key, Value)|Tail], DictOut) :-
+	inserListOfTuplesInDict(Dict, Tail, DictOutAux), DictOut = DictOutAux.put(Key, Value).
+
+loadAnimations(Animations) :-
 	assetsPath(AssetsPath),
 	string_concat(AssetsPath, "/Cubo", CubePath),
 
 	string_concat(CubePath, "/Default.txt", PathOfDefault),
 	readFileLines(PathOfDefault, AnimationOfDefault),
 
-	Animations = _{'Default': AnimationOfDefault},
+	AnimationsWithOnlyDefault = _{'Default': AnimationOfDefault},
 
+	findall((X, Y), ruleForCubeFrameNames(X, Y), ListCube),
 
+	inserListOfTuplesInDict(AnimationsWithOnlyDefault, ListCube, AnimationsWithDefaultAndCube),
 
-	writeln(Animations).
+	findall((X, Y), ruleForLogoFrameNames(X, Y), ListLogo),
+
+	inserListOfTuplesInDict(AnimationsWithDefaultAndCube, ListLogo, Animations).
