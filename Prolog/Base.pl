@@ -34,5 +34,49 @@ readLinesFromSTream(Stream, [Head|Tail]) :-
 
 readFileLines(FileName, List) :- 
     open(FileName, read, Stream),
-    readLinesFromSTream(Stream, List),
-    close(Stream).
+    readLinesFromSTream(Stream, List),!,
+	close(Stream).
+
+ruleForFrameNames(Name, Frame) :-
+	member(NameWithoutSep, ['0Left', '1Left', '2Left', '0Right', '1Right',
+	'2Right', 'AUp', 'BUp', 'CUp', 'ADown', 'BDown', 'CDown', 'aClockwise',
+	'bClockwise', 'cClockwise', 'aCounterclockwise', 'bCounterclockwise',
+	'cCounterclockwise']),
+
+	atom_concat(NameWithoutSep, '_', NameWithUnderline),
+
+	between(0, 4, Number),
+
+	atom_number(NumberAtom, Number),
+	
+	atom_concat(NameWithUnderline, NumberAtom, Name),
+
+	assetsPath(AssetsPath),
+	string_concat(AssetsPath, "/Cubo", CubePath),
+
+	string_concat(CubePath, "/", CubePathBar),
+
+	string_concat(CubePathBar, NameWithoutSep, CubePathBarName),
+
+	string_concat(CubePathBarName, "/", CubePathBarNameBar),
+
+	atom_string(NumberAtom, NumberString),
+
+	string_concat(CubePathBarNameBar, NumberString, CubePathBarNameBarAnim),
+
+	string_concat(CubePathBarNameBarAnim, ".txt", CubePathBarNameBarAnimTxt),
+
+	readFileLines(CubePathBarNameBarAnimTxt, Frame).
+
+loadAnimations() :-
+	assetsPath(AssetsPath),
+	string_concat(AssetsPath, "/Cubo", CubePath),
+
+	string_concat(CubePath, "/Default.txt", PathOfDefault),
+	readFileLines(PathOfDefault, AnimationOfDefault),
+
+	Animations = _{'Default': AnimationOfDefault},
+
+
+
+	writeln(Animations).
