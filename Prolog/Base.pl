@@ -183,6 +183,18 @@ colorizeStringAux([Head|Tail], ColourMatrix, IsPainting, PasteHead, Output) :-
 	Head >= 65, Head =< 76, CondToOpenCode -> Line is Head - 65, elementOfMatrix(ColourMatrix, Line, 3, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
 	Head >= 65, Head =< 76, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
 
+	Head >= 77, Head =< 88, CondToOpenCode -> Line is Head - 77, elementOfMatrix(ColourMatrix, Line, 4, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
+	Head >= 77, Head =< 88, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
+
+	Head >= 97, Head =< 108, CondToOpenCode -> Line is Head - 97, elementOfMatrix(ColourMatrix, Line, 5, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
+	Head >= 97, Head =< 108, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
+
+	Head >= 109, Head =< 120, CondToOpenCode -> Codd is Head - 109, Row is Codd // 3 + 3, Col is Codd mod 3 + 6, elementOfMatrix(ColourMatrix, Row, Col, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
+	Head >= 109, Head =< 120, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
+
+	Head >= 48, Head =< 56, CondToOpenCode -> Codd is Head - 48, Row is Codd // 3 + 3, Col is Codd mod 3, elementOfMatrix(ColourMatrix, Row, Col, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
+	Head >= 48, Head =< 56, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
+
 	string_codes(HeadString, [Head]), colorizeStringAux(Tail, ColourMatrix, false, Head, OutputAux), (IsPainting -> string_concat("\e[0m", HeadString, HeadStringCode); string_concat(HeadString, "", HeadStringCode)), string_concat(HeadStringCode, OutputAux, Output)
 	).
 
