@@ -107,3 +107,40 @@ loadAnimations(Animations) :-
 	findall((X, Y), ruleForLogoFrameNames(X, Y), ListLogo),
 
 	inserListOfTuplesInDict(AnimationsWithDefaultAndCube, ListLogo, Animations).
+
+elementOfList([Element|_], 0, Element).
+
+elementOfList([_|Tail], I, Element) :-
+	Iaux is I - 1,
+	elementOfList(Tail, Iaux, Element).
+
+elementOfMatrix(Matrix, I, J, Element) :-
+	elementOfList(Matrix, I, Line),
+	elementOfList(Line, J, Element).
+
+
+colorizeStringAux([], _, IsPainting, _, Output) :-
+	(
+	IsPainting -> Output = "\e[0m";
+	Output = ""
+	).
+
+colorizeStringAux([Head|Tail], ColourMatrix, IsPainting, PasteHead, Output) :-
+	(\+IsPainting -> CondToOpenCode = true; Head \= PasteHead -> CondToOpenCode = true; CondToOpenCode = false),
+
+	(
+	Head >= 65, Head =< 76, CondToOpenCode -> Line is Head - 65, elementOfMatrix(ColourMatrix, Line, 3, Cod), atom_number(CodAtom, Cod), atom_string(CodAtom, CodString), colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat("\e[", CodString, CodedBegin), string_concat(CodedBegin, "m ", CodedEnd), string_concat(CodedEnd, OutputAux, Output);
+	Head >= 65, Head =< 76, CondToOpenCode = false -> colorizeStringAux(Tail, ColourMatrix, true, Head, OutputAux), string_concat(" ", OutputAux, Output);
+
+	string_codes(HeadString, [Head]), colorizeStringAux(Tail, ColourMatrix, false, Head, OutputAux), (IsPainting -> string_concat("\e[0m", HeadString, HeadStringCode); string_concat(HeadString, "", HeadStringCode)), string_concat(HeadStringCode, OutputAux, Output)
+	).
+
+
+
+
+/*colorizeString(StringInput, ColourMatrix, StringOutput).*/
+
+
+
+
+
