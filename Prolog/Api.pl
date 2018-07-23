@@ -13,3 +13,15 @@ filledMatrix(FilledMatrix) :-
 
 drawMatrix(Matrix) :-
 	matrixToText(Matrix, Text), write(Text).
+
+/*writeOnLine(StrIn, Str, I, StrOut) :-
+	string_to_list(StrIn, ListIn), string_to_list(Str, List),
+	string_to_list(StrOut, ListOut), 
+	writeOnLine(ListIn, List, I, ListOut).*/
+
+/*writeOnLine(Text, I).*/
+
+/*writeText([Head|Tail], I, J, II) :-
+	(
+	II = I -> 
+	).*/

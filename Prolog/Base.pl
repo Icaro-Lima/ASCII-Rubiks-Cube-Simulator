@@ -27,6 +27,14 @@ cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
 
+writeOnLine([], List, _, List).
+	
+writeOnLine([HeadIn|TailIn], [Head|Tail], I, [HeadOut|TailOut]) :-
+	(
+	I > 0 -> II is I - 1, HeadOut = Head, writeOnLine([HeadIn|TailIn], Tail, II, TailOut);
+	HeadOut = HeadIn, writeOnLine(TailIn, Tail, 0, TailOut)
+	).
+
 matrixToText([], "").
 
 matrixToText([Head|Tail], Text) :-
