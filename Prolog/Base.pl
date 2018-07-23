@@ -12,18 +12,39 @@ cubeMatrix(
      [000, 000, 000, 100, 100, 100, 000, 000, 000],
      [000, 000, 000, 100, 100, 100, 000, 000, 000]]
 ).
+
+animations(Animations) :- loadAnimations(Animations).
      
 assetsPath("../Assets").
 
 lineLimit(500).
 
-rows(Width)  :- tty_size(Width, _).
-cols(Height) :- tty_size(_, Height).
+cols(Height) :- tty_size(Height, _).
+rows(Width) :- tty_size(_, Width).
 
 cubeOriginRow(0).
 cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
+
+matrixToText([], "").
+
+matrixToText([Head|Tail], Text) :-
+	matrixToText(Tail, TextAux), string_concat(Head, TextAux, Text).
+
+filledLine(Str, J) :-
+	cols(Cols), lineLimit(LineLimit), JJ is J + 1,
+	(
+	J < Cols -> filledLine(StrAux, JJ), string_concat(" ", StrAux, Str);
+	J >= Cols, J < LineLimit -> filledLine(StrAux, JJ), string_concat("\0", StrAux, Str);
+	Str = ""
+	).
+
+filledMatrixAux([], Rows) :- rows(Rows).
+
+filledMatrixAux([Head|Tail], I) :-
+	II is I + 1,
+	filledLine(Head, 0), filledMatrixAux(Tail, II).
 
 readLinesFromSTream(Stream, []) :-
     at_end_of_stream(Stream).
@@ -137,8 +158,3 @@ colorizeStringAux([Head|Tail], ColourMatrix, IsPainting, PasteHead, Output) :-
 
 colorizeString(StringInput, ColourMatrix, StringOutput) :-
 	string_to_list(StringInput, List), colorizeStringAux(List, ColourMatrix, false, 0, StringOutput).
-
-
-
-
-
