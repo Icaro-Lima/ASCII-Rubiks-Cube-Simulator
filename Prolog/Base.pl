@@ -135,10 +135,8 @@ colorizeStringAux([Head|Tail], ColourMatrix, IsPainting, PasteHead, Output) :-
 	string_codes(HeadString, [Head]), colorizeStringAux(Tail, ColourMatrix, false, Head, OutputAux), (IsPainting -> string_concat("\e[0m", HeadString, HeadStringCode); string_concat(HeadString, "", HeadStringCode)), string_concat(HeadStringCode, OutputAux, Output)
 	).
 
-
-
-
-/*colorizeString(StringInput, ColourMatrix, StringOutput).*/
+colorizeString(StringInput, ColourMatrix, StringOutput) :-
+	string_to_list(StringInput, List), colorizeStringAux(List, ColourMatrix, false, 0, StringOutput).
 
 
 
