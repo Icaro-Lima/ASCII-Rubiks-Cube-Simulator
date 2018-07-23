@@ -27,6 +27,23 @@ cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
 
+writeFrameWithoutColorAux(MatrixIn, [], _, _, MatrixIn).
+
+writeFrameWithoutColorAux(MatrixIn, [HeadFrame|TailFrame], I, J, MatrixOut) :-
+	writeText(MatrixIn, HeadFrame, I, J, MatrixOutAux), II is I + 1,
+	writeFrameWithoutColorAux(MatrixOutAux, TailFrame, II, J, MatrixOut).
+	
+writeLogoFrame(MatrixIn, FrameNumber, I, J, MatrixOut) :-
+	atom_number(FrameAtom, FrameNumber), atom_concat('Logo_', FrameAtom, FrameName),
+	animations(Animations), writeFrameWithoutColorAux(MatrixIn, Animations.get(FrameName), I, J, MatrixOut).
+
+drawLogoAnimationAux(44).
+
+drawLogoAnimationAux(I) :-
+	rows(Rows), cols(Cols), CenterI is Rows / 2 - 6, CenterJ is Cols / 2 - 44,
+	filledMatrix(FilledMatrix), writeLogoFrame(FilledMatrix, I, CenterI, CenterJ, MatrixOut),
+	drawMatrix(MatrixOut), sleep(0.07), II is I + 1, drawLogoAnimationAux(II).
+
 writeOnLineAux([], List, _, List).
 	
 writeOnLineAux([HeadIn|TailIn], [Head|Tail], I, [HeadOut|TailOut]) :-
@@ -50,7 +67,7 @@ filledLine(Str, J) :-
 	(
 	J < Cols -> filledLine(StrAux, JJ), string_concat(" ", StrAux, Str);
 	J >= Cols, J < LineLimit -> filledLine(StrAux, JJ), string_concat("\0", StrAux, Str);
-	Str = ""
+	Str = "\n"
 	).
 
 filledMatrixAux([], Rows) :- rows(Rows).

@@ -19,3 +19,9 @@ writeText([HeadIn|TailIn], Text, I, J, [HeadOut|TailOut]) :-
 	I > 0 -> II is I - 1, HeadOut = HeadIn, writeText(TailIn, Text, II, J, TailOut);
 	writeOnLine(Text, HeadIn, J, HeadOut), TailOut = TailIn
 	).
+
+drawLogoAnimation() :-
+	drawLogoAnimationAux(0).
+
+main :-
+	drawLogoAnimation().
