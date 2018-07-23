@@ -19,21 +19,26 @@ assetsPath("../Assets").
 
 lineLimit(500).
 
-cols(Height) :- tty_size(Height, _).
-rows(Width) :- tty_size(_, Width).
+cols(Cols) :- tty_size(_, Cols).
+rows(Rows) :- tty_size(Rows, _).
 
 cubeOriginRow(0).
 cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
 
-writeOnLine([], List, _, List).
+writeOnLineAux([], List, _, List).
 	
-writeOnLine([HeadIn|TailIn], [Head|Tail], I, [HeadOut|TailOut]) :-
+writeOnLineAux([HeadIn|TailIn], [Head|Tail], I, [HeadOut|TailOut]) :-
 	(
-	I > 0 -> II is I - 1, HeadOut = Head, writeOnLine([HeadIn|TailIn], Tail, II, TailOut);
-	HeadOut = HeadIn, writeOnLine(TailIn, Tail, 0, TailOut)
+	I > 0 -> II is I - 1, HeadOut = Head, writeOnLineAux([HeadIn|TailIn], Tail, II, TailOut);
+	HeadOut = HeadIn, writeOnLineAux(TailIn, Tail, 0, TailOut)
 	).
+
+writeOnLine(StrIn, Str, I, StrOut) :-
+	string_to_list(StrIn, ListIn), string_to_list(Str, List),
+	writeOnLineAux(ListIn, List, I, ListOut),
+	string_to_list(StrOut, ListOut).
 
 matrixToText([], "").
 

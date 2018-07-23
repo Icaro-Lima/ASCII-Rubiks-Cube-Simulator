@@ -14,14 +14,8 @@ filledMatrix(FilledMatrix) :-
 drawMatrix(Matrix) :-
 	matrixToText(Matrix, Text), write(Text).
 
-/*writeOnLine(StrIn, Str, I, StrOut) :-
-	string_to_list(StrIn, ListIn), string_to_list(Str, List),
-	string_to_list(StrOut, ListOut), 
-	writeOnLine(ListIn, List, I, ListOut).*/
-
-/*writeOnLine(Text, I).*/
-
-/*writeText([Head|Tail], I, J, II) :-
+writeText([HeadIn|TailIn], Text, I, J, [HeadOut|TailOut]) :-
 	(
-	II = I -> 
-	).*/
+	I > 0 -> II is I - 1, HeadOut = HeadIn, writeText(TailIn, Text, II, J, TailOut);
+	writeOnLine(Text, HeadIn, J, HeadOut), TailOut = TailIn
+	).
