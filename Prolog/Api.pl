@@ -21,26 +21,14 @@ writeCubeFace(MatrixIn, ColorMatrix, FaceName, I, J, MatrixOut) :-
 drawLogoAnimation() :-
 	drawLogoAnimationAux(0).
 
-drawMenu() :-
-	cols(Cols), ColsDiv2 is Cols // 2,
-	GName = "----------------------- RUBIK CUBE SIMULATOR -----------------------",
-	Opcao1 = "Pressione I para Instruções",
-	Opcao2 = "Pressione J para Jogar",
-	TeamName = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte",
-
-	string_length(GName, GNameLen),
-	string_length(Opcao1, Opcao1Len),
-	string_length(Opcao2, Opcao2Len),
-	string_length(TeamName, TeamNameLen),
-
-	filledMatrix(FilledMatrix),
-
-	writeText(FilledMatrix, GName, 5, ColsDiv2 - GNameLen // 2, A),
-	writeText(A, Opcao1, 8, ColsDiv2 - Opcao1Len // 2, B),
-	writeText(B, Opcao2, 9, ColsDiv2 - Opcao2Len // 2, C),
-	writeText(C, TeamName, 11, ColsDiv2 - TeamNameLen // 2, D),
-
-	drawMatrix(D).
+menu() :-
+	drawMenu(),
+	waitKey(['i', 'I', 'j', 'J'], Key),
+	downcase_atom(Key, KeyDownCase),
+	(
+		KeyDownCase = 'i' -> writeln("Instruções!!!");
+		writeln("Jogo!")
+	).
 
 writeInstructions(MatrixIn, I, J, InGame, MatrixOut) :-
 	writeText(MatrixIn, "7 - Rotaciona 1a linha em sentido horario", I, J, AA),
@@ -70,5 +58,4 @@ writeInstructions(MatrixIn, I, J, InGame, MatrixOut) :-
 	).
 
 main :-
-	drawLogoAnimation(),
-	filledMatrix(Filled), writeInstructions(Filled, 0, 0, false, Out), drawMatrix(Out), get_single_char(_).
+	menu().

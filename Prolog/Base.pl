@@ -27,6 +27,27 @@ cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
 
+drawMenu() :-
+	cols(Cols), ColsDiv2 is Cols // 2,
+	GName = "----------------------- RUBIK CUBE SIMULATOR -----------------------",
+	Opcao1 = "Pressione I para Instruções",
+	Opcao2 = "Pressione J para Jogar",
+	TeamName = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte",
+
+	string_length(GName, GNameLen),
+	string_length(Opcao1, Opcao1Len),
+	string_length(Opcao2, Opcao2Len),
+	string_length(TeamName, TeamNameLen),
+
+	filledMatrix(FilledMatrix),
+
+	writeText(FilledMatrix, GName, 5, ColsDiv2 - GNameLen // 2, A),
+	writeText(A, Opcao1, 8, ColsDiv2 - Opcao1Len // 2, B),
+	writeText(B, Opcao2, 9, ColsDiv2 - Opcao2Len // 2, C),
+	writeText(C, TeamName, 11, ColsDiv2 - TeamNameLen // 2, D),
+
+	drawMatrix(D).
+
 writeText([HeadIn|TailIn], Text, I, J, [HeadOut|TailOut]) :-
 	(
 	I > 0 -> II is I - 1, HeadOut = HeadIn, writeText(TailIn, Text, II, J, TailOut);
