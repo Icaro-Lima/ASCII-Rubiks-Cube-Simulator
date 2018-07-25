@@ -14,4 +14,8 @@ getMatrixCol(J, A, B, C, MatrixIn, [AA, BB, CC]) :-
 	nth0(J, LinhaB, BB),
 	nth0(J, LinhaC, CC).
 
+replace(0, Element, [_|Tail], [Element|Tail]).
 
+replace(Index, Element, [Head|Tail], [Head|TailOut]) :-
+	N is Index - 1,
+	replace(N, Element, Tail, TailOut).
