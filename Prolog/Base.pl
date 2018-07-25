@@ -123,7 +123,7 @@ readLinesFromSTream(Stream, [Head|Tail]) :-
 
 readFileLines(FileName, List) :- 
     open(FileName, read, Stream),
-    readLinesFromSTream(Stream, List),!,
+    readLinesFromSTream(Stream, List), !,
 	close(Stream).
 
 ruleForCubeFrameNames(Name, Frame) :-

@@ -21,12 +21,23 @@ writeCubeFace(MatrixIn, ColorMatrix, FaceName, I, J, MatrixOut) :-
 drawLogoAnimation() :-
 	drawLogoAnimationAux(0).
 
+instructions() :-
+	cols(Cols), rows(Rows),
+	filledMatrix(Filled), writeInstructions(Filled, Rows // 2 - 11, Cols // 2 - 23, false, Out),
+	drawMatrix(Out),
+	waitKey(['m', 'M', 'j', 'J'], Key),
+	downcase_atom(Key, KeyDownCase),
+	(
+		KeyDownCase = 'm' -> menu();
+		writeln("Jogo!")
+	).
+
 menu() :-
 	drawMenu(),
 	waitKey(['i', 'I', 'j', 'J'], Key),
 	downcase_atom(Key, KeyDownCase),
 	(
-		KeyDownCase = 'i' -> writeln("Instruções!!!");
+		KeyDownCase = 'i' -> instructions();
 		writeln("Jogo!")
 	).
 
@@ -58,4 +69,5 @@ writeInstructions(MatrixIn, I, J, InGame, MatrixOut) :-
 	).
 
 main :-
+	drawLogoAnimation(),
 	menu().
