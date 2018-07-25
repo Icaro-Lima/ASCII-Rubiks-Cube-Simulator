@@ -27,6 +27,19 @@ cuboMidCol(X) :- cols(Y), X is Y // 2 - 75 // 2.
 
 esc("\e").
 
+writeText([HeadIn|TailIn], Text, I, J, [HeadOut|TailOut]) :-
+	(
+	I > 0 -> II is I - 1, HeadOut = HeadIn, writeText(TailIn, Text, II, J, TailOut);
+	writeOnLine(Text, HeadIn, J, HeadOut), TailOut = TailIn
+	).
+
+writeCubeFaceAux(MatrixIn, _, [], _, _, MatrixIn).
+
+writeCubeFaceAux(MatrixIn, ColorMatrix, [FrameHead|FrameTail], I, J, MatrixOut) :-
+	colorizeString(FrameHead, ColorMatrix, ColorFullText),
+	writeText(MatrixIn, ColorFullText, I, J, MatrixOutAux), II is I + 1,
+	writeCubeFaceAux(MatrixOutAux, ColorMatrix, FrameTail, II, J, MatrixOut).
+
 writeFrameWithoutColorAux(MatrixIn, [], _, _, MatrixIn).
 
 writeFrameWithoutColorAux(MatrixIn, [HeadFrame|TailFrame], I, J, MatrixOut) :-

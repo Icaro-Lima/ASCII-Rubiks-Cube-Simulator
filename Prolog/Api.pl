@@ -14,19 +14,6 @@ filledMatrix(FilledMatrix) :-
 drawMatrix(Matrix) :-
 	matrixToText(Matrix, Text), write(Text).
 
-writeText([HeadIn|TailIn], Text, I, J, [HeadOut|TailOut]) :-
-	(
-	I > 0 -> II is I - 1, HeadOut = HeadIn, writeText(TailIn, Text, II, J, TailOut);
-	writeOnLine(Text, HeadIn, J, HeadOut), TailOut = TailIn
-	).
-
-writeCubeFaceAux(MatrixIn, _, [], _, _, MatrixIn).
-
-writeCubeFaceAux(MatrixIn, ColorMatrix, [FrameHead|FrameTail], I, J, MatrixOut) :-
-	colorizeString(FrameHead, ColorMatrix, ColorFullText),
-	writeText(MatrixIn, ColorFullText, I, J, MatrixOutAux), II is I + 1,
-	writeCubeFaceAux(MatrixOutAux, ColorMatrix, FrameTail, II, J, MatrixOut).
-
 writeCubeFace(MatrixIn, ColorMatrix, FaceName, I, J, MatrixOut) :-
 	animations(Animations),
 	writeCubeFaceAux(MatrixIn, ColorMatrix, Animations.get(FaceName), I, J, MatrixOut).
@@ -34,7 +21,26 @@ writeCubeFace(MatrixIn, ColorMatrix, FaceName, I, J, MatrixOut) :-
 drawLogoAnimation() :-
 	drawLogoAnimationAux(0).
 
+drawMenu() :-
+	cols(Cols), ColsDiv2 is Cols // 2,
+	GName = "----------------------- RUBIK CUBE SIMULATOR -----------------------",
+	Opcao1 = "Pressione I para Instruções",
+	Opcao2 = "Pressione J para Jogar",
+	TeamName = "Icaro Dantas, Igor Farias, Javan Lacerda, Lucas Araújo, Sérgio Duarte",
+
+	string_length(GName, GNameLen),
+	string_length(Opcao1, Opcao1Len),
+	string_length(Opcao2, Opcao2Len),
+	string_length(TeamName, TeamNameLen),
+
+	filledMatrix(FilledMatrix),
+
+	writeText(FilledMatrix, GName, 5, ColsDiv2 - GNameLen // 2, A),
+	writeText(A, Opcao1, 8, ColsDiv2 - Opcao1Len // 2, B),
+	writeText(B, Opcao2, 9, ColsDiv2 - Opcao2Len // 2, C),
+	writeText(C, TeamName, 11, ColsDiv2 - TeamNameLen // 2, D),
+
+	drawMatrix(D).
+
 main :-
-	filledMatrix(FillMatrix), cubeMatrix(CubeMatrix),
-	writeCubeFace(FillMatrix, CubeMatrix, 'Default', 0, 0, MatrixOut),
-	drawMatrix(MatrixOut).
+	drawMenu().
