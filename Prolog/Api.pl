@@ -1,4 +1,5 @@
 :- include('Base.pl').
+:- include('MovimentosLogicos.pl').
 
 waitKey(ValidKeys, ReturnedKey) :-
 get_single_char(X),
