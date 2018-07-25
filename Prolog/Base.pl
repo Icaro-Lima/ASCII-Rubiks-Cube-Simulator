@@ -76,7 +76,7 @@ drawLogoAnimationAux(44).
 drawLogoAnimationAux(I) :-
 	rows(Rows), cols(Cols), CenterI is Rows / 2 - 6, CenterJ is Cols / 2 - 44,
 	filledMatrix(FilledMatrix), writeLogoFrame(FilledMatrix, I, CenterI, CenterJ, MatrixOut),
-	drawMatrix(MatrixOut), sleep(0.07), II is I + 1, drawLogoAnimationAux(II).
+	drawMatrix(MatrixOut), sleep(0.01), II is I + 1, drawLogoAnimationAux(II).
 
 writeOnLineAux([], List, _, List).
 	

@@ -30,7 +30,7 @@ instructions() :-
 	downcase_atom(Key, KeyDownCase),
 	(
 		KeyDownCase = 'm' -> menu();
-		writeln("Jogo!")
+		cubeMatrix(Cube), gameLoop(Cube)
 	).
 
 menu() :-
@@ -39,7 +39,7 @@ menu() :-
 	downcase_atom(Key, KeyDownCase),
 	(
 		KeyDownCase = 'i' -> instructions();
-		writeln("Jogo!")
+		cubeMatrix(Cube), gameLoop(Cube)
 	).
 
 writeInstructions(MatrixIn, I, J, InGame, MatrixOut) :-
@@ -67,6 +67,63 @@ writeInstructions(MatrixIn, I, J, InGame, MatrixOut) :-
 	(
 		\+InGame -> writeText(AT, "Pressione J para Jogar", I + 21, J, MatrixOut);
 		MatrixOut = AT
+	).
+
+drawCubeDefault(ColorMatrix) :-
+	rows(Rows), cols(Cols), I is Rows // 2 - 18, J is Cols // 2 - 37,
+
+	filledMatrix(FilledMatrixWithoutInstructions),
+	writeInstructions(FilledMatrixWithoutInstructions, 0, 0, true, FilledMatrix),
+
+	writeCubeFace(FilledMatrix, ColorMatrix, 'Default', I, J, MatrixOut),
+	drawMatrix(MatrixOut).
+
+drawCubeMovement(Movement, ColorMatrix) :-
+	rows(Rows), cols(Cols), I is Rows // 2 - 18, J is Cols // 2 - 37,
+	SleepTime is 0.01,
+
+	atom_concat(Movement, '_0', Face0),
+
+	filledMatrix(FilledMatrixWithoutInstructions),
+	writeInstructions(FilledMatrixWithoutInstructions, 0, 0, true, FilledMatrix),
+
+
+	writeCubeFace(FilledMatrix, ColorMatrix, Face0, I, J, MatrixOut0),
+	drawMatrix(MatrixOut0),
+	sleep(SleepTime),
+
+	atom_concat(Movement, '_1', Face1),
+
+	writeCubeFace(FilledMatrix, ColorMatrix, Face1, I, J, MatrixOut1),
+	drawMatrix(MatrixOut1),
+	sleep(SleepTime),
+
+	atom_concat(Movement, '_2', Face2),
+
+	writeCubeFace(FilledMatrix, ColorMatrix, Face2, I, J, MatrixOut2),
+	drawMatrix(MatrixOut2),
+	sleep(SleepTime),
+
+	atom_concat(Movement, '_3', Face3),
+
+	writeCubeFace(FilledMatrix, ColorMatrix, Face3, I, J, MatrixOut3),
+	drawMatrix(MatrixOut3),
+	sleep(SleepTime),
+
+	atom_concat(Movement, '_4', Face4),
+
+	writeCubeFace(FilledMatrix, ColorMatrix, Face4, I, J, MatrixOut4),
+	drawMatrix(MatrixOut4),
+	sleep(SleepTime).
+
+gameLoop(ColorMatrix) :-
+	drawCubeDefault(ColorMatrix),
+	waitKey(['a', 'A', 'm', 'M'], Key),
+	downcase_atom(Key, KeyDownCase),
+
+	(
+		KeyDownCase = 'a' -> drawCubeMovement('ADown', ColorMatrix), aBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		menu()
 	).
 
 main :-

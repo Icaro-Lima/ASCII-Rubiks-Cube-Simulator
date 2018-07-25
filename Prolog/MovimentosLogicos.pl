@@ -91,8 +91,6 @@ aBaixo(MatrixIn, MatrixOut) :-
 
 	giraFaceHorario(3, 0, 5, 2, MatrixIn3, MatrixOut).
 
-
-
 test :-
 	cubeMatrix(Matrix), aBaixo(Matrix, Out),
 	writeln(Out).
