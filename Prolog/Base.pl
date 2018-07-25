@@ -75,19 +75,23 @@ matrixToText([], "").
 matrixToText([Head|Tail], Text) :-
 	matrixToText(Tail, TextAux), string_concat(Head, TextAux, Text).
 
-filledLine(Str, J) :-
+filledLine(Str, J, Break) :-
 	cols(Cols), lineLimit(LineLimit), JJ is J + 1,
 	(
-	J < Cols -> filledLine(StrAux, JJ), string_concat(" ", StrAux, Str);
-	J >= Cols, J < LineLimit -> filledLine(StrAux, JJ), string_concat("\0", StrAux, Str);
-	Str = "\n"
+		J < Cols -> filledLine(StrAux, JJ, Break), string_concat(" ", StrAux, Str);
+		J >= Cols, J < LineLimit -> filledLine(StrAux, JJ, Break), string_concat("\0", StrAux, Str);
+		(Break -> Str = "\n"; Str = "")
 	).
 
 filledMatrixAux([], Rows) :- rows(Rows).
 
+filledMatrixAux([Head|[]], I) :-
+	II is I + 1,
+	filledLine(Head, 0, false), filledMatrixAux([], II).
+
 filledMatrixAux([Head|Tail], I) :-
 	II is I + 1,
-	filledLine(Head, 0), filledMatrixAux(Tail, II).
+	filledLine(Head, 0, true), filledMatrixAux(Tail, II).
 
 readLinesFromSTream(Stream, []) :-
     at_end_of_stream(Stream).
