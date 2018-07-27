@@ -148,7 +148,3 @@ gameLoop(ColorMatrix) :-
 	downcase_atom(Key, KeyDownCase),
 	(KeyDownCase = 'x' -> random_between(0, 17, Num), nth0(Num, ['q', 'w', 'e', 'a', 's', 'd', 'r', 't', 'y', 'f', 'g', 'h', '7', '4', '1', '9', '6', '3'], Selected); Selected = KeyDownCase),
 	ganeLoop(ColorMatrix, Selected).
-
-main :-
-	/*drawLogoAnimation(),*/
-	menu().
