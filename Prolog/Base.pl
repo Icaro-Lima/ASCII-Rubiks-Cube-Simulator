@@ -197,15 +197,9 @@ loadAnimations(Animations) :-
 
 	inserListOfTuplesInDict(AnimationsWithDefaultAndCube, ListLogo, Animations).
 
-elementOfList([Element|_], 0, Element).
-
-elementOfList([_|Tail], I, Element) :-
-	Iaux is I - 1,
-	elementOfList(Tail, Iaux, Element).
-
 elementOfMatrix(Matrix, I, J, Element) :-
-	elementOfList(Matrix, I, Line),
-	elementOfList(Line, J, Element).
+	nth0(I, Matrix, Line),
+	nth0(J, Line, Element).
 
 
 colorizeStringAux([], _, IsPainting, _, Output) :-
