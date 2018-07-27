@@ -106,10 +106,10 @@ module MovimentosLogicos where
 
     bHorario :: [[Int]] -> [[Int]]
     bHorario matrix = do
-      let a = getMatrixLine 1 5 4 3 matrix
-      let b = getMatrixCol 7 3 4 5 matrix
-      let c = getMatrixLine 7 5 4 3 matrix
-      let d = getMatrixCol 1 3 4 5 matrix
+      let a = getMatrixLine 1 3 4 5 matrix
+      let b = getMatrixCol 7 5 4 3 matrix
+      let c = getMatrixLine 7 3 4 5 matrix
+      let d = getMatrixCol 1 5 4 3 matrix
       
       let xx = swapL 1 3 5 d matrix
       let yy = swapC 1 3 5 c xx
