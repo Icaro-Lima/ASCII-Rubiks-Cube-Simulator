@@ -155,6 +155,172 @@ cCima(MatrixIn, MatrixOut) :-
 
 	giraFaceHorario(3, 6, 5, 8, MatrixIn3, MatrixOut).
 
+zeroEsq(MatrixIn, MatrixOut) :-
+	getMatrixLine(3, 0, 1, 2, MatrixIn, AA),
+	getMatrixLine(3, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(3, 6, 7, 8, MatrixIn, C),
+	getMatrixLine(11, 3, 4, 5, MatrixIn, DD),
+
+	reverse(AA, A),
+	reverse(DD, D),
+
+	swapL(3, 0, 2, B, MatrixIn, MatrixIn0),
+	swapL(3, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(3, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapL(11, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceHorario(0, 3, 2, 5, MatrixIn3, MatrixOut).
+
+zeroDir(MatrixIn, MatrixOut) :-
+	getMatrixLine(3, 0, 1, 2, MatrixIn, A),
+	getMatrixLine(3, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(3, 6, 7, 8, MatrixIn, CC),
+	getMatrixLine(11, 3, 4, 5, MatrixIn, DD),
+
+	reverse(CC, C),
+	reverse(DD, D),
+
+	swapL(3, 0, 2, D, MatrixIn, MatrixIn0),
+	swapL(3, 3, 5, A, MatrixIn0, MatrixIn1),
+	swapL(3, 6, 8, B, MatrixIn1, MatrixIn2),
+	swapL(11, 3, 5, C, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(0, 3, 2, 5, MatrixIn3, MatrixOut).
+
+umEsq(MatrixIn, MatrixOut) :-
+	getMatrixLine(4, 0, 1, 2, MatrixIn, AA),
+	getMatrixLine(4, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(4, 6, 7, 8, MatrixIn, C),
+	getMatrixLine(10, 3, 4, 5, MatrixIn, DD),
+
+	reverse(AA, A),
+	reverse(DD, D),
+
+	swapL(4, 0, 2, B, MatrixIn, MatrixIn0),
+	swapL(4, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(4, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapL(10, 3, 5, A, MatrixIn2, MatrixOut).
+
+umDir(MatrixIn, MatrixOut) :-
+	getMatrixLine(4, 0, 1, 2, MatrixIn, A),
+	getMatrixLine(4, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(4, 6, 7, 8, MatrixIn, CC),
+	getMatrixLine(10, 3, 4, 5, MatrixIn, DD),
+
+	reverse(CC, C),
+	reverse(DD, D),
+
+	swapL(4, 0, 2, D, MatrixIn, MatrixIn0),
+	swapL(4, 3, 5, A, MatrixIn0, MatrixIn1),
+	swapL(4, 6, 8, B, MatrixIn1, MatrixIn2),
+	swapL(10, 3, 5, C, MatrixIn2, MatrixOut).
+
+doisEsq(MatrixIn, MatrixOut) :-
+	getMatrixLine(5, 0, 1, 2, MatrixIn, AA),
+	getMatrixLine(5, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(5, 6, 7, 8, MatrixIn, C),
+	getMatrixLine(9, 3, 4, 5, MatrixIn, DD),
+
+	reverse(AA, A),
+	reverse(DD, D),
+
+	swapL(5, 0, 2, B, MatrixIn, MatrixIn0),
+	swapL(5, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(5, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapL(9, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(6, 3, 8, 5, MatrixIn3, MatrixOut).
+
+doisDir(MatrixIn, MatrixOut) :-
+	getMatrixLine(5, 0, 1, 2, MatrixIn, A),
+	getMatrixLine(5, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(5, 6, 7, 8, MatrixIn, CC),
+	getMatrixLine(9, 3, 4, 5, MatrixIn, DD),
+
+	reverse(CC, C),
+	reverse(DD, D),
+
+	swapL(5, 0, 2, D, MatrixIn, MatrixIn0),
+	swapL(5, 3, 5, A, MatrixIn0, MatrixIn1),
+	swapL(5, 6, 8, B, MatrixIn1, MatrixIn2),
+	swapL(9, 3, 5, C, MatrixIn2, MatrixIn3),
+
+	giraFaceHorario(6, 3, 8, 5, MatrixIn3, MatrixOut).
+
+aHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(2, 3, 4, 5, MatrixIn, A),
+	getMatrixCol(6, 5, 4, 3, MatrixIn, B),
+	getMatrixLine(6, 3, 4, 5, MatrixIn, C),
+	getMatrixCol(2, 5, 4, 3, MatrixIn, D),
+
+	swapL(2, 3, 5, D, MatrixIn, MatrixIn0),
+	swapC(2, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(6, 3, 5, B, MatrixIn1, MatrixIn2),
+	swapC(6, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceHorario(3, 3, 5, 5, MatrixIn3, MatrixOut).
+
+aAntiHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(2, 5, 4, 3, MatrixIn, A),
+	getMatrixCol(6, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(6, 5, 4, 3, MatrixIn, C),
+	getMatrixCol(2, 3, 4, 5, MatrixIn, D),
+
+	swapL(2, 3, 5, B, MatrixIn, MatrixIn0),
+	swapC(6, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(6, 3, 5, D, MatrixIn1, MatrixIn2),
+	swapC(2, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(3, 3, 5, 5, MatrixIn3, MatrixOut).
+
+bHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(1, 3, 4, 5, MatrixIn, A),
+	getMatrixCol(7, 5, 4, 3, MatrixIn, B),
+	getMatrixLine(7, 3, 4, 5, MatrixIn, C),
+	getMatrixCol(1, 5, 4, 3, MatrixIn, D),
+
+	swapL(1, 3, 5, D, MatrixIn, MatrixIn0),
+	swapC(1, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(7, 3, 5, B, MatrixIn1, MatrixIn2),
+	swapC(7, 3, 5, A, MatrixIn2, MatrixOut).
+
+bAntiHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(1, 5, 4, 3, MatrixIn, A),
+	getMatrixCol(7, 3, 4, 5, MatrixIn, B),
+	getMatrixLine(7, 5, 4, 3, MatrixIn, C),
+	getMatrixCol(1, 3, 4, 5, MatrixIn, D),
+
+	swapL(1, 3, 5, B, MatrixIn, MatrixIn0),
+	swapC(7, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(7, 3, 5, D, MatrixIn1, MatrixIn2),
+	swapC(1, 3, 5, A, MatrixIn2, MatrixOut).
+
+cHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(0, 3, 4, 5, MatrixIn, A),
+	getMatrixCol(8, 5, 4, 3, MatrixIn, B),
+	getMatrixLine(8, 3, 4, 5, MatrixIn, C),
+	getMatrixCol(0, 5, 4, 3, MatrixIn, D),
+
+	swapL(0, 3, 5, D, MatrixIn, MatrixIn0),
+	swapC(0, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(8, 3, 5, B, MatrixIn1, MatrixIn2),
+	swapC(8, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(9, 3, 11, 5, MatrixIn3, MatrixOut).
+
+cAntiHorario(MatrixIn, MatrixOut) :-
+	getMatrixLine(0, 3, 4, 5, MatrixIn, A),
+	getMatrixCol(8, 5, 4, 3, MatrixIn, B),
+	getMatrixLine(8, 3, 4, 5, MatrixIn, C),
+	getMatrixCol(0, 5, 4, 3, MatrixIn, D),
+
+	swapL(0, 3, 5, B, MatrixIn, MatrixIn0),
+	swapC(8, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapL(8, 3, 5, D, MatrixIn1, MatrixIn2),
+	swapC(0, 3, 5, A, MatrixIn2, MatrixIn3),
+
+	giraFaceHorario(9, 3, 11, 5, MatrixIn3, MatrixOut).
+
 test :-
 	cubeMatrix(Matrix), aBaixo(Matrix, Out),
 	writeln(Out).

@@ -118,7 +118,7 @@ drawCubeMovement(Movement, ColorMatrix) :-
 
 gameLoop(ColorMatrix) :-
 	drawCubeDefault(ColorMatrix),
-	waitKey(['e', 'E', 'd', 'D', 'w', 'W', 's', 'S', 'q', 'Q', 'a', 'A', 'm', 'M'], Key),
+	waitKey(['r', 'R', 't', 'T', 'y', 'Y', 'f', 'F', 'g', 'G', 'h', 'H', '7', '9', '4', '6', '1', '3', 'e', 'E', 'd', 'D', 'w', 'W', 's', 'S', 'q', 'Q', 'a', 'A', 'm', 'M'], Key),
 	downcase_atom(Key, KeyDownCase),
 
 	(
@@ -128,6 +128,21 @@ gameLoop(ColorMatrix) :-
 		KeyDownCase = 'w' -> drawCubeMovement('BUp', ColorMatrix), bCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		KeyDownCase = 'd' -> drawCubeMovement('CDown', ColorMatrix), cBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		KeyDownCase = 'e' -> drawCubeMovement('CUp', ColorMatrix), cCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+
+		KeyDownCase = '7' -> drawCubeMovement('0Left', ColorMatrix), zeroEsq(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = '9' -> drawCubeMovement('0Right', ColorMatrix), zeroDir(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = '4' -> drawCubeMovement('1Left', ColorMatrix), umEsq(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = '6' -> drawCubeMovement('1Right', ColorMatrix), umDir(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = '1' -> drawCubeMovement('2Left', ColorMatrix), doisEsq(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = '3' -> drawCubeMovement('2Right', ColorMatrix), doisDir(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+
+		KeyDownCase = 'r' -> drawCubeMovement('aClockwise', ColorMatrix), aHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 't' -> drawCubeMovement('bClockwise', ColorMatrix), bHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'y' -> drawCubeMovement('cClockwise', ColorMatrix), cHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'f' -> drawCubeMovement('aCounterclockwise', ColorMatrix), aAntiHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'g' -> drawCubeMovement('bCounterclockwise', ColorMatrix), bAntiHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'h' -> drawCubeMovement('cCounterclockwise', ColorMatrix), cAntiHorario(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+
 		menu()
 	).
 
