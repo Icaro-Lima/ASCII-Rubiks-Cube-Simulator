@@ -91,6 +91,41 @@ aBaixo(MatrixIn, MatrixOut) :-
 
 	giraFaceHorario(3, 0, 5, 2, MatrixIn3, MatrixOut).
 
+aCima(MatrixIn, MatrixOut) :-
+	getMatrixCol(3, 0, 1, 2, MatrixIn, A),
+	getMatrixCol(3, 3, 4, 5, MatrixIn, B),
+	getMatrixCol(3, 6, 7, 8, MatrixIn, C),
+	getMatrixCol(3, 9, 10, 11, MatrixIn, D),
+
+	swapC(3, 0, 2, B, MatrixIn, MatrixIn0),
+	swapC(3, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapC(3, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapC(3, 9, 11, A, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(3, 0, 5, 2, MatrixIn3, MatrixOut).
+
+bBaixo(MatrixIn, MatrixOut) :-
+	getMatrixCol(4, 0, 1, 2, MatrixIn, A),
+	getMatrixCol(4, 3, 4, 5, MatrixIn, B),
+	getMatrixCol(4, 6, 7, 8, MatrixIn, C),
+	getMatrixCol(4, 9, 10, 11, MatrixIn, D),
+
+	swapC(4, 0, 2, D, MatrixIn, MatrixIn0),
+	swapC(4, 3, 5, A, MatrixIn0, MatrixIn1),
+	swapC(4, 6, 8, B, MatrixIn1, MatrixIn2),
+	swapC(4, 9, 11, C, MatrixIn2, MatrixOut).
+
+bCima(MatrixIn, MatrixOut) :-
+	getMatrixCol(4, 0, 1, 2, MatrixIn, A),
+	getMatrixCol(4, 3, 4, 5, MatrixIn, B),
+	getMatrixCol(4, 6, 7, 8, MatrixIn, C),
+	getMatrixCol(4, 9, 10, 11, MatrixIn, D),
+
+	swapC(4, 0, 2, B, MatrixIn, MatrixIn0),
+	swapC(4, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapC(4, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapC(4, 9, 11, A, MatrixIn2, MatrixOut).
+
 test :-
 	cubeMatrix(Matrix), aBaixo(Matrix, Out),
 	writeln(Out).

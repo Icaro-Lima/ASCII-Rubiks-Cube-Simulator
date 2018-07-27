@@ -118,14 +118,17 @@ drawCubeMovement(Movement, ColorMatrix) :-
 
 gameLoop(ColorMatrix) :-
 	drawCubeDefault(ColorMatrix),
-	waitKey(['a', 'A', 'm', 'M'], Key),
+	waitKey(['w', 'W', 's', 'S', 'q', 'Q', 'a', 'A', 'm', 'M'], Key),
 	downcase_atom(Key, KeyDownCase),
 
 	(
 		KeyDownCase = 'a' -> drawCubeMovement('ADown', ColorMatrix), aBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'q' -> drawCubeMovement('AUp', ColorMatrix), aCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 's' -> drawCubeMovement('BDown', ColorMatrix), bBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'w' -> drawCubeMovement('BUp', ColorMatrix), bCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		menu()
 	).
 
 main :-
-	drawLogoAnimation(),
+	/*drawLogoAnimation(),*/
 	menu().
