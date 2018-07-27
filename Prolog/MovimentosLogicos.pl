@@ -320,7 +320,3 @@ cAntiHorario(MatrixIn, MatrixOut) :-
 	swapC(0, 3, 5, A, MatrixIn2, MatrixIn3),
 
 	giraFaceHorario(9, 3, 11, 5, MatrixIn3, MatrixOut).
-
-test :-
-	cubeMatrix(Matrix), aBaixo(Matrix, Out),
-	writeln(Out).
