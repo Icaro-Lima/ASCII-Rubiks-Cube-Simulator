@@ -20,18 +20,21 @@ replace(Index, Element, [Head|Tail], [Head|TailOut]) :-
 	N is Index - 1,
 	replace(N, Element, Tail, TailOut).
 
-swapL(0, Begin, End, Array, [Head|Tail], [HeadOut|Tail]) :-
+swapL(I, Begin, End, Array, MatrixIn, MatrixOut) :-
 	nth0(0, Array, A),
 	nth0(1, Array, B),
 	nth0(2, Array, C),
 
-	replace(Begin, A, Head, AA),
-	replace(Begin + 1, B, AA, BB),
-	replace(End, C, BB, HeadOut).
+	nth0(I, MatrixIn, Line),
 
-swapL(I, Begin, End, Array, [Head|Tail], [Head|TailOut]) :-
-	II is I - 1,
-	swapL(II, Begin, End, Array, Tail, TailOut).
+	Beg1 is Begin + 1,
+
+	replace(Begin, A, Line, Line0),
+	replace(Beg1, B, Line0, Line1),
+	replace(End, C, Line1, Line2),
+	
+	replace(I, Line2, MatrixIn, MatrixOut).
+
 
 swapC(J, Begin, End, Array, MatrixIn, MatrixOut) :-
 	nth0(0, Array, Array0),
@@ -56,9 +59,9 @@ giraFaceHorario(Lini, Cini, Lfim, Cfim, MatrixIn, MatrixOut) :-
 	Cfim1 is Cfim - 1, Lfim1 is Lfim - 1,
 
 	getMatrixLine(Lini, Cini, Cfim1, Cfim, MatrixIn, A),
-	getMatrixLine(Cfim, Lfim, Lfim1, Lini, MatrixIn, B),
+	getMatrixCol(Cfim, Lfim, Lfim1, Lini, MatrixIn, B),
 	getMatrixLine(Lfim, Cini, Cfim1, Cfim, MatrixIn, C),
-	getMatrixLine(Cini, Lfim, Lfim1, Lini, MatrixIn, D),
+	getMatrixCol(Cini, Lfim, Lfim1, Lini, MatrixIn, D),
 
 	swapL(Lini, Cini, Cfim, D, MatrixIn, MatrixIn0),
 	swapC(Cini, Lini, Lfim, C, MatrixIn0, MatrixIn1),
@@ -69,9 +72,9 @@ giraFaceAntiHorario(Lini, Cini, Lfim, Cfim, MatrixIn, MatrixOut) :-
 	Cfim1 is Cfim - 1, Lfim1 is Lfim - 1,
 
 	getMatrixLine(Lini, Cfim, Cfim1, Cini, MatrixIn, A),
-	getMatrixLine(Cfim, Lini, Lfim1, Lfim, MatrixIn, B),
+	getMatrixCol(Cfim, Lini, Lfim1, Lfim, MatrixIn, B),
 	getMatrixLine(Lfim, Cfim, Cfim1, Cini, MatrixIn, C),
-	getMatrixLine(Cini, Lini, Lfim1, Lfim, MatrixIn, D),
+	getMatrixCol(Cini, Lini, Lfim1, Lfim, MatrixIn, D),
 
 	swapL(Lini, Cini, Cfim, B, MatrixIn, MatrixIn0),
 	swapC(Cfim, Lini, Lfim, C, MatrixIn0, MatrixIn1),
@@ -125,6 +128,32 @@ bCima(MatrixIn, MatrixOut) :-
 	swapC(4, 3, 5, C, MatrixIn0, MatrixIn1),
 	swapC(4, 6, 8, D, MatrixIn1, MatrixIn2),
 	swapC(4, 9, 11, A, MatrixIn2, MatrixOut).
+
+cBaixo(MatrixIn, MatrixOut) :-
+	getMatrixCol(5, 0, 1, 2, MatrixIn, A),
+	getMatrixCol(5, 3, 4, 5, MatrixIn, B),
+	getMatrixCol(5, 6, 7, 8, MatrixIn, C),
+	getMatrixCol(5, 9, 10, 11, MatrixIn, D),
+
+	swapC(5, 0, 2, D, MatrixIn, MatrixIn0),
+	swapC(5, 3, 5, A, MatrixIn0, MatrixIn1),
+	swapC(5, 6, 8, B, MatrixIn1, MatrixIn2),
+	swapC(5, 9, 11, C, MatrixIn2, MatrixIn3),
+
+	giraFaceAntiHorario(3, 6, 5, 8, MatrixIn3, MatrixOut).
+
+cCima(MatrixIn, MatrixOut) :-
+	getMatrixCol(5, 0, 1, 2, MatrixIn, A),
+	getMatrixCol(5, 3, 4, 5, MatrixIn, B),
+	getMatrixCol(5, 6, 7, 8, MatrixIn, C),
+	getMatrixCol(5, 9, 10, 11, MatrixIn, D),
+
+	swapC(5, 0, 2, B, MatrixIn, MatrixIn0),
+	swapC(5, 3, 5, C, MatrixIn0, MatrixIn1),
+	swapC(5, 6, 8, D, MatrixIn1, MatrixIn2),
+	swapC(5, 9, 11, A, MatrixIn2, MatrixIn3),
+
+	giraFaceHorario(3, 6, 5, 8, MatrixIn3, MatrixOut).
 
 test :-
 	cubeMatrix(Matrix), aBaixo(Matrix, Out),

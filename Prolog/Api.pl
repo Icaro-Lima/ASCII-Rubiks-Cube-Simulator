@@ -118,7 +118,7 @@ drawCubeMovement(Movement, ColorMatrix) :-
 
 gameLoop(ColorMatrix) :-
 	drawCubeDefault(ColorMatrix),
-	waitKey(['w', 'W', 's', 'S', 'q', 'Q', 'a', 'A', 'm', 'M'], Key),
+	waitKey(['e', 'E', 'd', 'D', 'w', 'W', 's', 'S', 'q', 'Q', 'a', 'A', 'm', 'M'], Key),
 	downcase_atom(Key, KeyDownCase),
 
 	(
@@ -126,6 +126,8 @@ gameLoop(ColorMatrix) :-
 		KeyDownCase = 'q' -> drawCubeMovement('AUp', ColorMatrix), aCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		KeyDownCase = 's' -> drawCubeMovement('BDown', ColorMatrix), bBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		KeyDownCase = 'w' -> drawCubeMovement('BUp', ColorMatrix), bCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'd' -> drawCubeMovement('CDown', ColorMatrix), cBaixo(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
+		KeyDownCase = 'e' -> drawCubeMovement('CUp', ColorMatrix), cCima(ColorMatrix, NewColorMatrix), gameLoop(NewColorMatrix);
 		menu()
 	).
 
