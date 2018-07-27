@@ -67,15 +67,15 @@ gameLoop logicalMatrix = do
 rotateCube :: String -> [[Int]] -> IO()
 rotateCube movement logicalMatrix = do
 
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "0") True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "0") True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
   sleep 0.03
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "1") True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "1") True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
   sleep 0.03
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "2") True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "2") True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
   sleep 0.03
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "3") True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "3") True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
   sleep 0.03
-  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "4") True logicalMatrix Api.filledMatrix)
+  Api.drawMatrix (Api.writtenCube Base.cube_origin_row Base.cubo_mid_col (movement ++ "4") True logicalMatrix (Api.writeLogicalMatrix 40 90 logicalMatrix Api.filledMatrix))
   sleep 0.03
   
   if movement == "0Left_" then
