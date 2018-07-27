@@ -312,7 +312,7 @@ cAntiHorario(MatrixIn, MatrixOut) :-
 	getMatrixLine(0, 5, 4, 3, MatrixIn, A),
 	getMatrixCol(8, 3, 4, 5, MatrixIn, B),
 	getMatrixLine(8, 5, 4, 3, MatrixIn, C),
-	getMatrixCol(0, 5, 4, 5, MatrixIn, D),
+	getMatrixCol(0, 3, 4, 5, MatrixIn, D),
 
 	swapL(0, 3, 5, B, MatrixIn, MatrixIn0),
 	swapC(8, 3, 5, C, MatrixIn0, MatrixIn1),
